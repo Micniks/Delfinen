@@ -1,0 +1,60 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package presentation;
+
+import java.util.Scanner;
+
+/**
+ *
+ * @author Michael N. Korsgaard
+ */
+public class SystemUI implements UI {
+    
+    Scanner scan = new Scanner(System.in);
+
+    @Override
+    public String getNewMemberName() {
+        System.out.println("Nyt medlems navn: ");
+        String name = scan.nextLine();
+        System.out.println();
+        return name;
+    }
+
+    @Override
+    public int getNewMemberAge() {
+        System.out.println("Nyt medlems alder: ");
+        String age = scan.nextLine();
+        System.out.println();
+        return Integer.parseInt(age);
+    }
+
+    @Override
+    public boolean getNewMemberActivityForm() {
+        System.out.println("Skriv medlem op som: ");
+        System.out.println("1. Motionist");
+        System.out.println("2. Konkurrencesvømmer");
+        String age = scan.nextLine();
+        System.out.println();
+        return Integer.parseInt(age) == 2;
+    }
+
+    @Override
+    public void displayMainMenu() {
+        System.out.println();
+        System.out.println("   Svømmeklubben Delfinen");
+        System.out.println();
+        System.out.println("1. Opret nyt medlem");
+        System.out.println("2. Afslut Program");
+    }
+
+    @Override
+    public String mainMenuSelection() {
+        String selection = scan.nextLine();
+        System.out.println();
+        return selection;       
+    }
+
+}
