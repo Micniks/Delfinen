@@ -5,6 +5,7 @@
  */
 package businesslogic;
 
+import datasource.Facade;
 import java.util.ArrayList;
 
 /**
@@ -14,9 +15,11 @@ import java.util.ArrayList;
 public class Members {
 
     private ArrayList<Member> members;
+    private Facade db;
 
-    public Members() {
+    public Members(Facade db) {
         members = new ArrayList();
+        this.db = db;
         getMembersFromStorage(members);
     }
 
@@ -29,7 +32,11 @@ public class Members {
     }
 
     private void getMembersFromStorage(ArrayList<Member> members) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        ArrayList<String> memberInfo = db.getMembers();
+        for (int i = 0; i < memberInfo.size(); i++) {
+            String[] info = memberInfo.get(i).split(":");
+        }
+        
     }
     
     

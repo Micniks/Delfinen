@@ -22,7 +22,7 @@ public class Controller {
     public Controller(UI ui, Facade db) {
         this.ui = ui;
         this.db = db;
-        this.members = new Members();
+        this.members = new Members(db);
     }
 
     public void start() {
@@ -48,14 +48,14 @@ public class Controller {
         String name = ui.getNewMemberName();
         int age = ui.getNewMemberAge();
         boolean competetiveSwimmer = ui.getNewMemberActivityForm();
+        String signUpDate = ui.getNewMemberSignUpDate();
         Member newMember;
         if (competetiveSwimmer) {
-            newMember = new CompetitiveSwimmer(name, age, competetiveSwimmer);
+            newMember = new CompetitiveSwimmer(name, age, competetiveSwimmer, signUpDate);
         } else {
-            newMember = new Member(name, age, competetiveSwimmer);
+            newMember = new Member(name, age, competetiveSwimmer, signUpDate);
         }
         members.addMembers(newMember);
-        String signUpDate = ui.getNewMemberSignUpDate();
         db.storageMember(newMember);
     }
 }

@@ -13,14 +13,16 @@ public class Member {
     private boolean activeMember;
     private boolean competetiveSwimmer;
     private int dept;
+    private String signUpDate;
 
     /* We might need to set a sign-up date to have the system auto-check debt
     private Date signUpDate;
      */
-    public Member(String name, int age, boolean competetiveSwimmer) {
+    public Member(String name, int age, boolean competetiveSwimmer, String signUpDate) {
         this.name = name;
         this.age = age;
         this.competetiveSwimmer = competetiveSwimmer;
+        this.signUpDate = signUpDate;
         this.activeMember = true;
         this.dept = 0;
         /* We might need to set a sign-up date to have the system auto-check debt

@@ -59,7 +59,8 @@ public class DBFacade implements Facade {
         }
     }
 
-    public ArrayList<String> getMembersFromStorage() {
+    @Override
+    public ArrayList<String> getMembers() {
 
         ArrayList<String> members = new ArrayList();
         StringBuilder sb = new StringBuilder();
@@ -72,28 +73,17 @@ public class DBFacade implements Facade {
             ArrayList memberActiveMember = new ArrayList();
             ArrayList memberDept = new ArrayList();
 
+            int index = 0;
             while (resultMembers.next()) {
-                memberName.add(resultMembers.getString("Name"));
-                memberAge.add(resultMembers.getInt("Age"));
-                memberCompetitiveSwimmer.add(resultMembers.getBoolean("Competitive_Swimmer"));
-                memberActiveMember.add(resultMembers.getBoolean("Active_Member"));
-                memberDept.add(resultMembers.getDouble("Debt"));
-            }
-
-            for (int i = 0; i < memberName.size(); i++) {
-                sb.append("Name: ");
-                sb.append(memberName.get(i));
-                sb.append(", Age: ");
-                sb.append(memberAge.get(i));
-                sb.append(", CompetitiveSwimmer: ");
-                sb.append(memberCompetitiveSwimmer.get(i));
-                sb.append(", ActiveMember: ");
-                sb.append(memberActiveMember.get(i));
-                sb.append(", Dept: ");
-                sb.append(memberDept.get(i));
+                sb.append(resultMembers.getString("Name") + ":");
+                sb.append(resultMembers.getInt("Age") + ":");
+                sb.append(resultMembers.getBoolean("Competitive_Swimmer") + ":");
+                sb.append(resultMembers.getBoolean("Active_Member") + ":");
+                sb.append(resultMembers.getDouble("Debt") + ":");
                 
                 members.add(sb.toString());
                 sb.delete(0, sb.length());
+                index++;
             }
 
         } catch (SQLException ex) {
@@ -101,11 +91,6 @@ public class DBFacade implements Facade {
         }
 
         return members;
-    }
-
-    @Override
-    public ArrayList<String> getMembers() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }
