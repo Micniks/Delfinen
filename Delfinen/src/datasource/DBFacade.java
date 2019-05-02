@@ -8,6 +8,7 @@ package datasource;
 import businesslogic.Member;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -51,12 +52,55 @@ public class DBFacade implements Facade {
         sb.append(member.getDept());
         sb.append(")");
 
-
         try {
             statement.executeUpdate(sb.toString());
         } catch (SQLException ex) {
             Logger.getLogger(DBFacade.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    public ArrayList<String> getMembersFromStorage() {
+
+        ArrayList<String> members = new ArrayList();
+        StringBuilder sb = new StringBuilder();
+        try {
+            ResultSet resultMembers = statement.executeQuery("SELECT * from members");
+
+            ArrayList memberName = new ArrayList();
+            ArrayList memberAge = new ArrayList();
+            ArrayList memberCompetitiveSwimmer = new ArrayList();
+            ArrayList memberActiveMember = new ArrayList();
+            ArrayList memberDept = new ArrayList();
+
+            while (resultMembers.next()) {
+                memberName.add(resultMembers.getString("Name"));
+                memberAge.add(resultMembers.getInt("Age"));
+                memberCompetitiveSwimmer.add(resultMembers.getBoolean("Competitive_Swimmer"));
+                memberActiveMember.add(resultMembers.getBoolean("Active_Member"));
+                memberDept.add(resultMembers.getDouble("Debt"));
+            }
+
+            for (int i = 0; i < memberName.size(); i++) {
+                sb.append("Name: ");
+                sb.append(memberName.get(i));
+                sb.append(", Age: ");
+                sb.append(memberAge.get(i));
+                sb.append(", CompetitiveSwimmer: ");
+                sb.append(memberCompetitiveSwimmer.get(i));
+                sb.append(", ActiveMember: ");
+                sb.append(memberActiveMember.get(i));
+                sb.append(", Dept: ");
+                sb.append(memberDept.get(i));
+                
+                members.add(sb.toString());
+                sb.delete(0, sb.length());
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(DBFacade.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return members;
     }
 
     @Override
