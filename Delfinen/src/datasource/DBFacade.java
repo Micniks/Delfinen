@@ -39,7 +39,7 @@ public class DBFacade implements Facade {
     public void storageMember(Member member) {
         StringBuilder sb = new StringBuilder();
 
-        sb.append("INSERT INTO Member (Name, Age, Active_Member, Competitive_Swimmer, Debt) VALUES (");
+        sb.append("INSERT INTO Members (Name, Age, Active_Member, Competitive_Swimmer, Debt) VALUES (");
         sb.append(member.getName());
         sb.append(", ");
         sb.append(member.getAge());
