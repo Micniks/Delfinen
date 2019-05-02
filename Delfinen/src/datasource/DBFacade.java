@@ -26,13 +26,13 @@ public class DBFacade implements Facade {
     private String serverTime = "serverTimezone=UTC";
 
     public DBFacade(String password) throws SQLException {
-        connect = DriverManager.getConnection("jdbc:mysql://localhost:3306/Marios_Pizza+?" + serverTime, "root", password);
+        connect = DriverManager.getConnection("jdbc:mysql://localhost:3306/Delfinen+?" + serverTime, "root", password);
         statement = connect.createStatement();
 
     }
 
     public DBFacade() throws SQLException {
-        connect = DriverManager.getConnection("jdbc:mysql://localhost:3306/Marios_Pizza+?" + serverTime, "root", "Gunstar1");
+        connect = DriverManager.getConnection("jdbc:mysql://localhost:3306/Delfinen+?" + serverTime, "root", "Gunstar1");
         statement = connect.createStatement();
     }
 

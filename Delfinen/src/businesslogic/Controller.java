@@ -16,10 +16,12 @@ public class Controller {
 
     private UI ui;
     private Facade db;
+    private Members members;
 
     public Controller(UI ui, Facade db) {
         this.ui = ui;
         this.db = db;
+        this.members = new Members();
     }
 
     public void start() {
@@ -51,6 +53,7 @@ public class Controller {
         } else {
             newMember = new Member(name, age, competetiveSwimmer);
         }
+        members.addMembers(newMember);
         db.storageMember(newMember);
     }
 }
