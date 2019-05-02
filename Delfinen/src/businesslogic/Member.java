@@ -12,6 +12,7 @@ public class Member {
     private int age;
     private boolean activeMember;
     private boolean competetiveSwimmer;
+    private int dept;
 
     /* We might need to set a sign-up date to have the system auto-check debt
     private Date signUpDate;
@@ -21,9 +22,18 @@ public class Member {
         this.age = age;
         this.competetiveSwimmer = competetiveSwimmer;
         this.activeMember = true;
+        this.dept = 0;
         /* We might need to set a sign-up date to have the system auto-check debt
         this.signUpDate = new Date();
          */
+    }
+
+    public int getDept() {
+        return dept;
+    }
+
+    public void setDept(int dept) {
+        this.dept = dept;
     }
 
     public String getName() {
@@ -76,6 +86,10 @@ public class Member {
             sb.append("ikke ");
         }
         sb.append("aktivt medlem.");
+        if (dept > 0){
+            sb.append(" Gæld: ");
+            sb.append(dept);
+        }
         return sb.toString();
     }
 

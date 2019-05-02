@@ -41,13 +41,15 @@ public class DBFacade implements Facade {
 
         sb.append("INSERT INTO Member (Name, Age, Active_Member, Competitive_Swimmer, Debt) VALUES (");
         sb.append(member.getName());
-        sb.append(",");
+        sb.append(", ");
         sb.append(member.getAge());
-        sb.append(",");
+        sb.append(", ");
         sb.append(member.isActiveMember());
-        sb.append(",");
+        sb.append(", ");
         sb.append(member.isCompetetiveSwimmer());
-        sb.append(", 0)");
+        sb.append(", )");
+        sb.append(member.getDept());
+        sb.append(")");
 
 
         try {
