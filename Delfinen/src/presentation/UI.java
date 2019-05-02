@@ -19,5 +19,6 @@ public interface UI {
     public void displayMainMenu();
 
     public String mainMenuSelection();
+    public String getNewMemberSignUpDate();
 
 }

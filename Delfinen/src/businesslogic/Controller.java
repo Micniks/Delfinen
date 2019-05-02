@@ -7,6 +7,7 @@ package businesslogic;
 
 import datasource.Facade;
 import presentation.UI;
+import java.time.LocalDate;
 
 /**
  *
@@ -54,6 +55,7 @@ public class Controller {
             newMember = new Member(name, age, competetiveSwimmer);
         }
         members.addMembers(newMember);
+        String signUpDate = ui.getNewMemberSignUpDate();
         db.storageMember(newMember);
     }
 }

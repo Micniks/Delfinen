@@ -8,6 +8,7 @@ package presentation;
 import java.util.Scanner;
 import java.time.LocalDate;
 import java.time.Period;
+import java.time.format.DateTimeFormatter;
 
 /**
  *
@@ -33,6 +34,15 @@ public class SystemUI implements UI {
         LocalDate today = LocalDate.now();
         int age = Period.between(birthday, today).getYears();
         return age;
+
+    }
+
+    @Override
+    public String getNewMemberSignUpDate() {
+        LocalDate today = LocalDate.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-LLLL-yyyy");
+        String signUpDate = today.format(formatter);
+        return signUpDate;
 
     }
 
