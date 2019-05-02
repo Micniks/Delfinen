@@ -22,7 +22,7 @@ public class Controller {
         this.db = db;
     }
 
-        public void start(){
+    public void start() {
         boolean quit = false;
         do {
             ui.displayMainMenu();
@@ -45,7 +45,12 @@ public class Controller {
         String name = ui.getNewMemberName();
         int age = ui.getNewMemberAge();
         boolean compedetiveSwimmer = ui.getNewMemberActivityForm();
-        Member newMember = new Member(name, age, compedetiveSwimmer);
+        Member newMember;
+        if (compedetiveSwimmer) {
+            newMember = new CompetitiveSwimmer(name, age, compedetiveSwimmer);
+        } else {
+            newMember = new Member(name, age, compedetiveSwimmer);
+        }
         db.storageMember(newMember);
     }
 }

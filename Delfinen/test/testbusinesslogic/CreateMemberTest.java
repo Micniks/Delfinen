@@ -24,7 +24,6 @@ public void testCreateOneMember(){
     
     //act
     ctrl.createMember();
-    System.out.println(db.getMembers().get(0));
     
     
     //assert
@@ -38,6 +37,7 @@ public void testCreateOneMember(){
     assertTrue(db.getMembers().get(0).contains("motionist"));
 }
 
+@Test
 public void testCreateTwoMember(){
     String[] input = {"Oscar L.", "26", "1", "Jens B.", "22", "2", };
     FakeUI ui = new FakeUI(input);
@@ -48,6 +48,7 @@ public void testCreateTwoMember(){
     ctrl.createMember();
     ctrl.createMember();
     System.out.println(db.getMembers().get(0));
+    System.out.println(db.getMembers().get(1));
     
     
     //assert

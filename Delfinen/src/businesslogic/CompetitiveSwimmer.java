@@ -21,4 +21,22 @@ public class CompetitiveSwimmer extends Member {
         this.eventResults = new ArrayList();
     }
     
+        @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(getName());
+        sb.append(", alder ");
+        sb.append(getAge());
+        sb.append(", konkurrencesvømmer, ");
+        if (!isActiveMember()) {
+            sb.append("ikke ");
+        }
+        sb.append("aktivt medlem.");
+        if (getDept() > 0){
+            sb.append(" Gæld: ");
+            sb.append(getDept());
+        }
+        return sb.toString();
+    }
+    
 }

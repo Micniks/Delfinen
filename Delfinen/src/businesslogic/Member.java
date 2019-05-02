@@ -76,12 +76,7 @@ public class Member {
         sb.append(name);
         sb.append(", alder ");
         sb.append(age);
-        sb.append(", ");
-        if (competetiveSwimmer) {
-            sb.append("konkurrencesvømmer, ");
-        } else {
-            sb.append("motionist, ");
-        }
+        sb.append(", motionist, ");
         if (!activeMember) {
             sb.append("ikke ");
         }
