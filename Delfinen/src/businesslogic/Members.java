@@ -7,6 +7,7 @@ package businesslogic;
 
 import datasource.Facade;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  *
@@ -32,9 +33,16 @@ public class Members {
     }
 
     private void getMembersFromStorage(ArrayList<Member> members) {
-        ArrayList<String> memberInfo = db.getMembers();
-        for (int i = 0; i < memberInfo.size(); i++) {
-            String[] info = memberInfo.get(i).split(":");
+        ArrayList<HashMap<String, String>> memberInfo = db.getMembers();
+        
+        for(HashMap<String, String> map : memberInfo){
+            String name = map.get("Name");
+            int age = Integer.parseInt(map.get("Age"));
+            boolean competitiveSwimmer = Integer.parseInt(map.get("Competitive_Swimmer")) == 1;
+            boolean activeMember = Integer.parseInt(map.get("Active_Member")) == 1;
+            double debt = Double.parseDouble(map.get("Debt"));
+            
+            
         }
         
     }

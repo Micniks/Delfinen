@@ -7,6 +7,7 @@ package datasource;
 
 import businesslogic.Member;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  *
@@ -27,9 +28,11 @@ public class FakeFacade implements Facade {
     }
 
     @Override
-    public ArrayList<String> getMembers() {
-        return testArray;
+    public ArrayList<HashMap<String, String>> getMembers() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+
 
 
 }

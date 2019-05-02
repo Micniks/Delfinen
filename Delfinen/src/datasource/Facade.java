@@ -7,6 +7,7 @@ package datasource;
 
 import businesslogic.Member;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 
 
@@ -17,6 +18,6 @@ import java.util.ArrayList;
 public interface Facade {
     
     public void storageMember(Member member);
-    public ArrayList<String> getMembers();
+    public ArrayList<HashMap<String, String>> getMembers();
     
 }

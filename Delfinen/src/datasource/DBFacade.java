@@ -12,6 +12,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -21,7 +22,7 @@ import java.util.logging.Logger;
  */
 public class DBFacade implements Facade {
 
-    private final Connection connect;
+    private Connection connect;
     private Statement statement;
     private String serverTime = "serverTimezone=UTC";
 
@@ -31,9 +32,14 @@ public class DBFacade implements Facade {
 
     }
 
-    public DBFacade() throws SQLException {
-        connect = DriverManager.getConnection("jdbc:mysql://localhost:3306/Delfinen+?" + serverTime, "root", "Gunstar1");
-        statement = connect.createStatement();
+    public DBFacade() {
+        try {
+            connect = DriverManager.getConnection("jdbc:mysql://localhost:3306/Delfinen+?" + serverTime, "root", "Gunstar1");
+            statement = connect.createStatement();
+        } catch (SQLException ex) {
+            Logger.getLogger(DBFacade.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }
 
     @Override
@@ -60,10 +66,9 @@ public class DBFacade implements Facade {
     }
 
     @Override
-    public ArrayList<String> getMembers() {
+    public ArrayList<HashMap<String, String>> getMembers() {
 
-        ArrayList<String> members = new ArrayList();
-        StringBuilder sb = new StringBuilder();
+        ArrayList<HashMap<String, String>> memberinformation = new ArrayList<>();
         try {
             ResultSet resultMembers = statement.executeQuery("SELECT * from members");
 
@@ -73,24 +78,21 @@ public class DBFacade implements Facade {
             ArrayList memberActiveMember = new ArrayList();
             ArrayList memberDept = new ArrayList();
 
-            int index = 0;
             while (resultMembers.next()) {
-                sb.append(resultMembers.getString("Name") + ":");
-                sb.append(resultMembers.getInt("Age") + ":");
-                sb.append(resultMembers.getBoolean("Competitive_Swimmer") + ":");
-                sb.append(resultMembers.getBoolean("Active_Member") + ":");
-                sb.append(resultMembers.getDouble("Debt") + ":");
-                
-                members.add(sb.toString());
-                sb.delete(0, sb.length());
-                index++;
+                HashMap<String, String> map = new HashMap();
+                map.put("Name", resultMembers.getString("Name"));
+                map.put("Age", resultMembers.getString("Age"));
+                map.put("Competitive_Swimmer", resultMembers.getString("Competitive_Swimmer"));
+                map.put("Active_Member", resultMembers.getString("Active_Member"));
+                map.put("Debt", resultMembers.getString("Debt"));
+                memberinformation.add(map);
             }
 
         } catch (SQLException ex) {
             Logger.getLogger(DBFacade.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        return members;
+        return memberinformation;
     }
 
 }
