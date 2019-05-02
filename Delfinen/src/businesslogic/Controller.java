@@ -44,12 +44,12 @@ public class Controller {
     public void createMember() {
         String name = ui.getNewMemberName();
         int age = ui.getNewMemberAge();
-        boolean compedetiveSwimmer = ui.getNewMemberActivityForm();
+        boolean competetiveSwimmer = ui.getNewMemberActivityForm();
         Member newMember;
-        if (compedetiveSwimmer) {
-            newMember = new CompetitiveSwimmer(name, age, compedetiveSwimmer);
+        if (competetiveSwimmer) {
+            newMember = new CompetitiveSwimmer(name, age, competetiveSwimmer);
         } else {
-            newMember = new Member(name, age, compedetiveSwimmer);
+            newMember = new Member(name, age, competetiveSwimmer);
         }
         db.storageMember(newMember);
     }

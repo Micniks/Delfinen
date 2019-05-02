@@ -6,13 +6,15 @@
 package presentation;
 
 import java.util.Scanner;
+import java.time.LocalDate;
+import java.time.Period;
 
 /**
  *
  * @author Michael N. Korsgaard
  */
 public class SystemUI implements UI {
-    
+
     Scanner scan = new Scanner(System.in);
 
     @Override
@@ -25,10 +27,13 @@ public class SystemUI implements UI {
 
     @Override
     public int getNewMemberAge() {
-        System.out.println("Nyt medlems alder: ");
-        String age = scan.nextLine();
-        System.out.println();
-        return Integer.parseInt(age);
+        System.out.println("Indtast nyt medlems fødselsdato i formatet YYYY-MM-DD:  ");
+        String birthDate = scan.nextLine();
+        LocalDate birthday = LocalDate.parse(birthDate);
+        LocalDate today = LocalDate.now();
+        int age = Period.between(birthday, today).getYears();
+        return age;
+
     }
 
     @Override
@@ -54,7 +59,7 @@ public class SystemUI implements UI {
     public String mainMenuSelection() {
         String selection = scan.nextLine();
         System.out.println();
-        return selection;       
+        return selection;
     }
 
 }
