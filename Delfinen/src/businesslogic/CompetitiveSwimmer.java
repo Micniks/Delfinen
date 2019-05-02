@@ -14,7 +14,7 @@ import java.util.ArrayList;
 public class CompetitiveSwimmer extends Member {
     
     private ArrayList<EventResults> eventResults;
-    private TrainingResult trainingResult;
+    private TrainingResults trainingResults;
     
     public CompetitiveSwimmer(String name, int age, boolean competetiveSwimmer) {
         super(name, age, competetiveSwimmer);

@@ -16,7 +16,7 @@ public class EventResults {
     private double timeResult;
     private Member member;
     
-    public EventResults(Member mebmer, String eventName, int placement, double timeResult){
+    public EventResults(Member member, String eventName, int placement, double timeResult){
         this.member = member;
         this.eventName = eventName;
         this.placement = placement;
