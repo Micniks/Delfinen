@@ -4,12 +4,12 @@ public class TrainingResults {
 
     private double timeResult;
     private Member member;
-    private String swimmingDisciplin;
+    private SwimmingDiscipline discipline;
 
-    public TrainingResults (Member member, String swimmingDisciplin, double timeResult) {
+    public TrainingResults (Member member, SwimmingDiscipline discipline, double timeResult) {
         this.member = member;
         this.timeResult = timeResult;
-        this.swimmingDisciplin = swimmingDisciplin;
+        this.discipline = discipline;
     }
 
 }

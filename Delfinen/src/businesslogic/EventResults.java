@@ -15,12 +15,14 @@ public class EventResults {
     private int placement;
     private double timeResult;
     private Member member;
+    private SwimmingDiscipline discipline;
     
-    public EventResults(Member member, String eventName, int placement, double timeResult){
+    public EventResults(Member member, String eventName, int placement, double timeResult, SwimmingDiscipline discipline){
         this.member = member;
         this.eventName = eventName;
         this.placement = placement;
         this.timeResult = timeResult;
+        this.discipline = discipline;
     }
     
     
