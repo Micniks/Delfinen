@@ -27,10 +27,13 @@ public class DBFacade implements Facade {
     private Statement statement;
     private String serverTime = "serverTimezone=UTC";
 
-    public DBFacade(String password) throws SQLException {
-        connect = DriverManager.getConnection("jdbc:mysql://localhost:3306/Delfinen+?" + serverTime, "root", password);
-        statement = connect.createStatement();
-
+    public DBFacade(String password) {
+        try {
+            connect = DriverManager.getConnection("jdbc:mysql://localhost:3306/Delfinen+?" + serverTime, "root", password);
+            statement = connect.createStatement();
+        } catch (SQLException ex) {
+            Logger.getLogger(DBFacade.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     public DBFacade() {
@@ -48,19 +51,21 @@ public class DBFacade implements Facade {
         StringBuilder sb = new StringBuilder();
 
         sb.append("INSERT INTO Members (Member_ID, Name, Age, Active_Member, Competitive_Swimmer, Debt, Sign_Up_Date) VALUES (");
+        sb.append(member.getMember_ID());
+        sb.append(", \"");
         sb.append(member.getName());
-        sb.append(", ");
+        sb.append("\", ");
         sb.append(member.getAge());
         sb.append(", ");
         sb.append(member.isActiveMember());
         sb.append(", ");
         sb.append(member.isCompetetiveSwimmer());
-        sb.append(", )");
+        sb.append(", ");
         sb.append(member.getDept());
-        sb.append(", )");
+        sb.append(", \"");
         sb.append(member.getSignUpDate());
-        sb.append(")");
-
+        sb.append("\")");
+        System.out.println(sb.toString());
         try {
             statement.executeUpdate(sb.toString());
         } catch (SQLException ex) {

@@ -27,8 +27,14 @@ public interface UI {
 
     public int swimmingDiscipline();
 
-    public String trainingResult();
+    public String timeResult();
 
     public String resultDate();
+
+    public String getPasswordForDatabase();
+
+    public String getEventName();
+
+    public int getEventPlacement();
 
 }

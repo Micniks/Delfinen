@@ -15,7 +15,7 @@ public class Main {
     public static void main(String[] args) {
 
         UI ui = new SystemUI();
-        Facade db = new DBFacade();
+        Facade db = new DBFacade(ui.getPasswordForDatabase());
         Controller ctrl = new Controller(ui, db);
         ctrl.start();
 

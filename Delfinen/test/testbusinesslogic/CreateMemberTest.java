@@ -27,7 +27,7 @@ public class CreateMemberTest {
         String localDate = today.format(formatter);
 
         //act
-        ctrl.createMember();
+        ctrl.createNewMember();
         System.out.println(db.getMembers().get(0).get("Dept"));
 
         //assert
@@ -55,7 +55,7 @@ public class CreateMemberTest {
         String localDate = today.format(formatter);
 
         //act
-        ctrl.createMember();
+        ctrl.createNewMember();
         System.out.println(db.getMembers().get(0).get("Dept"));
 
         //assert
@@ -84,8 +84,8 @@ public class CreateMemberTest {
         String localDate = today.format(formatter);
 
         //act
-        ctrl.createMember();
-        ctrl.createMember();
+        ctrl.createNewMember();
+        ctrl.createNewMember();
         System.out.println(db.getMembers().get(0));
         System.out.println(db.getMembers().get(1));
 

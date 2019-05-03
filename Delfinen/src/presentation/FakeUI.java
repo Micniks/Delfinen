@@ -92,15 +92,33 @@ public class FakeUI implements UI {
     }
 
     @Override
-    public String trainingResult() {
-        output.add("Indtast træningresultatet i formattet TT:MM:SS:MM");
-        return (input[index++]);
+    public String timeResult() {
+        output.add("Indtast tidsresultatet i formattet TT:MM:SS:MM");
+        return input[index++];
     }
 
     @Override
     public String resultDate() {
         output.add("Indtast dato for træningsresultatet i formattet DD:MM:ÅÅÅÅ");
-        return (input[index++]);
+        return input[index++];
+    }
+
+    @Override
+    public String getPasswordForDatabase() {
+        // This is not meant to be tested with.
+        return null;
+    }
+
+    @Override
+    public String getEventName() {
+        output.add("Indtast navnet for konkurrencen: ");
+        return input[index++];
+    }
+
+    @Override
+    public int getEventPlacement() {
+        output.add("Indtast svømmerens placeing i konkurrencen: ");
+        return Integer.parseInt(input[index++]);
     }
 
 }

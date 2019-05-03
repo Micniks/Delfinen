@@ -87,12 +87,29 @@ public class SystemUI implements UI {
     }
 
     @Override
-    public String trainingResult() {
+    public String timeResult() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public String resultDate() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public String getPasswordForDatabase() {
+        System.out.println("Please write password for database: ");
+        String password = scan.nextLine();
+        return password;
+    }
+
+    @Override
+    public String getEventName() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public int getEventPlacement() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

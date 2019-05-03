@@ -13,37 +13,57 @@ import java.util.ArrayList;
  */
 public class CompetitiveSwimmer extends Member {
 
-    private ArrayList<EventResults> eventResults;
-    private TrainingResults[] trainingResults;
+    private ArrayList<EventResult> eventResults;
+    private TrainingResult[] trainingResults;
 
     public CompetitiveSwimmer(int member_ID, String name, int age, boolean competetiveSwimmer, String signUpDate) {
         super(member_ID, name, age, competetiveSwimmer, signUpDate);
         this.eventResults = new ArrayList();
-        trainingResults = new TrainingResults[4];
+        trainingResults = new TrainingResult[4];
     }
 
-    public ArrayList<EventResults> getEventResults() {
+    public ArrayList<EventResult> getEventResults() {
         return eventResults;
     }
+    
+    public void addEventResult(EventResult result) {
+        eventResults.add(result);
+    }
 
-    public TrainingResults[] getTrainingResults() {
+    public TrainingResult[] getTrainingResults() {
         return trainingResults;
     }
 
-    public TrainingResults getTrainingResultButterfly() {
+    public TrainingResult getTrainingResultButterfly() {
         return trainingResults[0];
     }
 
-    public TrainingResults getTrainingResultCrawl() {
+    public TrainingResult getTrainingResultCrawl() {
         return trainingResults[1];
     }
 
-    public TrainingResults getTrainingResultRygCrawl() {
+    public TrainingResult getTrainingResultRygCrawl() {
         return trainingResults[2];
     }
 
-    public TrainingResults getTrainingResultBrystsvømning() {
+    public TrainingResult getTrainingResultBrystsvømning() {
         return trainingResults[3];
+    }
+    
+    public void setTrainingResultButterfly(TrainingResult tr){
+        trainingResults[0] = tr;
+    }    
+    
+    public void setTrainingResultCrawl(TrainingResult tr){
+        trainingResults[1] = tr;
+    }    
+    
+    public void setTrainingResultRygCrawl(TrainingResult tr){
+        trainingResults[2] = tr;
+    }    
+    
+    public void setTrainingResultBrystsvømning(TrainingResult tr){
+        trainingResults[3] = tr;
     }
 
     @Override

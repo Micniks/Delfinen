@@ -38,7 +38,7 @@ public class Controller {
             String userInput = ui.mainMenuSelection();
             switch (userInput) {
                 case "1":
-                    createMember();
+                    createNewMember();
                     break;
                 case "2":
                     quit = true;
@@ -47,10 +47,9 @@ public class Controller {
                     throw new IllegalArgumentException();
             }
         } while (!quit);
-
     }
 
-    public void createMember() {
+    public void createNewMember() {
         String name = ui.getNewMemberName();
         int age = ui.getNewMemberAge();
         boolean competetiveSwimmer = ui.getNewMemberActivityForm();
@@ -66,11 +65,70 @@ public class Controller {
     }
 
     public void addResult() {
-        int medlemsID = ui.getMemberID();
-        int resultatValg = ui.resultType();
-        int disciplinValg = ui.swimmingDiscipline();
+        int memberID = ui.getMemberID();
+        int resultChoice = ui.resultType();
+        int disciplineChoice = ui.swimmingDiscipline();
+        String timeResult = ui.timeResult();
+        CompetitiveSwimmer tempMember = getCompetitiveSwimmerFromMemberID(memberID);
+
+        if (resultChoice == 1) {
+            addTrainingResult(memberID, disciplineChoice, timeResult, tempMember);
+        } else if (resultChoice == 2) {
+            addEventResult(memberID, disciplineChoice, timeResult, tempMember);
+        }
+    }
+
+    public CompetitiveSwimmer getCompetitiveSwimmerFromMemberID(int memberID) {
+        CompetitiveSwimmer tempMember = null;
+        for (Member member : members.getMembers()) {
+            if (memberID == member.getMember_ID() && member.isCompetetiveSwimmer()) {
+                tempMember = (CompetitiveSwimmer) member;
+                break;
+            }
+        }
+        return tempMember;
+    }
+
+    public void addTrainingResult(int memberID, int disciplineChoice, String timeResult, CompetitiveSwimmer tempMember) {
+
+        String resultDate = ui.resultDate();
+
         SwimmingDiscipline dv;
-        switch (disciplinValg) {
+        TrainingResult temp;
+        switch (disciplineChoice) {
+            case 1:
+                dv = SwimmingDiscipline.BUTTERFLY;
+                temp = new TrainingResult(dv, timeResult, resultDate);
+                tempMember.setTrainingResultButterfly(temp);
+                break;
+            case 2:
+                dv = SwimmingDiscipline.CRAWL;
+                temp = new TrainingResult(dv, timeResult, resultDate);
+                tempMember.setTrainingResultCrawl(temp);
+                break;
+            case 3:
+                dv = SwimmingDiscipline.RYGCRAWL;
+                temp = new TrainingResult(dv, timeResult, resultDate);
+                tempMember.setTrainingResultRygCrawl(temp);
+                break;
+            case 4:
+                dv = SwimmingDiscipline.BRYSTSVØMMING;
+                temp = new TrainingResult(dv, timeResult, resultDate);
+                tempMember.setTrainingResultBrystsvømning(temp);
+                break;
+            default:
+                throw new IllegalArgumentException();
+        }
+    }
+
+    private void addEventResult(int memberID, int disciplineChoice, String timeResult, CompetitiveSwimmer tempMember) {
+
+        String eventName = ui.getEventName();
+        int eventPlacement = ui.getEventPlacement();
+
+        SwimmingDiscipline dv;
+        EventResult temp;
+        switch (disciplineChoice) {
             case 1:
                 dv = SwimmingDiscipline.BUTTERFLY;
                 break;
@@ -87,17 +145,8 @@ public class Controller {
                 throw new IllegalArgumentException();
         }
 
-        String træningsResultat = ui.trainingResult();
-        String resultatsDato = ui.resultDate();
-        CompetitiveSwimmer tempMember;
-        for (Member member : members.getMembers()) {
-            if (medlemsID == member.getMember_ID() && member.isCompetetiveSwimmer()) {
-                tempMember = (CompetitiveSwimmer) member;
-                break;
-            }
-        }
-        TrainingResults temp = new TrainingResults(dv, træningsResultat, resultatsDato);
-        
+        temp = new EventResult(eventName, eventPlacement, timeResult, dv);
+        tempMember.addEventResult(temp);
     }
 
 }
