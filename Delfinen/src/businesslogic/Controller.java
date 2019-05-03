@@ -19,6 +19,10 @@ public class Controller {
     private Facade db;
     private Members members;
 
+    public Members getMembers() {
+        return members;
+    }
+
     public Controller(UI ui, Facade db) {
         this.ui = ui;
         this.db = db;
