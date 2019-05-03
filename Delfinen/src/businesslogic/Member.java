@@ -8,6 +8,7 @@ import java.util.Date;          // Remove if we don't need to use Sign Up Date
  */
 public class Member {
 
+    private int member_ID;
     private String name;
     private int age;
     private boolean activeMember;
@@ -15,7 +16,8 @@ public class Member {
     private double dept;
     private String signUpDate;
 
-    public Member(String name, int age, boolean competetiveSwimmer, String signUpDate) {
+    public Member(int member_ID, String name, int age, boolean competetiveSwimmer, String signUpDate) {
+        this.member_ID=member_ID;
         this.name = name;
         this.age = age;
         this.competetiveSwimmer = competetiveSwimmer;
@@ -70,6 +72,10 @@ public class Member {
 
     public void setCompetetiveSwimmer(boolean compedetiveSwimmer) {
         this.competetiveSwimmer = compedetiveSwimmer;
+    }
+    
+    public int getMember_ID() {
+        return member_ID;
     }
     
     

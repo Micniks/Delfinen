@@ -64,6 +64,43 @@ public class FakeUI implements UI {
         String signUpDate = today.format(formatter);
         return signUpDate;
     }
-    
-    
+
+    @Override
+    public int getMemberID() {
+        output.add("Indtast medlems ID-nummer: ");
+        return Integer.parseInt(input[index++]);
+        
+    }
+
+    @Override
+    public int resultType() {
+        output.add("Vælg resultattype: ");
+        output.add("1: Træningsresultat");
+        output.add("2: Konkurrenceresultat");
+        return Integer.parseInt(input[index++]);
+    }
+
+    @Override
+    public int swimmingDiscipline() {
+        output.add("Vælg svømmediscplin:");
+        output.add("1. Butterfly");
+        output.add("2. Crawl");
+        output.add("3. Rycrawl");
+        output.add("4. Brystsvømning");
+        return Integer.parseInt(input[index++]);
+        
+    }
+
+    @Override
+    public String trainingResult() {
+        output.add("Indtast træningresultatet i formattet TT:MM:SS:MM");
+        return (input[index++]);
+    }
+
+    @Override
+    public String resultDate() {
+        output.add("Indtast dato for træningsresultatet i formattet DD:MM:ÅÅÅÅ");
+        return (input[index++]);
+    }
+
 }

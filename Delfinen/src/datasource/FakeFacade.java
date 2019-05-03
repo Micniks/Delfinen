@@ -41,4 +41,9 @@ public class FakeFacade implements Facade {
         return testArray;
     }
 
+    @Override
+    public int readHighestMemberID() {
+        return 1;
+    }
+
 }

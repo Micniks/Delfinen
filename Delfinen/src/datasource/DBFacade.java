@@ -12,6 +12,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -46,7 +47,7 @@ public class DBFacade implements Facade {
     public void storageMember(Member member) {
         StringBuilder sb = new StringBuilder();
 
-        sb.append("INSERT INTO Members (Name, Age, Active_Member, Competitive_Swimmer, Debt, Sign_Up_Date) VALUES (");
+        sb.append("INSERT INTO Members (Member_ID, Name, Age, Active_Member, Competitive_Swimmer, Debt, Sign_Up_Date) VALUES (");
         sb.append(member.getName());
         sb.append(", ");
         sb.append(member.getAge());
@@ -96,6 +97,31 @@ public class DBFacade implements Facade {
         }
 
         return memberinformation;
+    }
+
+    @Override
+    public int readHighestMemberID() {
+        ArrayList temp = new ArrayList();
+        int highestMemberID = 0;
+        ResultSet result;
+        try {
+            result = statement.executeQuery("SELECT * from Members");
+
+            while (result.next()) {
+                temp.add(result.getInt("Member_ID"));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DBFacade.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        if (temp.size() != 0) {
+            highestMemberID = (int) Collections.max(temp);
+            highestMemberID++;
+        } else {
+            highestMemberID = 1;
+        }
+
+        return highestMemberID;
+
     }
 
 }

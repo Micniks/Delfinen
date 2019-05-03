@@ -21,4 +21,14 @@ public interface UI {
     public String mainMenuSelection();
     public String getNewMemberSignUpDate();
 
+    public int getMemberID();
+
+    public int resultType();
+
+    public int swimmingDiscipline();
+
+    public String trainingResult();
+
+    public String resultDate();
+
 }

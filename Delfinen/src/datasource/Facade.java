@@ -9,15 +9,16 @@ import businesslogic.Member;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-
-
 /**
  *
  * @author Michael N. Korsgaard
  */
 public interface Facade {
-    
+
     public void storageMember(Member member);
+
     public ArrayList<HashMap<String, String>> getMembers();
-    
-}
+
+    public int readHighestMemberID();
+
+    }

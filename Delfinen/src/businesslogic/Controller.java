@@ -18,6 +18,7 @@ public class Controller {
     private UI ui;
     private Facade db;
     private Members members;
+    private int currentHighestMemberID;
 
     public Members getMembers() {
         return members;
@@ -30,6 +31,7 @@ public class Controller {
     }
 
     public void start() {
+        currentHighestMemberID = db.readHighestMemberID();
         boolean quit = false;
         do {
             ui.displayMainMenu();
@@ -55,11 +57,47 @@ public class Controller {
         String signUpDate = ui.getNewMemberSignUpDate();
         Member newMember;
         if (competetiveSwimmer) {
-            newMember = new CompetitiveSwimmer(name, age, competetiveSwimmer, signUpDate);
+            newMember = new CompetitiveSwimmer(currentHighestMemberID++, name, age, competetiveSwimmer, signUpDate);
         } else {
-            newMember = new Member(name, age, competetiveSwimmer, signUpDate);
+            newMember = new Member(currentHighestMemberID++, name, age, competetiveSwimmer, signUpDate);
         }
         members.addMembers(newMember);
         db.storageMember(newMember);
     }
+
+    public void addResult() {
+        int medlemsID = ui.getMemberID();
+        int resultatValg = ui.resultType();
+        int disciplinValg = ui.swimmingDiscipline();
+        SwimmingDiscipline dv;
+        switch (disciplinValg) {
+            case 1:
+                dv = SwimmingDiscipline.BUTTERFLY;
+                break;
+            case 2:
+                dv = SwimmingDiscipline.CRAWL;
+                break;
+            case 3:
+                dv = SwimmingDiscipline.RYGCRAWL;
+                break;
+            case 4:
+                dv = SwimmingDiscipline.BRYSTSVØMMING;
+                break;
+            default:
+                throw new IllegalArgumentException();
+        }
+
+        String træningsResultat = ui.trainingResult();
+        String resultatsDato = ui.resultDate();
+        CompetitiveSwimmer tempMember;
+        for (Member member : members.getMembers()) {
+            if (medlemsID == member.getMember_ID() && member.isCompetetiveSwimmer()) {
+                tempMember = (CompetitiveSwimmer) member;
+                break;
+            }
+        }
+        TrainingResults temp = new TrainingResults(dv, træningsResultat, resultatsDato);
+        
+    }
+
 }
