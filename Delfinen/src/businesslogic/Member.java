@@ -12,12 +12,9 @@ public class Member {
     private int age;
     private boolean activeMember;
     private boolean competetiveSwimmer;
-    private int dept;
+    private double dept;
     private String signUpDate;
 
-    /* We might need to set a sign-up date to have the system auto-check debt
-    private Date signUpDate;
-     */
     public Member(String name, int age, boolean competetiveSwimmer, String signUpDate) {
         this.name = name;
         this.age = age;
@@ -25,17 +22,22 @@ public class Member {
         this.signUpDate = signUpDate;
         this.activeMember = true;
         this.dept = 0;
-        /* We might need to set a sign-up date to have the system auto-check debt
-        this.signUpDate = new Date();
-         */
     }
 
-    public int getDept() {
+    public double getDept() {
         return dept;
     }
 
-    public void setDept(int dept) {
+    public void setDept(double dept) {
         this.dept = dept;
+    }
+
+    public String getSignUpDate() {
+        return signUpDate;
+    }
+
+    public void setSignUpDate(String signUpDate) {
+        this.signUpDate = signUpDate;
     }
 
     public String getName() {

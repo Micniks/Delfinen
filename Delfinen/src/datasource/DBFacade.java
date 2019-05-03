@@ -46,7 +46,7 @@ public class DBFacade implements Facade {
     public void storageMember(Member member) {
         StringBuilder sb = new StringBuilder();
 
-        sb.append("INSERT INTO Members (Name, Age, Active_Member, Competitive_Swimmer, Debt) VALUES (");
+        sb.append("INSERT INTO Members (Name, Age, Active_Member, Competitive_Swimmer, Debt, Sign_Up_Date) VALUES (");
         sb.append(member.getName());
         sb.append(", ");
         sb.append(member.getAge());
@@ -56,6 +56,8 @@ public class DBFacade implements Facade {
         sb.append(member.isCompetetiveSwimmer());
         sb.append(", )");
         sb.append(member.getDept());
+        sb.append(", )");
+        sb.append(member.getSignUpDate());
         sb.append(")");
 
         try {
@@ -85,6 +87,7 @@ public class DBFacade implements Facade {
                 map.put("Competitive_Swimmer", resultMembers.getString("Competitive_Swimmer"));
                 map.put("Active_Member", resultMembers.getString("Active_Member"));
                 map.put("Debt", resultMembers.getString("Debt"));
+                map.put("Sign_Up_Date", resultMembers.getString("Sign_Up_Date"));
                 memberinformation.add(map);
             }
 

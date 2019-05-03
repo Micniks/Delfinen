@@ -14,8 +14,10 @@ import java.util.HashMap;
  * @author Michael N. Korsgaard
  */
 public class FakeFacade implements Facade {
+
+    public ArrayList<HashMap<String, String>> testArray;
+
     
-    public ArrayList<String> testArray;
 
     public FakeFacade() {
         this.testArray = new ArrayList();
@@ -23,16 +25,20 @@ public class FakeFacade implements Facade {
     }
 
     @Override
-    public void storageMember(Member member){
-        testArray.add(member.toString());
+    public void storageMember(Member member) {
+        HashMap<String, String> map = new HashMap();
+        map.put("Name", member.getName());
+        map.put("Age", Integer.toString(member.getAge()));
+        map.put("Competitive_Swimmer", Boolean.toString(member.isCompetetiveSwimmer()));
+        map.put("Active_Member", Boolean.toString(member.isActiveMember()));
+        map.put("Debt", Double.toString(member.getDept()));
+        map.put("Sign_Up_Date", member.getSignUpDate());
+        testArray.add(map);
     }
 
     @Override
     public ArrayList<HashMap<String, String>> getMembers() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return testArray;
     }
-
-
-
 
 }

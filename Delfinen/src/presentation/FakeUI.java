@@ -5,6 +5,8 @@
  */
 package presentation;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 /**
@@ -57,7 +59,10 @@ public class FakeUI implements UI {
 
     @Override
     public String getNewMemberSignUpDate() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        LocalDate today = LocalDate.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-LLLL-yyyy");
+        String signUpDate = today.format(formatter);
+        return signUpDate;
     }
     
     

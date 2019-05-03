@@ -43,7 +43,6 @@ public class SystemUI implements UI {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-LLLL-yyyy");
         String signUpDate = today.format(formatter);
         return signUpDate;
-
     }
 
     @Override
