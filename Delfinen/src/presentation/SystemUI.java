@@ -5,10 +5,12 @@
  */
 package presentation;
 
+import businesslogic.EventResult;
 import java.util.Scanner;
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 
 /**
  *
@@ -110,6 +112,11 @@ public class SystemUI implements UI {
 
     @Override
     public int getEventPlacement() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public int getEventNeedingDeleting(ArrayList<EventResult> eventResults) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

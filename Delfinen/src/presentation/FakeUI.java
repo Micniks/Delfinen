@@ -5,6 +5,7 @@
  */
 package presentation;
 
+import businesslogic.EventResult;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -69,7 +70,7 @@ public class FakeUI implements UI {
     public int getMemberID() {
         output.add("Indtast medlems ID-nummer: ");
         return Integer.parseInt(input[index++]);
-        
+
     }
 
     @Override
@@ -88,7 +89,7 @@ public class FakeUI implements UI {
         output.add("3. Rycrawl");
         output.add("4. Brystsvømning");
         return Integer.parseInt(input[index++]);
-        
+
     }
 
     @Override
@@ -119,6 +120,15 @@ public class FakeUI implements UI {
     public int getEventPlacement() {
         output.add("Indtast svømmerens placeing i konkurrencen: ");
         return Integer.parseInt(input[index++]);
+    }
+
+    @Override
+    public int getEventNeedingDeleting(ArrayList<EventResult> eventResults) {
+        output.add("Indtast nr. for konkurrence der skal slettes: ");
+        for (int i = 1; i <= eventResults.size(); i++) {
+            output.add(Integer.toString(i) + ". " + eventResults.get(i-1).toString());
+        }
+        return Integer.parseInt(input[index++])-1;
     }
 
 }

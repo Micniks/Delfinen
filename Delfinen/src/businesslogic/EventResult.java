@@ -39,6 +39,10 @@ public class EventResult {
         return discipline;
     }
     
+    @Override
+    public String toString(){
+        return eventName + ", " + placement + ". plads i " + discipline.toString() + " med tid: " + timeResult;
+    }
     
     
 }

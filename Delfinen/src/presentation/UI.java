@@ -5,6 +5,9 @@
  */
 package presentation;
 
+import businesslogic.EventResult;
+import java.util.ArrayList;
+
 /**
  *
  * @author Michael N. Korsgaard
@@ -36,5 +39,7 @@ public interface UI {
     public String getEventName();
 
     public int getEventPlacement();
+
+    public int getEventNeedingDeleting(ArrayList<EventResult> eventResults);
 
 }

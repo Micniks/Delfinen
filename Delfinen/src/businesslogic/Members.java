@@ -15,21 +15,21 @@ import java.util.HashMap;
  */
 public class Members {
 
-    private ArrayList<Member> members;
+    private ArrayList<Member> membersList;
     private Facade db;
 
     public Members(Facade db) {
-        members = new ArrayList();
+        membersList = new ArrayList();
         this.db = db;
-        getMembersFromStorage(members);
+        getMembersFromStorage(membersList);
     }
 
-    public ArrayList<Member> getMembers() {
-        return members;
+    public ArrayList<Member> getMembersList() {
+        return membersList;
     }
 
     public void addMembers(Member member) {
-        members.add(member);
+        membersList.add(member);
     }
 
     private void getMembersFromStorage(ArrayList<Member> members) {

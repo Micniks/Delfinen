@@ -63,13 +63,13 @@ public class CreateNewMemberTest {
         assertTrue(ui.getOutput().get(1).contains("alder"));
         assertTrue(ui.getOutput().get(3).contains("Motionist"));
         assertTrue(ui.getOutput().get(4).contains("Konkurrencesvømmer"));
-        assertEquals(1, ctrl.getMembers().getMembers().size());
-        assertTrue(ctrl.getMembers().getMembers().get(0).getName().contains("Oscar L."));
-        assertEquals(26, ctrl.getMembers().getMembers().get(0).getAge());
-        assertFalse(ctrl.getMembers().getMembers().get(0).isCompetetiveSwimmer());
-        assertTrue(ctrl.getMembers().getMembers().get(0).isActiveMember());
-        assertEquals(0, ctrl.getMembers().getMembers().get(0).getDebt(), 0);
-        assertEquals(localDate, ctrl.getMembers().getMembers().get(0).getSignUpDate());
+        assertEquals(1, ctrl.getMembers().getMembersList().size());
+        assertTrue(ctrl.getMembers().getMembersList().get(0).getName().contains("Oscar L."));
+        assertEquals(26, ctrl.getMembers().getMembersList().get(0).getAge());
+        assertFalse(ctrl.getMembers().getMembersList().get(0).isCompetetiveSwimmer());
+        assertTrue(ctrl.getMembers().getMembersList().get(0).isActiveMember());
+        assertEquals(0, ctrl.getMembers().getMembersList().get(0).getDebt(), 0);
+        assertEquals(localDate, ctrl.getMembers().getMembersList().get(0).getSignUpDate());
 
     }
 

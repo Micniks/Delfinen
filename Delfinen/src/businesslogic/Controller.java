@@ -100,30 +100,11 @@ public class Controller {
 
         // calling different methods based on what kind of result should be
         // added to the competitiveSwimmer 
-        CompetitiveSwimmer tempMember = getCompetitiveSwimmerFromMemberID(memberID);
         if (resultChoice == 1) {
-            addTrainingResult(memberID, disciplineChoice, timeResult, tempMember);
+            addTrainingResult(memberID, disciplineChoice, timeResult);
         } else if (resultChoice == 2) {
-            addEventResult(memberID, disciplineChoice, timeResult, tempMember);
+            addEventResult(memberID, disciplineChoice, timeResult);
         }
-    }
-
-    /*
-    *   This is a short method used to find a specific CompetitiveSwimmer from their
-    *   Member_ID, but this method will become obsulite given a better storing/sorting
-    *   method of the members, that will make this search method redudant.
-    *   So far this method is only used in controller.addResult() 
-     */
-    //  TODO: improve sorting and searching method
-    public CompetitiveSwimmer getCompetitiveSwimmerFromMemberID(int memberID) {
-        CompetitiveSwimmer tempMember = null;
-        for (Member member : members.getMembers()) {
-            if (memberID == member.getMember_ID() && member.isCompetetiveSwimmer()) {
-                tempMember = (CompetitiveSwimmer) member;
-                break;
-            }
-        }
-        return tempMember;
     }
 
     /*
@@ -133,8 +114,9 @@ public class Controller {
     *   each swimming discipline stored, and not the best for each day
      */
     //  TODO: Check if the new TrainingResult is better then the old.
-    public void addTrainingResult(int memberID, int disciplineChoice, String timeResult, CompetitiveSwimmer tempMember) {
+    public void addTrainingResult(int memberID, int disciplineChoice, String timeResult) {
 
+        CompetitiveSwimmer tempMember = getCompetitiveSwimmerFromMemberID(memberID);
         String resultDate = ui.resultDate();
 
         SwimmingDiscipline dv;
@@ -173,8 +155,9 @@ public class Controller {
     *      
      */
     //  TODO: Maybe sort the eventResults based on date
-    private void addEventResult(int memberID, int disciplineChoice, String timeResult, CompetitiveSwimmer tempMember) {
+    private void addEventResult(int memberID, int disciplineChoice, String timeResult) {
 
+        CompetitiveSwimmer tempMember = getCompetitiveSwimmerFromMemberID(memberID);
         String eventName = ui.getEventName();
         int eventPlacement = ui.getEventPlacement();
 
@@ -233,6 +216,63 @@ public class Controller {
 
             members.addMembers(storageMember);
         }
+    }
+
+    public void deleteResult() {
+        int memberID = ui.getMemberID();
+        int resultChoice = ui.resultType();
+        if (resultChoice == 1) {
+            deleteTrainingResult(memberID);
+        } else if (resultChoice == 2) {
+            deleteEventResult(memberID);
+        }
+    }
+
+    public void deleteTrainingResult(int memberID) {
+        CompetitiveSwimmer tempMember = getCompetitiveSwimmerFromMemberID(memberID);
+        int disciplineChoice = ui.swimmingDiscipline();
+
+        switch (disciplineChoice) {
+            case 1:
+                tempMember.setTrainingResultButterfly(null);
+                break;
+            case 2:
+                tempMember.setTrainingResultCrawl(null);
+                break;
+            case 3:
+                tempMember.setTrainingResultRygCrawl(null);
+                break;
+            case 4:
+                tempMember.setTrainingResultBrystsvømning(null);
+                break;
+            default:
+                throw new IllegalArgumentException();
+        }
+
+    }
+
+    public void deleteEventResult(int memberID) {
+        CompetitiveSwimmer tempMember = getCompetitiveSwimmerFromMemberID(memberID);
+        int eventNeedingDeleting = ui.getEventNeedingDeleting(tempMember.getEventResults());
+        tempMember.getEventResults().remove(eventNeedingDeleting);
+    }
+
+    /*
+    *   This is a short method used to find a specific CompetitiveSwimmer from their
+    *   Member_ID, but this method will become obsulite given a better storing/sorting
+    *   method of the members, that will make this search method redudant.
+    *   So far this method is only used in controller.addResult() 
+     */
+    //  TODO: improve sorting and searching method
+    public CompetitiveSwimmer getCompetitiveSwimmerFromMemberID(int memberID) {
+        CompetitiveSwimmer tempMember = null;
+        for (Member member : members.getMembersList()) {
+            if (memberID == member.getMember_ID() && member.isCompetetiveSwimmer()) {
+                tempMember = (CompetitiveSwimmer) member;
+                break;
+            }
+        }
+        return tempMember;
     }
 
 }
