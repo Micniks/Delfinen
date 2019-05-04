@@ -31,6 +31,13 @@ public class Controller {
         this.members = new Members(db);
     }
 
+    /*
+    *   This is the method that create the "Main Menu", is the entrance to the program from the main class.
+    *   This is the first real step into the program, as well as the last
+     */
+    //  TODO: Create test for the this function
+    //  TODO: Add the new functions to the Menu
+    //  TODO: Error-handeling
     public void start() {
         currentHighestMemberID = db.readHighestMemberID();
         boolean quit = false;
@@ -51,28 +58,49 @@ public class Controller {
         } while (!quit);
     }
 
+    /*
+    *   This is the method that is used from the main menu by the User to create a new member.
+    *   It creates an object from the Member or CompetetiveSwimmer classes, add them to the 
+    *   membersList, and add them to storage. A new member will always have a debt = 0 and
+    *   boolean activeMember = true, as the default. 
+     */
+    //  TODO: Add functions for the trainer and team for CompetitiveSwimmers
     public void createNewMember() {
+        // We get data from user that we need for the new member
         String name = ui.getNewMemberName();
         int age = ui.getNewMemberAge();
         boolean competetiveSwimmer = ui.getNewMemberActivityForm();
         String signUpDate = ui.getNewMemberSignUpDate();
+
+        // We make the new member, as either Member or CompetitiveSwimmer
         Member newMember;
         if (competetiveSwimmer) {
             newMember = new CompetitiveSwimmer(currentHighestMemberID++, name, age, true, signUpDate);
         } else {
             newMember = new Member(currentHighestMemberID++, name, age, false, signUpDate);
         }
+
+        // We store the member in both the programs MembersList and the Database
         members.addMembers(newMember);
         db.storageMember(newMember);
     }
 
+    /*
+    *   This is our method to create a Training- or Event-Result, and store them
+    *   in a member that the results belong to.
+     */
+    //  TODO: add access to the start() method in controller
+    //  TODO: refactor temp names
     public void addResult() {
+        // we get data from user that we need to add a result to a specific member
         int memberID = ui.getMemberID();
         int resultChoice = ui.resultType();
         int disciplineChoice = ui.swimmingDiscipline();
         String timeResult = ui.timeResult();
-        CompetitiveSwimmer tempMember = getCompetitiveSwimmerFromMemberID(memberID);
 
+        // calling different methods based on what kind of result should be
+        // added to the competitiveSwimmer 
+        CompetitiveSwimmer tempMember = getCompetitiveSwimmerFromMemberID(memberID);
         if (resultChoice == 1) {
             addTrainingResult(memberID, disciplineChoice, timeResult, tempMember);
         } else if (resultChoice == 2) {
@@ -80,6 +108,13 @@ public class Controller {
         }
     }
 
+    /*
+    *   This is a short method used to find a specific CompetitiveSwimmer from their
+    *   Member_ID, but this method will become obsulite given a better storing/sorting
+    *   method of the members, that will make this search method redudant.
+    *   So far this method is only used in controller.addResult() 
+     */
+    //  TODO: improve sorting and searching method
     public CompetitiveSwimmer getCompetitiveSwimmerFromMemberID(int memberID) {
         CompetitiveSwimmer tempMember = null;
         for (Member member : members.getMembers()) {
@@ -91,6 +126,13 @@ public class Controller {
         return tempMember;
     }
 
+    /*
+    *   This is the method used by Controller.addResult() to create a training Result.
+    *   The TrainingResult is added to the CompetitiveSwimmers TrainingResultsArray.
+    *   As of this point, each member can only have their best training result in
+    *   each swimming discipline stored, and not the best for each day
+     */
+    //  TODO: Check if the new TrainingResult is better then the old.
     public void addTrainingResult(int memberID, int disciplineChoice, String timeResult, CompetitiveSwimmer tempMember) {
 
         String resultDate = ui.resultDate();
@@ -123,6 +165,14 @@ public class Controller {
         }
     }
 
+    /*
+    *   This is the method used by Controller.addResult() to create an event Result.
+    *   The EventResult is added to the CompetitiveSwimmers EventResultsArrayList.
+    *   As of this point, there is no sorting in the eventResults, other then the
+    *   order in which they are added to the ArrayList
+    *      
+     */
+    //  TODO: Maybe sort the eventResults based on date
     private void addEventResult(int memberID, int disciplineChoice, String timeResult, CompetitiveSwimmer tempMember) {
 
         String eventName = ui.getEventName();
@@ -151,11 +201,22 @@ public class Controller {
         tempMember.addEventResult(temp);
     }
 
+    /*
+    *   This is the method that read from the database when called, and create 
+    *   Members from the database information. This should only be called once,
+    *   when the program start up from the Controller.Start() method, as there is
+    *   so far no checking if dublicates are already in the program. This method
+    *   create both Members and CompetitiveSwimmer from the Database data, and
+    *   add them to the MembersList that should be empty at the beginning of the
+    *   program. This method adds nothing to the database, despite creating members
+    *      
+     */
+    //  TODO: Make sure this method is only called once, propoly check if MembersList is empty
     public void createMembersFromStorage() {
         for (HashMap<String, String> memberInfo : db.getMembers()) {
 
             Member storageMember;
-            
+
             int member_ID = Integer.parseInt(memberInfo.get("Member_ID"));
             String name = memberInfo.get("Name");
             int age = Integer.parseInt(memberInfo.get("Age"));
