@@ -61,7 +61,7 @@ public class DBFacade implements Facade {
         sb.append(", ");
         sb.append(member.isCompetetiveSwimmer());
         sb.append(", ");
-        sb.append(member.getDept());
+        sb.append(member.getDebt());
         sb.append(", \"");
         sb.append(member.getSignUpDate());
         sb.append("\")");
@@ -88,10 +88,11 @@ public class DBFacade implements Facade {
 
             while (resultMembers.next()) {
                 HashMap<String, String> map = new HashMap();
+                map.put("Member_ID", resultMembers.getString("Member_ID"));
                 map.put("Name", resultMembers.getString("Name"));
                 map.put("Age", resultMembers.getString("Age"));
-                map.put("Competitive_Swimmer", resultMembers.getString("Competitive_Swimmer"));
-                map.put("Active_Member", resultMembers.getString("Active_Member"));
+                map.put("Competitive_Swimmer", Boolean.toString(resultMembers.getString("Competitive_Swimmer").contains("1")));
+                map.put("Active_Member", Boolean.toString(resultMembers.getString("Active_Member").contains("1")));
                 map.put("Debt", resultMembers.getString("Debt"));
                 map.put("Sign_Up_Date", resultMembers.getString("Sign_Up_Date"));
                 memberinformation.add(map);

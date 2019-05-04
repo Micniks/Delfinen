@@ -13,7 +13,7 @@ public class Member {
     private int age;
     private boolean activeMember;
     private boolean competetiveSwimmer;
-    private double dept;
+    private double debt;
     private String signUpDate;
 
     public Member(int member_ID, String name, int age, boolean competetiveSwimmer, String signUpDate) {
@@ -23,15 +23,25 @@ public class Member {
         this.competetiveSwimmer = competetiveSwimmer;
         this.signUpDate = signUpDate;
         this.activeMember = true;
-        this.dept = 0;
+        this.debt = 0;
     }
 
-    public double getDept() {
-        return dept;
+    public Member(int member_ID, String name, int age, boolean activeMember, boolean competetiveSwimmer, double debt, String signUpDate) {
+        this.member_ID=member_ID;
+        this.name = name;
+        this.age = age;
+        this.competetiveSwimmer = competetiveSwimmer;
+        this.signUpDate = signUpDate;
+        this.activeMember = activeMember;
+        this.debt = debt;
     }
 
-    public void setDept(double dept) {
-        this.dept = dept;
+    public double getDebt() {
+        return debt;
+    }
+
+    public void setDebt(double debt) {
+        this.debt = debt;
     }
 
     public String getSignUpDate() {
@@ -91,9 +101,9 @@ public class Member {
             sb.append("ikke ");
         }
         sb.append("aktivt medlem.");
-        if (dept > 0){
+        if (debt > 0){
             sb.append(" Gæld: ");
-            sb.append(dept);
+            sb.append(debt);
         }
         return sb.toString();
     }

@@ -27,11 +27,12 @@ public class FakeFacade implements Facade {
     @Override
     public void storageMember(Member member) {
         HashMap<String, String> map = new HashMap();
+        map.put("Member_ID", Integer.toString(member.getMember_ID()));
         map.put("Name", member.getName());
         map.put("Age", Integer.toString(member.getAge()));
         map.put("Competitive_Swimmer", Boolean.toString(member.isCompetetiveSwimmer()));
         map.put("Active_Member", Boolean.toString(member.isActiveMember()));
-        map.put("Debt", Double.toString(member.getDept()));
+        map.put("Debt", Double.toString(member.getDebt()));
         map.put("Sign_Up_Date", member.getSignUpDate());
         testArray.add(map);
     }

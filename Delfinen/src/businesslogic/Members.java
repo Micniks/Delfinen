@@ -38,8 +38,8 @@ public class Members {
         for(HashMap<String, String> map : memberInfo){
             String name = map.get("Name");
             int age = Integer.parseInt(map.get("Age"));
-            boolean competitiveSwimmer = Integer.parseInt(map.get("Competitive_Swimmer")) == 1;
-            boolean activeMember = Integer.parseInt(map.get("Active_Member")) == 1;
+            boolean competitiveSwimmer = Boolean.parseBoolean(map.get("Competitive_Swimmer"));
+            boolean activeMember = Boolean.parseBoolean(map.get("Active_Member"));
             double debt = Double.parseDouble(map.get("Debt"));
             
             

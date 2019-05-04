@@ -22,6 +22,12 @@ public class CompetitiveSwimmer extends Member {
         trainingResults = new TrainingResult[4];
     }
 
+    public CompetitiveSwimmer(int member_ID, String name, int age, boolean activeMember, boolean competetiveSwimmer, double debt, String signUpDate) {
+        super(member_ID, name, age, activeMember, competetiveSwimmer, debt, signUpDate);
+        this.eventResults = new ArrayList();
+        trainingResults = new TrainingResult[4];
+    }
+
     public ArrayList<EventResult> getEventResults() {
         return eventResults;
     }
@@ -77,9 +83,9 @@ public class CompetitiveSwimmer extends Member {
             sb.append("ikke ");
         }
         sb.append("aktivt medlem.");
-        if (getDept() > 0) {
+        if (getDebt() > 0) {
             sb.append(" Gæld: ");
-            sb.append(getDept());
+            sb.append(getDebt());
         }
         return sb.toString();
     }

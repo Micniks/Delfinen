@@ -8,6 +8,7 @@ package businesslogic;
 import datasource.Facade;
 import presentation.UI;
 import java.time.LocalDate;
+import java.util.HashMap;
 
 /**
  *
@@ -33,6 +34,7 @@ public class Controller {
     public void start() {
         currentHighestMemberID = db.readHighestMemberID();
         boolean quit = false;
+        createMembersFromStorage();
         do {
             ui.displayMainMenu();
             String userInput = ui.mainMenuSelection();
@@ -56,9 +58,9 @@ public class Controller {
         String signUpDate = ui.getNewMemberSignUpDate();
         Member newMember;
         if (competetiveSwimmer) {
-            newMember = new CompetitiveSwimmer(currentHighestMemberID++, name, age, competetiveSwimmer, signUpDate);
+            newMember = new CompetitiveSwimmer(currentHighestMemberID++, name, age, true, signUpDate);
         } else {
-            newMember = new Member(currentHighestMemberID++, name, age, competetiveSwimmer, signUpDate);
+            newMember = new Member(currentHighestMemberID++, name, age, false, signUpDate);
         }
         members.addMembers(newMember);
         db.storageMember(newMember);
@@ -147,6 +149,29 @@ public class Controller {
 
         temp = new EventResult(eventName, eventPlacement, timeResult, dv);
         tempMember.addEventResult(temp);
+    }
+
+    public void createMembersFromStorage() {
+        for (HashMap<String, String> memberInfo : db.getMembers()) {
+
+            Member storageMember;
+            
+            int member_ID = Integer.parseInt(memberInfo.get("Member_ID"));
+            String name = memberInfo.get("Name");
+            int age = Integer.parseInt(memberInfo.get("Age"));
+            boolean activeMember = Boolean.parseBoolean(memberInfo.get("Active_Member"));
+            boolean competetiveSwimmer = Boolean.parseBoolean(memberInfo.get("Competitive_Swimmer"));
+            double debt = Double.parseDouble(memberInfo.get("Debt"));
+            String signUpDate = memberInfo.get("Sign_Up_Date");
+
+            if (competetiveSwimmer) {
+                storageMember = new CompetitiveSwimmer(member_ID, name, age, activeMember, true, debt, signUpDate);
+            } else {
+                storageMember = new Member(member_ID, name, age, activeMember, false, debt, signUpDate);
+            }
+
+            members.addMembers(storageMember);
+        }
     }
 
 }
