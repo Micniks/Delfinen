@@ -5,7 +5,10 @@
  */
 package datasource;
 
+import businesslogic.EventResult;
 import businesslogic.Member;
+import businesslogic.SwimmingDiscipline;
+import businesslogic.TrainingResult;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -15,13 +18,14 @@ import java.util.HashMap;
  */
 public class FakeFacade implements Facade {
 
-    public ArrayList<HashMap<String, String>> testArray;
-
-    
+    public ArrayList<HashMap<String, String>> testMembersHashMapArray;
+    public ArrayList<HashMap<String, String>> testTrainingResultsHashMapArray;
+    public ArrayList<HashMap<String, String>> testEventResultsHashMapArray;
 
     public FakeFacade() {
-        this.testArray = new ArrayList();
-
+        this.testMembersHashMapArray = new ArrayList();
+        this.testTrainingResultsHashMapArray = new ArrayList();
+        this.testEventResultsHashMapArray = new ArrayList();
     }
 
     @Override
@@ -34,17 +38,78 @@ public class FakeFacade implements Facade {
         map.put("Active_Member", Boolean.toString(member.isActiveMember()));
         map.put("Debt", Double.toString(member.getDebt()));
         map.put("Sign_Up_Date", member.getSignUpDate());
-        testArray.add(map);
+        testMembersHashMapArray.add(map);
     }
 
     @Override
     public ArrayList<HashMap<String, String>> getMembers() {
-        return testArray;
+        return testMembersHashMapArray;
     }
 
     @Override
     public int readHighestMemberID() {
         return 1;
+    }
+
+    @Override
+    public void storeTrainingResult(TrainingResult trainingResult, int member_ID) {
+        HashMap<String, String> map = new HashMap();
+        map.put("Swimming_Discipline", trainingResult.getDiscipline().toString());
+        map.put("Member_ID", Integer.toString(member_ID));
+        map.put("Time_Result", trainingResult.getTimeResult());
+        map.put("Date", trainingResult.getDate());
+        testTrainingResultsHashMapArray.add(map);
+    }
+
+    @Override
+    public void storeEventResult(EventResult eventResult, int member_ID) {
+        HashMap<String, String> map = new HashMap();
+        map.put("Swimming_Discipline", eventResult.getDiscipline().toString());
+        map.put("Event_Name", eventResult.getEventName());
+        map.put("Member_ID", Integer.toString(member_ID));
+        map.put("Placement", Integer.toString(eventResult.getPlacement()));
+        map.put("Time_Result", eventResult.getTimeResult());
+        testEventResultsHashMapArray.add(map);
+    }
+
+    @Override
+    public void deleteTrainingResult(int memberID, SwimmingDiscipline swimmingDiscipline) {
+        String compareID;
+        String compareSD;
+        boolean correctMemberID;
+        boolean correctSwimmingDiscipline;
+        for (int i = 0; i < 10; i++) {
+            compareID = testTrainingResultsHashMapArray.get(i).get("Member_ID");
+            compareSD = testTrainingResultsHashMapArray.get(i).get("Swimming_Discipline");
+            correctMemberID = compareID.contains(Integer.toString(memberID));
+            correctSwimmingDiscipline = compareSD.contains(swimmingDiscipline.toString());
+            if (correctMemberID && correctSwimmingDiscipline) {
+                testTrainingResultsHashMapArray.remove(i);
+                break;
+            }
+        }
+    }
+
+    @Override
+    public void deleteEventResult(int memberID, String eventName, SwimmingDiscipline eventSD) {
+        String compareMemberID;
+        String compareDiscipline;
+        String compareEventName;
+        boolean correctMemberID;
+        boolean correctSwimmingDiscipline;
+        boolean correctEventName;
+        for (int i = 0; i < 10; i++) {
+            compareMemberID = testTrainingResultsHashMapArray.get(i).get("Member_ID");
+            compareDiscipline = testTrainingResultsHashMapArray.get(i).get("Swimming_Discipline");
+            compareEventName = testTrainingResultsHashMapArray.get(i).get("Event_Name");
+            correctMemberID = compareMemberID.contains(Integer.toString(memberID));
+            correctSwimmingDiscipline = compareDiscipline.contains(eventSD.toString());
+            correctEventName = compareEventName.contains(eventName);
+            if (correctMemberID && correctSwimmingDiscipline && correctEventName) {
+                testTrainingResultsHashMapArray.remove(i);
+                break;
+            }
+        }
     }
 
 }

@@ -5,7 +5,10 @@
  */
 package datasource;
 
+import businesslogic.EventResult;
 import businesslogic.Member;
+import businesslogic.SwimmingDiscipline;
+import businesslogic.TrainingResult;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -65,7 +68,6 @@ public class DBFacade implements Facade {
         sb.append(", \"");
         sb.append(member.getSignUpDate());
         sb.append("\")");
-        System.out.println(sb.toString());
         try {
             statement.executeUpdate(sb.toString());
         } catch (SQLException ex) {
@@ -128,6 +130,82 @@ public class DBFacade implements Facade {
 
         return highestMemberID;
 
+    }
+
+    @Override
+    public void storeTrainingResult(TrainingResult trainingResult, int member_ID) {
+        StringBuilder sb = new StringBuilder();
+
+        sb.append("INSERT INTO Training_Results (Swimming_Discipline, Member_ID, Time_Result, Date) VALUES (\"");
+        sb.append(trainingResult.getDiscipline().toString());
+        sb.append("\", ");
+        sb.append(member_ID);
+        sb.append(", \"");
+        sb.append(trainingResult.getTimeResult());
+        sb.append("\", \"");
+        sb.append(trainingResult.getDate());
+        sb.append("\")");
+        try {
+            statement.executeUpdate(sb.toString());
+        } catch (SQLException ex) {
+            Logger.getLogger(DBFacade.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    @Override
+    public void storeEventResult(EventResult eventResult, int member_ID) {
+        StringBuilder sb = new StringBuilder();
+
+        sb.append("INSERT INTO Event_Results (Swimming_Discipline, Event_Name, Member_ID, Placement, Time_Result) VALUES (\"");
+        sb.append(eventResult.getDiscipline().toString());
+        sb.append("\", \"");
+        sb.append(eventResult.getEventName());
+        sb.append("\", ");
+        sb.append(member_ID);
+        sb.append(", ");
+        sb.append(eventResult.getPlacement());
+        sb.append(", \"");
+        sb.append(eventResult.getTimeResult());
+        sb.append("\")");
+        try {
+            statement.executeUpdate(sb.toString());
+        } catch (SQLException ex) {
+            Logger.getLogger(DBFacade.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    @Override
+    public void deleteTrainingResult(int memberID, SwimmingDiscipline swimmingDiscipline) {
+        StringBuilder sb = new StringBuilder();
+
+        sb.append("DELETE FROM Training_Results WHERE Member_ID = ");
+        sb.append(Integer.toString(memberID));
+        sb.append(" AND Swimming_Discipline = \"");
+        sb.append(swimmingDiscipline.toString());
+        sb.append("\"");
+        try {
+            statement.executeUpdate(sb.toString());
+        } catch (SQLException ex) {
+            Logger.getLogger(DBFacade.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    @Override
+    public void deleteEventResult(int memberID, String eventName, SwimmingDiscipline eventSD) {
+        StringBuilder sb = new StringBuilder();
+
+        sb.append("DELETE FROM Event_Results WHERE Member_ID = ");
+        sb.append(Integer.toString(memberID));
+        sb.append(" AND Swimming_Discipline = \"");
+        sb.append(eventSD.toString());
+        sb.append(" AND Event_Name = \"");
+        sb.append(eventName);
+        sb.append("\"");
+        try {
+            statement.executeUpdate(sb.toString());
+        } catch (SQLException ex) {
+            Logger.getLogger(DBFacade.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
 }

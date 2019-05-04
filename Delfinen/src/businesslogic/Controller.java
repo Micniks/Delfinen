@@ -86,6 +86,39 @@ public class Controller {
     }
 
     /*
+    *   This is the method that read from the database when called, and create 
+    *   Members from the database information. This should only be called once,
+    *   when the program start up from the Controller.Start() method, as there is
+    *   so far no checking if dublicates are already in the program. This method
+    *   create both Members and CompetitiveSwimmer from the Database data, and
+    *   add them to the MembersList that should be empty at the beginning of the
+    *   program. This method adds nothing to the database, despite creating members  
+     */
+    //  TODO: Make sure this method is only called once, propoly check if MembersList is empty
+    public void createMembersFromStorage() {
+        for (HashMap<String, String> memberInfo : db.getMembers()) {
+
+            Member storageMember;
+
+            int member_ID = Integer.parseInt(memberInfo.get("Member_ID"));
+            String name = memberInfo.get("Name");
+            int age = Integer.parseInt(memberInfo.get("Age"));
+            boolean activeMember = Boolean.parseBoolean(memberInfo.get("Active_Member"));
+            boolean competetiveSwimmer = Boolean.parseBoolean(memberInfo.get("Competitive_Swimmer"));
+            double debt = Double.parseDouble(memberInfo.get("Debt"));
+            String signUpDate = memberInfo.get("Sign_Up_Date");
+
+            if (competetiveSwimmer) {
+                storageMember = new CompetitiveSwimmer(member_ID, name, age, activeMember, true, debt, signUpDate);
+            } else {
+                storageMember = new Member(member_ID, name, age, activeMember, false, debt, signUpDate);
+            }
+
+            members.addMembers(storageMember);
+        }
+    }
+
+    /*
     *   This is our method to create a Training- or Event-Result, and store them
     *   in a member that the results belong to.
      */
@@ -114,6 +147,7 @@ public class Controller {
     *   each swimming discipline stored, and not the best for each day
      */
     //  TODO: Check if the new TrainingResult is better then the old.
+    //  TODO: refactor temp names.
     public void addTrainingResult(int memberID, int disciplineChoice, String timeResult) {
 
         CompetitiveSwimmer tempMember = getCompetitiveSwimmerFromMemberID(memberID);
@@ -145,6 +179,7 @@ public class Controller {
             default:
                 throw new IllegalArgumentException();
         }
+        db.storeTrainingResult(temp, tempMember.getMember_ID());
     }
 
     /*
@@ -155,6 +190,7 @@ public class Controller {
     *      
      */
     //  TODO: Maybe sort the eventResults based on date
+    //  TODO: refactor temp names
     private void addEventResult(int memberID, int disciplineChoice, String timeResult) {
 
         CompetitiveSwimmer tempMember = getCompetitiveSwimmerFromMemberID(memberID);
@@ -182,42 +218,15 @@ public class Controller {
 
         temp = new EventResult(eventName, eventPlacement, timeResult, dv);
         tempMember.addEventResult(temp);
+        db.storeEventResult(temp, tempMember.getMember_ID());
     }
 
     /*
-    *   This is the method that read from the database when called, and create 
-    *   Members from the database information. This should only be called once,
-    *   when the program start up from the Controller.Start() method, as there is
-    *   so far no checking if dublicates are already in the program. This method
-    *   create both Members and CompetitiveSwimmer from the Database data, and
-    *   add them to the MembersList that should be empty at the beginning of the
-    *   program. This method adds nothing to the database, despite creating members
-    *      
+    *   This method is used to delete a Training- or Event-Result from a specific
+    *   Member, and goes to either deleteTrainingResult() or deleteEventResult()
      */
-    //  TODO: Make sure this method is only called once, propoly check if MembersList is empty
-    public void createMembersFromStorage() {
-        for (HashMap<String, String> memberInfo : db.getMembers()) {
-
-            Member storageMember;
-
-            int member_ID = Integer.parseInt(memberInfo.get("Member_ID"));
-            String name = memberInfo.get("Name");
-            int age = Integer.parseInt(memberInfo.get("Age"));
-            boolean activeMember = Boolean.parseBoolean(memberInfo.get("Active_Member"));
-            boolean competetiveSwimmer = Boolean.parseBoolean(memberInfo.get("Competitive_Swimmer"));
-            double debt = Double.parseDouble(memberInfo.get("Debt"));
-            String signUpDate = memberInfo.get("Sign_Up_Date");
-
-            if (competetiveSwimmer) {
-                storageMember = new CompetitiveSwimmer(member_ID, name, age, activeMember, true, debt, signUpDate);
-            } else {
-                storageMember = new Member(member_ID, name, age, activeMember, false, debt, signUpDate);
-            }
-
-            members.addMembers(storageMember);
-        }
-    }
-
+    //  TODO: add way to access from Start()
+    //  TODO: delete from database as well.
     public void deleteResult() {
         int memberID = ui.getMemberID();
         int resultChoice = ui.resultType();
@@ -228,21 +237,35 @@ public class Controller {
         }
     }
 
+    /*
+    *   This method is used to delete a TrainingResult from a specific CompetitiveSwimmer,
+    *   by setting the TrainResultArray[] at the corrosponing index to equal null.
+    *   The method is called from the Controller.deleteResult
+     */
+    //  TODO: refactor temp names.
+    //  TODO: think about showing the time in the training dicipline before choosing to delete.
+    //  TODO: delete from database as well.
     public void deleteTrainingResult(int memberID) {
         CompetitiveSwimmer tempMember = getCompetitiveSwimmerFromMemberID(memberID);
         int disciplineChoice = ui.swimmingDiscipline();
 
+        
+
         switch (disciplineChoice) {
             case 1:
+                db.deleteTrainingResult(memberID, SwimmingDiscipline.BUTTERFLY);
                 tempMember.setTrainingResultButterfly(null);
                 break;
             case 2:
+                db.deleteTrainingResult(memberID, SwimmingDiscipline.CRAWL);
                 tempMember.setTrainingResultCrawl(null);
                 break;
             case 3:
+                db.deleteTrainingResult(memberID, SwimmingDiscipline.RYGCRAWL);
                 tempMember.setTrainingResultRygCrawl(null);
                 break;
             case 4:
+                db.deleteTrainingResult(memberID, SwimmingDiscipline.BRYSTSVØMMING);
                 tempMember.setTrainingResultBrystsvømning(null);
                 break;
             default:
@@ -251,9 +274,19 @@ public class Controller {
 
     }
 
+    /*
+    *   This method is used to delete EventResults from a specific competitiveSwimmer,
+    *   by removing it from the ArrayList of EventResults from that member.
+    *   The method is called from the Controller.deleteResult
+     */
+    //  TODO: refactor temp names.
+    //  TODO: delete from database as well.
     public void deleteEventResult(int memberID) {
         CompetitiveSwimmer tempMember = getCompetitiveSwimmerFromMemberID(memberID);
         int eventNeedingDeleting = ui.getEventNeedingDeleting(tempMember.getEventResults());
+        String eventName = tempMember.getEventResults().get(eventNeedingDeleting).getEventName();
+        SwimmingDiscipline eventSD = tempMember.getEventResults().get(eventNeedingDeleting).getDiscipline();
+        db.deleteEventResult(memberID, eventName, eventSD);
         tempMember.getEventResults().remove(eventNeedingDeleting);
     }
 

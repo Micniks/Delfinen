@@ -5,7 +5,10 @@
  */
 package datasource;
 
+import businesslogic.EventResult;
 import businesslogic.Member;
+import businesslogic.SwimmingDiscipline;
+import businesslogic.TrainingResult;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -21,4 +24,12 @@ public interface Facade {
 
     public int readHighestMemberID();
 
-    }
+    public void storeTrainingResult(TrainingResult trainingResult, int member_ID);
+
+    public void storeEventResult(EventResult eventResult, int member_ID);
+
+    public void deleteTrainingResult(int memberID, SwimmingDiscipline swimmingDiscipline);
+
+    public void deleteEventResult(int memberID, String eventName, SwimmingDiscipline eventSD);
+
+}

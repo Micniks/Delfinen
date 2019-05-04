@@ -16,12 +16,15 @@ public interface UI {
 
     // New Member Calls
     public String getNewMemberName();
+
     public int getNewMemberAge();
+
     public boolean getNewMemberActivityForm();
 
     public void displayMainMenu();
 
     public String mainMenuSelection();
+
     public String getNewMemberSignUpDate();
 
     public int getMemberID();
