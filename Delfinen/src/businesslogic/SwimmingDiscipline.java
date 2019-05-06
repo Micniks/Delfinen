@@ -4,7 +4,7 @@ public enum SwimmingDiscipline {
     BUTTERFLY,
     CRAWL,
     RYGCRAWL,
-    BRYSTSVØMMING;
+    BRYSTSVØMNING;
 
     public SwimmingDiscipline getSwimmingDisciplineFromString(String str) {
         if (str.contains("BUTTERFLY")) {
@@ -16,8 +16,8 @@ public enum SwimmingDiscipline {
         if (str.contains("RYGCRAWL")) {
             return RYGCRAWL;
         }
-        if (str.contains("BRYSTSVØMMING")) {
-            return BRYSTSVØMMING;
+        if (str.contains("BRYSTSVØMNING")) {
+            return BRYSTSVØMNING;
         }
         return null;
     }

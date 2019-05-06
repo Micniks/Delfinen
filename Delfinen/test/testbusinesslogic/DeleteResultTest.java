@@ -30,6 +30,7 @@ public class DeleteResultTest {
         CompetitiveSwimmer member = new CompetitiveSwimmer(1, "Michael", 26, true, "03-05-2019");
         TrainingResult trainingResult = new TrainingResult(SwimmingDiscipline.CRAWL, "00:00:45:67", "03-05-2019");
         member.setTrainingResultCrawl(trainingResult);
+        db.storeTrainingResult(trainingResult, member.getMember_ID());
         ctrl.getMembers().addMembers(member);
 
         //pre-asserts
@@ -64,6 +65,7 @@ public class DeleteResultTest {
         CompetitiveSwimmer member = new CompetitiveSwimmer(1, "Michael", 26, true, "03-05-2019");
         EventResult eventResult = new EventResult("Ny Svømmer Konkurrence", 3, "00:00:45:67", SwimmingDiscipline.CRAWL);
         member.addEventResult(eventResult);
+        db.storeEventResult(eventResult, member.getMember_ID());
         ctrl.getMembers().addMembers(member);
 
         //pre-asserts
@@ -96,12 +98,16 @@ public class DeleteResultTest {
         CompetitiveSwimmer member = new CompetitiveSwimmer(1, "Michael", 26, true, "03-05-2019");
         TrainingResult trainingResult1 = new TrainingResult(SwimmingDiscipline.CRAWL, "00:00:45:67", "03-05-2019");
         member.setTrainingResultCrawl(trainingResult1);
+        db.storeTrainingResult(trainingResult1, member.getMember_ID());
         TrainingResult trainingResult2 = new TrainingResult(SwimmingDiscipline.RYGCRAWL, "00:01:45:67", "03-05-2019");
         member.setTrainingResultRygCrawl(trainingResult2);
-        TrainingResult trainingResult3 = new TrainingResult(SwimmingDiscipline.BRYSTSVØMMING, "00:02:45:67", "03-05-2019");
+        db.storeTrainingResult(trainingResult2, member.getMember_ID());
+        TrainingResult trainingResult3 = new TrainingResult(SwimmingDiscipline.BRYSTSVØMNING, "00:02:45:67", "03-05-2019");
         member.setTrainingResultBrystsvømning(trainingResult3);
+        db.storeTrainingResult(trainingResult3, member.getMember_ID());
         TrainingResult trainingResult4 = new TrainingResult(SwimmingDiscipline.BUTTERFLY, "00:03:45:67", "03-05-2019");
         member.setTrainingResultButterfly(trainingResult4);
+        db.storeTrainingResult(trainingResult4, member.getMember_ID());
         ctrl.getMembers().addMembers(member);
 
         //pre-asserts
@@ -136,10 +142,13 @@ public class DeleteResultTest {
         CompetitiveSwimmer member = new CompetitiveSwimmer(1, "Michael", 26, true, "03-05-2019");
         EventResult eventResult1 = new EventResult("Ny Svømmer Konkurrence", 3, "00:01:45:67", SwimmingDiscipline.CRAWL);
         member.addEventResult(eventResult1);
+        db.storeEventResult(eventResult1, member.getMember_ID());
         EventResult eventResult2 = new EventResult("NSK", 2, "00:00:45:67", SwimmingDiscipline.RYGCRAWL);
         member.addEventResult(eventResult2);
-        EventResult eventResult3 = new EventResult("NSK-2", 1, "00:00:35:67", SwimmingDiscipline.BRYSTSVØMMING);
+        db.storeEventResult(eventResult2, member.getMember_ID());
+        EventResult eventResult3 = new EventResult("NSK-2", 1, "00:00:35:67", SwimmingDiscipline.BRYSTSVØMNING);
         member.addEventResult(eventResult3);
+        db.storeEventResult(eventResult3, member.getMember_ID());
         ctrl.getMembers().addMembers(member);
 
         //pre-asserts
@@ -154,7 +163,7 @@ public class DeleteResultTest {
         assertEquals(2, member.getEventResults().get(1).getPlacement());
         assertTrue(member.getEventResults().get(2).getTimeResult().contains("00:00:35:67"));
         assertTrue(member.getEventResults().get(2).getEventName().contains("NSK-2"));
-        assertEquals(SwimmingDiscipline.BRYSTSVØMMING, member.getEventResults().get(2).getDiscipline());
+        assertEquals(SwimmingDiscipline.BRYSTSVØMNING, member.getEventResults().get(2).getDiscipline());
         assertEquals(1, member.getEventResults().get(2).getPlacement());
         assertEquals(1, ctrl.getMembers().getMembersList().size());
 
@@ -174,7 +183,7 @@ public class DeleteResultTest {
         assertEquals(3, member.getEventResults().get(0).getPlacement());
         assertTrue(member.getEventResults().get(1).getTimeResult().contains("00:00:35:67"));
         assertTrue(member.getEventResults().get(1).getEventName().contains("NSK-2"));
-        assertEquals(SwimmingDiscipline.BRYSTSVØMMING, member.getEventResults().get(1).getDiscipline());
+        assertEquals(SwimmingDiscipline.BRYSTSVØMNING, member.getEventResults().get(1).getDiscipline());
         assertEquals(1, member.getEventResults().get(1).getPlacement());
 
     }

@@ -57,7 +57,7 @@ public class FakeFacade implements Facade {
         map.put("Swimming_Discipline", trainingResult.getDiscipline().toString());
         map.put("Member_ID", Integer.toString(member_ID));
         map.put("Time_Result", trainingResult.getTimeResult());
-        map.put("Date", trainingResult.getDate());
+        map.put("Result_Date", trainingResult.getDate());
         testTrainingResultsHashMapArray.add(map);
     }
 
@@ -78,7 +78,7 @@ public class FakeFacade implements Facade {
         String compareSD;
         boolean correctMemberID;
         boolean correctSwimmingDiscipline;
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < testTrainingResultsHashMapArray.size(); i++) {
             compareID = testTrainingResultsHashMapArray.get(i).get("Member_ID");
             compareSD = testTrainingResultsHashMapArray.get(i).get("Swimming_Discipline");
             correctMemberID = compareID.contains(Integer.toString(memberID));
@@ -98,15 +98,15 @@ public class FakeFacade implements Facade {
         boolean correctMemberID;
         boolean correctSwimmingDiscipline;
         boolean correctEventName;
-        for (int i = 0; i < 10; i++) {
-            compareMemberID = testTrainingResultsHashMapArray.get(i).get("Member_ID");
-            compareDiscipline = testTrainingResultsHashMapArray.get(i).get("Swimming_Discipline");
-            compareEventName = testTrainingResultsHashMapArray.get(i).get("Event_Name");
+        for (int i = 0; i < testEventResultsHashMapArray.size(); i++) {
+            compareMemberID = testEventResultsHashMapArray.get(i).get("Member_ID");
+            compareDiscipline = testEventResultsHashMapArray.get(i).get("Swimming_Discipline");
+            compareEventName = testEventResultsHashMapArray.get(i).get("Event_Name");
             correctMemberID = compareMemberID.contains(Integer.toString(memberID));
             correctSwimmingDiscipline = compareDiscipline.contains(eventSD.toString());
             correctEventName = compareEventName.contains(eventName);
             if (correctMemberID && correctSwimmingDiscipline && correctEventName) {
-                testTrainingResultsHashMapArray.remove(i);
+                testEventResultsHashMapArray.remove(i);
                 break;
             }
         }
@@ -115,6 +115,11 @@ public class FakeFacade implements Facade {
     @Override
     public Iterable<HashMap<String, String>> getTrainingResults() {
         return testTrainingResultsHashMapArray;
+    }
+
+    @Override
+    public Iterable<HashMap<String, String>> getEventResults() {
+        return testEventResultsHashMapArray;
     }
 
 }

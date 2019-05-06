@@ -157,4 +157,9 @@ public class FakeUI implements UI {
         return Integer.parseInt(input[index++]) == 1;
     }
 
+    @Override
+    public void notCompetitveSwimmerMessage(int memberID) {
+        output.add("FEJL: Medlem med ID: " + memberID + " er ikke en konkurrence svømmer.");
+    }
+
 }

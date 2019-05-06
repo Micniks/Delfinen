@@ -171,4 +171,9 @@ public class SystemUI implements UI {
         return choice == 1;
     }
 
+    @Override
+    public void notCompetitveSwimmerMessage(int memberID) {
+        System.out.println("FEJL: Medlem med ID: " + memberID + " er ikke en konkurrence svømmer.");
+    }
+
 }

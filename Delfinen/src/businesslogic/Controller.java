@@ -8,6 +8,7 @@ package businesslogic;
 import datasource.Facade;
 import presentation.UI;
 import java.time.LocalDate;
+import java.time.Period;
 import java.util.HashMap;
 
 /**
@@ -42,6 +43,9 @@ public class Controller {
         currentHighestMemberID = db.readHighestMemberID();
         createMembersFromStorage();
         createResultsFromStorage();
+        for (Member member : members.getMembersList()) {
+            System.out.println(member.getMember_ID() + ". " + member);
+        }
         boolean quit = false;
         do {
             ui.displayMainMenu();
@@ -126,12 +130,16 @@ public class Controller {
         int disciplineChoice = ui.swimmingDiscipline();
         String timeResult = ui.timeResult();
 
+        CompetitiveSwimmer tempMember = getCompetitiveSwimmerFromMemberID(memberID);
+
         // calling different methods based on what kind of result should be
         // added to the competitiveSwimmer 
-        if (resultChoice == 1) {
-            addTrainingResult(memberID, disciplineChoice, timeResult);
-        } else if (resultChoice == 2) {
-            addEventResult(memberID, disciplineChoice, timeResult);
+        if (tempMember != null) {
+            if (resultChoice == 1) {
+                addTrainingResult(memberID, disciplineChoice, timeResult, tempMember);
+            } else if (resultChoice == 2) {
+                addEventResult(memberID, disciplineChoice, timeResult, tempMember);
+            }
         }
     }
 
@@ -143,64 +151,72 @@ public class Controller {
      */
     //  TODO: Check if the new TrainingResult is better then the old.
     //  TODO: refactor temp names.
-    public void addTrainingResult(int memberID, int disciplineChoice, String timeResult) {
+    //  TODO: Change the switch to use getTrainingResults() and use indexes, so we can generlize more from the switch
+    public void addTrainingResult(int memberID, int disciplineChoice, String timeResult, CompetitiveSwimmer tempMember) {
 
-        CompetitiveSwimmer tempMember = getCompetitiveSwimmerFromMemberID(memberID);
         String resultDate = ui.resultDate();
 
         SwimmingDiscipline dv;
         TrainingResult newTrainingResult;
         TrainingResult oldTrainingResult;
-        boolean confirmOverride = true;
+        boolean confirmProceed = true;
         switch (disciplineChoice) {
             case 1:
-                oldTrainingResult = tempMember.getTrainingResultButterfly();
                 dv = SwimmingDiscipline.BUTTERFLY;
                 newTrainingResult = new TrainingResult(dv, timeResult, resultDate);
-                confirmOverride = confirmTrainingResultOverride(oldTrainingResult, confirmOverride, newTrainingResult, memberID, dv);
-                if (confirmOverride) {
+                if (tempMember.getTrainingResultButterfly() != null) {
+                    oldTrainingResult = tempMember.getTrainingResultButterfly();
+                    confirmProceed = confirmTrainingResultProceed(oldTrainingResult, newTrainingResult, memberID, dv);
+                }
+                if (confirmProceed) {
                     tempMember.setTrainingResultButterfly(newTrainingResult);
                 }
                 break;
             case 2:
-                oldTrainingResult = tempMember.getTrainingResultCrawl();
                 dv = SwimmingDiscipline.CRAWL;
                 newTrainingResult = new TrainingResult(dv, timeResult, resultDate);
-                confirmOverride = confirmTrainingResultOverride(oldTrainingResult, confirmOverride, newTrainingResult, memberID, dv);
-                if (confirmOverride) {
+                if (tempMember.getTrainingResultCrawl() != null) {
+                    oldTrainingResult = tempMember.getTrainingResultCrawl();
+                    confirmProceed = confirmTrainingResultProceed(oldTrainingResult, newTrainingResult, memberID, dv);
+                }
+                if (confirmProceed) {
                     tempMember.setTrainingResultCrawl(newTrainingResult);
                 }
                 break;
             case 3:
-                oldTrainingResult = tempMember.getTrainingResultRygCrawl();
                 dv = SwimmingDiscipline.RYGCRAWL;
                 newTrainingResult = new TrainingResult(dv, timeResult, resultDate);
-                confirmOverride = confirmTrainingResultOverride(oldTrainingResult, confirmOverride, newTrainingResult, memberID, dv);
-                if (confirmOverride) {
+                if (tempMember.getTrainingResultRygCrawl() != null) {
+                    oldTrainingResult = tempMember.getTrainingResultRygCrawl();
+                    confirmProceed = confirmTrainingResultProceed(oldTrainingResult, newTrainingResult, memberID, dv);
+                }
+                if (confirmProceed) {
                     tempMember.setTrainingResultRygCrawl(newTrainingResult);
                 }
                 break;
             case 4:
-                oldTrainingResult = tempMember.getTrainingResultBrystsvømning();
-                dv = SwimmingDiscipline.BRYSTSVØMMING;
+                dv = SwimmingDiscipline.BRYSTSVØMNING;
                 newTrainingResult = new TrainingResult(dv, timeResult, resultDate);
-                confirmOverride = confirmTrainingResultOverride(oldTrainingResult, confirmOverride, newTrainingResult, memberID, dv);
-                if (confirmOverride) {
+                if (tempMember.getTrainingResultBrystsvømning() != null) {
+                    oldTrainingResult = tempMember.getTrainingResultBrystsvømning();
+                    confirmProceed = confirmTrainingResultProceed(oldTrainingResult, newTrainingResult, memberID, dv);
+                }
+                if (confirmProceed) {
                     tempMember.setTrainingResultBrystsvømning(newTrainingResult);
                 }
                 break;
             default:
                 throw new IllegalArgumentException();
         }
-        db.storeTrainingResult(newTrainingResult, tempMember.getMember_ID());
+        if (confirmProceed) {
+            db.storeTrainingResult(newTrainingResult, tempMember.getMember_ID());
+        }
     }
 
-    public boolean confirmTrainingResultOverride(TrainingResult oldTrainingResult, boolean confirmOverride, TrainingResult newTrainingResult, int memberID, SwimmingDiscipline dv) {
-        if (oldTrainingResult != null) {
-            confirmOverride = ui.confirmTrainingResultOverride(oldTrainingResult, newTrainingResult);
-            if (confirmOverride) {
-                db.deleteTrainingResult(memberID, dv);
-            }
+    public boolean confirmTrainingResultProceed(TrainingResult oldTrainingResult, TrainingResult newTrainingResult, int memberID, SwimmingDiscipline dv) {
+        boolean confirmOverride = ui.confirmTrainingResultOverride(oldTrainingResult, newTrainingResult);
+        if (confirmOverride) {
+            db.deleteTrainingResult(memberID, dv);
         }
         return confirmOverride;
     }
@@ -214,9 +230,8 @@ public class Controller {
      */
     //  TODO: Maybe sort the eventResults based on date
     //  TODO: refactor temp names
-    private void addEventResult(int memberID, int disciplineChoice, String timeResult) {
+    public void addEventResult(int memberID, int disciplineChoice, String timeResult, CompetitiveSwimmer tempMember) {
 
-        CompetitiveSwimmer tempMember = getCompetitiveSwimmerFromMemberID(memberID);
         String eventName = ui.getEventName();
         int eventPlacement = ui.getEventPlacement();
 
@@ -233,7 +248,7 @@ public class Controller {
                 dv = SwimmingDiscipline.RYGCRAWL;
                 break;
             case 4:
-                dv = SwimmingDiscipline.BRYSTSVØMMING;
+                dv = SwimmingDiscipline.BRYSTSVØMNING;
                 break;
             default:
                 throw new IllegalArgumentException();
@@ -253,10 +268,13 @@ public class Controller {
     public void deleteResult() {
         int memberID = ui.getMemberID();
         int resultChoice = ui.resultType();
-        if (resultChoice == 1) {
-            deleteTrainingResult(memberID);
-        } else if (resultChoice == 2) {
-            deleteEventResult(memberID);
+        CompetitiveSwimmer tempMember = getCompetitiveSwimmerFromMemberID(memberID);
+        if (tempMember != null) {
+            if (resultChoice == 1) {
+                deleteTrainingResult(tempMember);
+            } else if (resultChoice == 2) {
+                deleteEventResult(tempMember);
+            }
         }
     }
 
@@ -268,25 +286,25 @@ public class Controller {
     //  TODO: refactor temp names.
     //  TODO: think about showing the time in the training dicipline before choosing to delete.
     //  TODO: delete from database as well.
-    public void deleteTrainingResult(int memberID) {
-        CompetitiveSwimmer tempMember = getCompetitiveSwimmerFromMemberID(memberID);
+    public void deleteTrainingResult(CompetitiveSwimmer tempMember) {
+
         int disciplineChoice = ui.swimmingDiscipline();
 
         switch (disciplineChoice) {
             case 1:
-                db.deleteTrainingResult(memberID, SwimmingDiscipline.BUTTERFLY);
+                db.deleteTrainingResult(tempMember.getMember_ID(), SwimmingDiscipline.BUTTERFLY);
                 tempMember.setTrainingResultButterfly(null);
                 break;
             case 2:
-                db.deleteTrainingResult(memberID, SwimmingDiscipline.CRAWL);
+                db.deleteTrainingResult(tempMember.getMember_ID(), SwimmingDiscipline.CRAWL);
                 tempMember.setTrainingResultCrawl(null);
                 break;
             case 3:
-                db.deleteTrainingResult(memberID, SwimmingDiscipline.RYGCRAWL);
+                db.deleteTrainingResult(tempMember.getMember_ID(), SwimmingDiscipline.RYGCRAWL);
                 tempMember.setTrainingResultRygCrawl(null);
                 break;
             case 4:
-                db.deleteTrainingResult(memberID, SwimmingDiscipline.BRYSTSVØMMING);
+                db.deleteTrainingResult(tempMember.getMember_ID(), SwimmingDiscipline.BRYSTSVØMNING);
                 tempMember.setTrainingResultBrystsvømning(null);
                 break;
             default:
@@ -302,35 +320,37 @@ public class Controller {
      */
     //  TODO: refactor temp names.
     //  TODO: delete from database as well.
-    public void deleteEventResult(int memberID) {
-        CompetitiveSwimmer tempMember = getCompetitiveSwimmerFromMemberID(memberID);
+    public void deleteEventResult(CompetitiveSwimmer tempMember) {
         int eventNeedingDeleting = ui.getEventNeedingDeleting(tempMember.getEventResults());
         String eventName = tempMember.getEventResults().get(eventNeedingDeleting).getEventName();
         SwimmingDiscipline eventSD = tempMember.getEventResults().get(eventNeedingDeleting).getDiscipline();
-        db.deleteEventResult(memberID, eventName, eventSD);
+        db.deleteEventResult(tempMember.getMember_ID(), eventName, eventSD);
         tempMember.getEventResults().remove(eventNeedingDeleting);
     }
 
     public void editResult() {
         int memberID = ui.getMemberID();
         int resultChoice = ui.resultType();
-        if (resultChoice == 1) {
-            editTrainingResult(memberID);
+        CompetitiveSwimmer tempMember = getCompetitiveSwimmerFromMemberID(memberID);
+        if (tempMember != null) {
+            if (resultChoice == 1) {
+                editTrainingResult(memberID, tempMember);
 
-        } else if (resultChoice == 2) {
-            editEventResult(memberID);
+            } else if (resultChoice == 2) {
+                editEventResult(memberID, tempMember);
+            }
         }
     }
 
-    public void editTrainingResult(int memberID) {
+    public void editTrainingResult(int memberID, CompetitiveSwimmer tempMember) {
         int disciplineChoice = ui.swimmingDiscipline();
         String timeresult = ui.timeResult();
-        addTrainingResult(memberID, disciplineChoice, timeresult);
+        addTrainingResult(memberID, disciplineChoice, timeresult, tempMember);
     }
 
-    public void editEventResult(int memberID) {
-        deleteEventResult(memberID);
-        addEventResult(memberID, ui.swimmingDiscipline(), ui.timeResult());
+    public void editEventResult(int memberID, CompetitiveSwimmer tempMember) {
+        deleteEventResult(tempMember);
+        addEventResult(memberID, ui.swimmingDiscipline(), ui.timeResult(), tempMember);
     }
 
     /*
@@ -347,6 +367,9 @@ public class Controller {
                 tempMember = (CompetitiveSwimmer) member;
                 break;
             }
+        }
+        if (tempMember == null) {
+            ui.notCompetitveSwimmerMessage(memberID);
         }
         return tempMember;
     }
@@ -384,19 +407,73 @@ public class Controller {
         }
     }
 
+    /*
+    *   if there is faulty data in storage, ui.notCompetitveSwimmerMessage() will be called as the program is starting up
+     */
     //  TODO: addEventResults
     //  TODO: change temp names
-    private void createResultsFromStorage() {
+    public void createResultsFromStorage() {
         for (HashMap<String, String> memberInfo : db.getTrainingResults()) {
-            
+
             TrainingResult storageResult;
-            
+
             SwimmingDiscipline dv = SwimmingDiscipline.valueOf(memberInfo.get("Swimming_Discipline"));
             String timeResult = memberInfo.get("Time_Result");
-            String resultDate = memberInfo.get("Result_Date");
-            
+            String resultDate = memberInfo.get("Date");
+
             storageResult = new TrainingResult(dv, timeResult, resultDate);
+            int memberID = Integer.parseInt(memberInfo.get("Member_ID"));
+
+            CompetitiveSwimmer tempMember = getCompetitiveSwimmerFromMemberID(memberID);
+
+            if (tempMember != null) {
+                switch (dv) {
+                    case BUTTERFLY:
+                        tempMember.setTrainingResultButterfly(storageResult);
+                        break;
+                    case CRAWL:
+                        tempMember.setTrainingResultCrawl(storageResult);
+                        break;
+                    case RYGCRAWL:
+                        tempMember.setTrainingResultRygCrawl(storageResult);
+                        break;
+                    case BRYSTSVØMNING:
+                        tempMember.setTrainingResultBrystsvømning(storageResult);
+                        break;
+                    default:
+                        throw new IllegalArgumentException();
+                }
+            }
+        }
+
+        for (HashMap<String, String> memberInfo : db.getEventResults()) {
+
+            EventResult storageResult;
+
+            String eventName = memberInfo.get("Event_Name");
+            int eventPlacement = Integer.parseInt(memberInfo.get("Placement"));
+            String timeResult = memberInfo.get("Time_Result");
+            SwimmingDiscipline dv = SwimmingDiscipline.valueOf(memberInfo.get("Swimming_Discipline"));
+
+            storageResult = new EventResult(eventName, eventPlacement, timeResult, dv);
+            int memberID = Integer.parseInt(memberInfo.get("Member_ID"));
+            CompetitiveSwimmer tempMember = getCompetitiveSwimmerFromMemberID(memberID);
+            if (tempMember != null) {
+                tempMember.addEventResult(storageResult);
+            }
+
         }
     }
 
+    public void calculateInterests() {
+        for (Member member : members.getMembersList()) {
+            double oldDebt = member.getDebt();
+            LocalDate current = LocalDate.now();
+            int debtAge = Period.between(current, LocalDate.parse(member.getSignUpDate())).getMonths();
+            System.out.println(debtAge);
+            double newDebt = oldDebt * (1.25 * debtAge);
+
+        }
+
+    }
 }

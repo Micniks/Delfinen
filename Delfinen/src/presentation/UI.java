@@ -50,4 +50,6 @@ public interface UI {
 
     public boolean confirmTrainingResultOverride(TrainingResult oldTrainingResult, TrainingResult newTrainingResult);
 
+    public void notCompetitveSwimmerMessage(int memberID);
+
 }
