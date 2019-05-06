@@ -40,16 +40,44 @@ public class Controller {
     //  TODO: Error-handeling
     public void start() {
         currentHighestMemberID = db.readHighestMemberID();
-        boolean quit = false;
         createMembersFromStorage();
+        
+        boolean quit = false;
         do {
             ui.displayMainMenu();
-            String userInput = ui.mainMenuSelection();
+            String userInput = ui.getMenuSelection();
             switch (userInput) {
                 case "1":
                     createNewMember();
                     break;
                 case "2":
+                    resultMenu();
+                    break;
+                case "3":
+                    quit = true;
+                    break;
+                default:
+                    throw new IllegalArgumentException();
+            }
+        } while (!quit);
+    }
+
+    public void resultMenu() {
+        boolean quit = false;
+        do {
+            ui.displayResultMenu();
+            String userInput = ui.getMenuSelection();
+            switch (userInput) {
+                case "1":
+                    addResult();
+                    break;
+                case "2":
+                    editResult();
+                    break;
+                case "3":
+                    deleteResult();
+                    break;
+                case "4":
                     quit = true;
                     break;
                 default:
@@ -154,32 +182,60 @@ public class Controller {
         String resultDate = ui.resultDate();
 
         SwimmingDiscipline dv;
-        TrainingResult temp;
+        TrainingResult newTrainingResult;
+        TrainingResult oldTrainingResult;
+        boolean confirmOverride = true;
         switch (disciplineChoice) {
             case 1:
+                oldTrainingResult = tempMember.getTrainingResultButterfly();
                 dv = SwimmingDiscipline.BUTTERFLY;
-                temp = new TrainingResult(dv, timeResult, resultDate);
-                tempMember.setTrainingResultButterfly(temp);
+                newTrainingResult = new TrainingResult(dv, timeResult, resultDate);
+                confirmOverride = confirmTrainingResultOverride(oldTrainingResult, confirmOverride, newTrainingResult, memberID, dv);
+                if (confirmOverride) {
+                    tempMember.setTrainingResultButterfly(newTrainingResult);
+                }
                 break;
             case 2:
+                oldTrainingResult = tempMember.getTrainingResultCrawl();
                 dv = SwimmingDiscipline.CRAWL;
-                temp = new TrainingResult(dv, timeResult, resultDate);
-                tempMember.setTrainingResultCrawl(temp);
+                newTrainingResult = new TrainingResult(dv, timeResult, resultDate);
+                confirmOverride = confirmTrainingResultOverride(oldTrainingResult, confirmOverride, newTrainingResult, memberID, dv);
+                if (confirmOverride) {
+                    tempMember.setTrainingResultCrawl(newTrainingResult);
+                }
                 break;
             case 3:
+                oldTrainingResult = tempMember.getTrainingResultRygCrawl();
                 dv = SwimmingDiscipline.RYGCRAWL;
-                temp = new TrainingResult(dv, timeResult, resultDate);
-                tempMember.setTrainingResultRygCrawl(temp);
+                newTrainingResult = new TrainingResult(dv, timeResult, resultDate);
+                confirmOverride = confirmTrainingResultOverride(oldTrainingResult, confirmOverride, newTrainingResult, memberID, dv);
+                if (confirmOverride) {
+                    tempMember.setTrainingResultRygCrawl(newTrainingResult);
+                }
                 break;
             case 4:
+                oldTrainingResult = tempMember.getTrainingResultBrystsvømning();
                 dv = SwimmingDiscipline.BRYSTSVØMMING;
-                temp = new TrainingResult(dv, timeResult, resultDate);
-                tempMember.setTrainingResultBrystsvømning(temp);
+                newTrainingResult = new TrainingResult(dv, timeResult, resultDate);
+                confirmOverride = confirmTrainingResultOverride(oldTrainingResult, confirmOverride, newTrainingResult, memberID, dv);
+                if (confirmOverride) {
+                    tempMember.setTrainingResultBrystsvømning(newTrainingResult);
+                }
                 break;
             default:
                 throw new IllegalArgumentException();
         }
-        db.storeTrainingResult(temp, tempMember.getMember_ID());
+        db.storeTrainingResult(newTrainingResult, tempMember.getMember_ID());
+    }
+
+    public boolean confirmTrainingResultOverride(TrainingResult oldTrainingResult, boolean confirmOverride, TrainingResult newTrainingResult, int memberID, SwimmingDiscipline dv) {
+        if (oldTrainingResult != null) {
+            confirmOverride = ui.confirmTrainingResultOverride(oldTrainingResult, newTrainingResult);
+            if (confirmOverride) {
+                db.deleteTrainingResult(memberID, dv);
+            }
+        }
+        return confirmOverride;
     }
 
     /*
@@ -299,17 +355,16 @@ public class Controller {
         }
     }
 
-    private void editEventResult(int memberID) {
-        deleteEventResult(memberID);
-        addEventResult(memberID, ui.swimmingDiscipline(), ui.timeResult());
-    }
-
-    private void editTrainingResult(int memberID) {
+    public void editTrainingResult(int memberID) {
         int disciplineChoice = ui.swimmingDiscipline();
         String timeresult = ui.timeResult();
         addTrainingResult(memberID, disciplineChoice, timeresult);
     }
 
+    public void editEventResult(int memberID) {
+        deleteEventResult(memberID);
+        addEventResult(memberID, ui.swimmingDiscipline(), ui.timeResult());
+    }
 
     /*
     *   This is a short method used to find a specific CompetitiveSwimmer from their

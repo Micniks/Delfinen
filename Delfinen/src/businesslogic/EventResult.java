@@ -10,13 +10,13 @@ package businesslogic;
  * @author Michael N. Korsgaard
  */
 public class EventResult {
-    
+
     private String eventName;
     private int placement;
     private String timeResult;
     private SwimmingDiscipline discipline;
-    
-    public EventResult(String eventName, int placement, String timeResult, SwimmingDiscipline discipline){
+
+    public EventResult(String eventName, int placement, String timeResult, SwimmingDiscipline discipline) {
         this.eventName = eventName;
         this.placement = placement;
         this.timeResult = timeResult;
@@ -38,11 +38,10 @@ public class EventResult {
     public SwimmingDiscipline getDiscipline() {
         return discipline;
     }
-    
+
     @Override
-    public String toString(){
+    public String toString() {
         return eventName + ", " + placement + ". plads i " + discipline.toString() + " med tid: " + timeResult;
     }
-    
-    
+
 }

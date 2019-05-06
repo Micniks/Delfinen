@@ -6,6 +6,7 @@
 package presentation;
 
 import businesslogic.EventResult;
+import businesslogic.TrainingResult;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -50,12 +51,28 @@ public class FakeUI implements UI {
 
     @Override
     public void displayMainMenu() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        output.add("");
+        output.add("   Svømmeklubben Delfinen");
+        output.add("");
+        output.add("1. Opret nyt medlem");
+        output.add("2. Resultater");
+        output.add("3. Afslut Program");
     }
 
     @Override
-    public String mainMenuSelection() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void displayResultMenu() {
+        output.add("");
+        output.add("   Svømmeklubben Delfinen - Resultater");
+        output.add("");
+        output.add("1. Opret Resultat");
+        output.add("2. Ændre Resultat");
+        output.add("3. Slet Resultat");
+        output.add("4. Gå tilbage");
+    }
+
+    @Override
+    public String getMenuSelection() {
+        return input[index++];
     }
 
     @Override
@@ -126,9 +143,14 @@ public class FakeUI implements UI {
     public int getEventNeedingDeleting(ArrayList<EventResult> eventResults) {
         output.add("Indtast nr. for konkurrence der skal slettes: ");
         for (int i = 1; i <= eventResults.size(); i++) {
-            output.add(Integer.toString(i) + ". " + eventResults.get(i-1).toString());
+            output.add(Integer.toString(i) + ". " + eventResults.get(i - 1).toString());
         }
-        return Integer.parseInt(input[index++])-1;
+        return Integer.parseInt(input[index++]) - 1;
+    }
+
+    @Override
+    public boolean confirmTrainingResultOverride(TrainingResult oldTrainingResult, TrainingResult newTrainingResult) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

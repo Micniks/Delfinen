@@ -6,6 +6,7 @@
 package presentation;
 
 import businesslogic.EventResult;
+import businesslogic.TrainingResult;
 import java.util.Scanner;
 import java.time.LocalDate;
 import java.time.Period;
@@ -63,11 +64,23 @@ public class SystemUI implements UI {
         System.out.println("   Svømmeklubben Delfinen");
         System.out.println();
         System.out.println("1. Opret nyt medlem");
-        System.out.println("2. Afslut Program");
+        System.out.println("2. Resultater");
+        System.out.println("3. Afslut Program");
     }
 
     @Override
-    public String mainMenuSelection() {
+    public void displayResultMenu() {
+        System.out.println();
+        System.out.println("   Svømmeklubben Delfinen - Resultater");
+        System.out.println();
+        System.out.println("1. Opret Resultat");
+        System.out.println("2. Ændre Resultat");
+        System.out.println("3. Slet Resultat");
+        System.out.println("4. Gå tilbage");
+    }
+
+    @Override
+    public String getMenuSelection() {
         String selection = scan.nextLine();
         System.out.println();
         return selection;
@@ -145,6 +158,17 @@ public class SystemUI implements UI {
         int choice = scan.nextInt();
         scan.nextLine();
         return choice;
+    }
+
+    @Override
+    public boolean confirmTrainingResultOverride(TrainingResult oldTrainingResult, TrainingResult newTrainingResult) {
+        System.out.println("Vil du overskrive: " + oldTrainingResult.toString());
+        System.out.println("Med følgende: " + newTrainingResult.toString());
+        System.out.println("1. Ja");
+        System.out.println("2. Nej");
+        int choice = scan.nextInt();
+        scan.nextLine();
+        return choice == 1;
     }
 
 }

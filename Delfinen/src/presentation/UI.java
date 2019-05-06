@@ -6,6 +6,7 @@
 package presentation;
 
 import businesslogic.EventResult;
+import businesslogic.TrainingResult;
 import java.util.ArrayList;
 
 /**
@@ -23,7 +24,7 @@ public interface UI {
 
     public void displayMainMenu();
 
-    public String mainMenuSelection();
+    public String getMenuSelection();
 
     public String getNewMemberSignUpDate();
 
@@ -44,5 +45,9 @@ public interface UI {
     public int getEventPlacement();
 
     public int getEventNeedingDeleting(ArrayList<EventResult> eventResults);
+
+    public void displayResultMenu();
+
+    public boolean confirmTrainingResultOverride(TrainingResult oldTrainingResult, TrainingResult newTrainingResult);
 
 }

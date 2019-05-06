@@ -183,6 +183,7 @@ public class DBFacade implements Facade {
         sb.append(" AND Swimming_Discipline = \"");
         sb.append(swimmingDiscipline.toString());
         sb.append("\"");
+        System.out.println(sb.toString());
         try {
             statement.executeUpdate(sb.toString());
         } catch (SQLException ex) {
