@@ -249,8 +249,6 @@ public class Controller {
         CompetitiveSwimmer tempMember = getCompetitiveSwimmerFromMemberID(memberID);
         int disciplineChoice = ui.swimmingDiscipline();
 
-        
-
         switch (disciplineChoice) {
             case 1:
                 db.deleteTrainingResult(memberID, SwimmingDiscipline.BUTTERFLY);
@@ -289,6 +287,29 @@ public class Controller {
         db.deleteEventResult(memberID, eventName, eventSD);
         tempMember.getEventResults().remove(eventNeedingDeleting);
     }
+
+    public void editResult() {
+        int memberID = ui.getMemberID();
+        int resultChoice = ui.resultType();
+        if (resultChoice == 1) {
+            editTrainingResult(memberID);
+
+        } else if (resultChoice == 2) {
+            editEventResult(memberID);
+        }
+    }
+
+    private void editEventResult(int memberID) {
+        deleteEventResult(memberID);
+        addEventResult(memberID, ui.swimmingDiscipline(), ui.timeResult());
+    }
+
+    private void editTrainingResult(int memberID) {
+        int disciplineChoice = ui.swimmingDiscipline();
+        String timeresult = ui.timeResult();
+        addTrainingResult(memberID, disciplineChoice, timeresult);
+    }
+
 
     /*
     *   This is a short method used to find a specific CompetitiveSwimmer from their
