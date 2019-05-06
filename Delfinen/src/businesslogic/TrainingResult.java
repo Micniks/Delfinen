@@ -23,5 +23,10 @@ public class TrainingResult {
     public SwimmingDiscipline getDiscipline() {
         return discipline;
     }
+    
+    @Override
+    public String toString(){
+        return discipline.toString()+ ", " + timeResult + " d. " + date;
+    }
 
 }

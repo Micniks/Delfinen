@@ -41,7 +41,7 @@ public class Controller {
     public void start() {
         currentHighestMemberID = db.readHighestMemberID();
         createMembersFromStorage();
-        
+        createResultsFromStorage();
         boolean quit = false;
         do {
             ui.displayMainMenu();
@@ -111,39 +111,6 @@ public class Controller {
         // We store the member in both the programs MembersList and the Database
         members.addMembers(newMember);
         db.storageMember(newMember);
-    }
-
-    /*
-    *   This is the method that read from the database when called, and create 
-    *   Members from the database information. This should only be called once,
-    *   when the program start up from the Controller.Start() method, as there is
-    *   so far no checking if dublicates are already in the program. This method
-    *   create both Members and CompetitiveSwimmer from the Database data, and
-    *   add them to the MembersList that should be empty at the beginning of the
-    *   program. This method adds nothing to the database, despite creating members  
-     */
-    //  TODO: Make sure this method is only called once, propoly check if MembersList is empty
-    public void createMembersFromStorage() {
-        for (HashMap<String, String> memberInfo : db.getMembers()) {
-
-            Member storageMember;
-
-            int member_ID = Integer.parseInt(memberInfo.get("Member_ID"));
-            String name = memberInfo.get("Name");
-            int age = Integer.parseInt(memberInfo.get("Age"));
-            boolean activeMember = Boolean.parseBoolean(memberInfo.get("Active_Member"));
-            boolean competetiveSwimmer = Boolean.parseBoolean(memberInfo.get("Competitive_Swimmer"));
-            double debt = Double.parseDouble(memberInfo.get("Debt"));
-            String signUpDate = memberInfo.get("Sign_Up_Date");
-
-            if (competetiveSwimmer) {
-                storageMember = new CompetitiveSwimmer(member_ID, name, age, activeMember, true, debt, signUpDate);
-            } else {
-                storageMember = new Member(member_ID, name, age, activeMember, false, debt, signUpDate);
-            }
-
-            members.addMembers(storageMember);
-        }
     }
 
     /*
@@ -382,6 +349,54 @@ public class Controller {
             }
         }
         return tempMember;
+    }
+
+    /*
+    *   This is the method that read from the database when called, and create 
+    *   Members from the database information. This should only be called once,
+    *   when the program start up from the Controller.Start() method, as there is
+    *   so far no checking if dublicates are already in the program. This method
+    *   create both Members and CompetitiveSwimmer from the Database data, and
+    *   add them to the MembersList that should be empty at the beginning of the
+    *   program. This method adds nothing to the database, despite creating members  
+     */
+    //  TODO: Make sure this method is only called once, propoly check if MembersList is empty
+    public void createMembersFromStorage() {
+        for (HashMap<String, String> memberInfo : db.getMembers()) {
+
+            Member storageMember;
+
+            int member_ID = Integer.parseInt(memberInfo.get("Member_ID"));
+            String name = memberInfo.get("Name");
+            int age = Integer.parseInt(memberInfo.get("Age"));
+            boolean activeMember = Boolean.parseBoolean(memberInfo.get("Active_Member"));
+            boolean competetiveSwimmer = Boolean.parseBoolean(memberInfo.get("Competitive_Swimmer"));
+            double debt = Double.parseDouble(memberInfo.get("Debt"));
+            String signUpDate = memberInfo.get("Sign_Up_Date");
+
+            if (competetiveSwimmer) {
+                storageMember = new CompetitiveSwimmer(member_ID, name, age, activeMember, true, debt, signUpDate);
+            } else {
+                storageMember = new Member(member_ID, name, age, activeMember, false, debt, signUpDate);
+            }
+
+            members.addMembers(storageMember);
+        }
+    }
+
+    //  TODO: addEventResults
+    //  TODO: change temp names
+    private void createResultsFromStorage() {
+        for (HashMap<String, String> memberInfo : db.getTrainingResults()) {
+            
+            TrainingResult storageResult;
+            
+            SwimmingDiscipline dv = SwimmingDiscipline.valueOf(memberInfo.get("Swimming_Discipline"));
+            String timeResult = memberInfo.get("Time_Result");
+            String resultDate = memberInfo.get("Result_Date");
+            
+            storageResult = new TrainingResult(dv, timeResult, resultDate);
+        }
     }
 
 }

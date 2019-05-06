@@ -150,7 +150,11 @@ public class FakeUI implements UI {
 
     @Override
     public boolean confirmTrainingResultOverride(TrainingResult oldTrainingResult, TrainingResult newTrainingResult) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        output.add("Vil du overskrive: " + oldTrainingResult.toString());
+        output.add("Med følgende: " + newTrainingResult.toString());
+        output.add("1. Ja");
+        output.add("2. Nej");
+        return Integer.parseInt(input[index++]) == 1;
     }
 
 }

@@ -32,4 +32,6 @@ public interface Facade {
 
     public void deleteEventResult(int memberID, String eventName, SwimmingDiscipline eventSD);
 
+    public Iterable<HashMap<String, String>> getTrainingResults();
+
 }

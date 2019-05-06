@@ -80,13 +80,7 @@ public class DBFacade implements Facade {
 
         ArrayList<HashMap<String, String>> memberinformation = new ArrayList<>();
         try {
-            ResultSet resultMembers = statement.executeQuery("SELECT * from members");
-
-            ArrayList memberName = new ArrayList();
-            ArrayList memberAge = new ArrayList();
-            ArrayList memberCompetitiveSwimmer = new ArrayList();
-            ArrayList memberActiveMember = new ArrayList();
-            ArrayList memberDept = new ArrayList();
+            ResultSet resultMembers = statement.executeQuery("SELECT * from Members");
 
             while (resultMembers.next()) {
                 HashMap<String, String> map = new HashMap();
@@ -207,6 +201,29 @@ public class DBFacade implements Facade {
         } catch (SQLException ex) {
             Logger.getLogger(DBFacade.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    @Override
+    public Iterable<HashMap<String, String>> getTrainingResults() {
+        ArrayList<HashMap<String, String>> trainingResultInfo = new ArrayList<>();
+        try {
+            ResultSet resultTrainingResults = statement.executeQuery("SELECT * from Training_Results");
+
+            while (resultTrainingResults.next()) {
+                HashMap<String, String> map = new HashMap();
+                map.put("Swimming_Discipline", resultTrainingResults.getString("Swimming_Discipline"));
+                map.put("Member_ID", Integer.toString(resultTrainingResults.getInt("Member_ID")));
+                map.put("Time_Result", resultTrainingResults.getString("Time_Result"));
+                map.put("Date", resultTrainingResults.getString("Date"));
+
+                trainingResultInfo.add(map);
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(DBFacade.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return trainingResultInfo;
     }
 
 }

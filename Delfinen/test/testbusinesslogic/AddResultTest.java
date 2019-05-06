@@ -129,7 +129,7 @@ public class AddResultTest {
 
     @Test
     public void testAddTwoTrainingResultOverride() {
-        String[] input = {"1", "1", "2", "00:01:45:67", "02-05-2019", "1", "1", "2", "00:00:45:67", "03-05-2019"};
+        String[] input = {"1", "1", "2", "00:01:45:67", "02-05-2019", "1", "1", "2", "00:00:45:67", "03-05-2019", "1"};
         FakeUI ui = new FakeUI(input);
         FakeFacade db = new FakeFacade();
         Controller ctrl = new Controller(ui, db);

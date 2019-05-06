@@ -112,4 +112,9 @@ public class FakeFacade implements Facade {
         }
     }
 
+    @Override
+    public Iterable<HashMap<String, String>> getTrainingResults() {
+        return testTrainingResultsHashMapArray;
+    }
+
 }
