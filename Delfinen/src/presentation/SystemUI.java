@@ -75,27 +75,44 @@ public class SystemUI implements UI {
 
     @Override
     public int getMemberID() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        System.out.println("Indtast medlems ID-nummer: ");
+        int choice = scan.nextInt();
+        scan.nextLine();
+        return choice;
     }
 
     @Override
     public int resultType() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        System.out.println("Vælg resultattype: ");
+        System.out.println("1: Træningsresultat");
+        System.out.println("2: Konkurrenceresultat");
+        int choice = scan.nextInt();
+        scan.nextLine();
+        return choice;
     }
 
     @Override
     public int swimmingDiscipline() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        System.out.println("Vælg svømmediscplin:");
+        System.out.println("1. Butterfly");
+        System.out.println("2. Crawl");
+        System.out.println("3. Rycrawl");
+        System.out.println("4. Brystsvømning");
+        int choice = scan.nextInt();
+        scan.nextLine();
+        return choice;
     }
 
     @Override
     public String timeResult() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        System.out.println("Indtast tidsresultatet i formattet TT:MM:SS:MM");
+        return scan.nextLine();
     }
 
     @Override
     public String resultDate() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        System.out.println("Indtast dato for træningsresultatet i formattet DD:MM:ÅÅÅÅ");
+        return scan.nextLine();
     }
 
     @Override
@@ -107,17 +124,27 @@ public class SystemUI implements UI {
 
     @Override
     public String getEventName() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        System.out.println("Indtast navnet for konkurrencen: ");
+        return scan.nextLine();
     }
 
     @Override
     public int getEventPlacement() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        System.out.println("Indtast svømmerens placeing i konkurrencen: ");
+        int choice = scan.nextInt();
+        scan.nextLine();
+        return choice;
     }
 
     @Override
     public int getEventNeedingDeleting(ArrayList<EventResult> eventResults) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        System.out.println("Indtast nr. for konkurrence der skal slettes: ");
+        for (int i = 1; i <= eventResults.size(); i++) {
+            System.out.println(Integer.toString(i) + ". " + eventResults.get(i - 1).toString());
+        }
+        int choice = scan.nextInt();
+        scan.nextLine();
+        return choice;
     }
 
 }
