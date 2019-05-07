@@ -47,7 +47,7 @@ public interface UI {
 
     public int getEventNeedingDeleting(ArrayList<EventResult> eventResults);
 
-    public void displayResultMenu();
+    public void displayEditResultMenu();
 
     public boolean confirmTrainingResultOverride(TrainingResult oldTrainingResult, TrainingResult newTrainingResult);
 
@@ -60,5 +60,10 @@ public interface UI {
     public void showNonCompetitiveSwimmers(ArrayList<Member> membersList);
 
     public void showCompetitiveSwimmers(ArrayList<Member> membersList);
+
+    
+    public void showResultsMenu();
+
+    public void showResults(ArrayList<Member> membersList);
 
 }

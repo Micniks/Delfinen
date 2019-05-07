@@ -39,5 +39,6 @@ public interface Facade {
     public Iterable<HashMap<String, String>> getTrainingResults();
 
     public Iterable<HashMap<String, String>> getEventResults();
+    
 
 }

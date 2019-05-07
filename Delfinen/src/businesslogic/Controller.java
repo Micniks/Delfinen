@@ -73,7 +73,7 @@ public class Controller {
     public void resultMenu() {
         boolean quit = false;
         do {
-            ui.displayResultMenu();
+            ui.displayEditResultMenu();
             String userInput = ui.getMenuSelection();
             switch (userInput) {
                 case "1":
