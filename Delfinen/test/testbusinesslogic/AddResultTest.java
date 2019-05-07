@@ -99,8 +99,8 @@ public class AddResultTest {
     }
 
     @Test
-    public void testAddThreeEventResult() {
-        String[] input = {"1", "2", "1", "00:01:49:71", "Ny Svømmer Konkurrence", "3", "1", "2", "2", "00:01:19:71", "NSK", "2", "1", "2", "3", "00:00:49:71", "NSK-2", "1"};
+    public void testAddFourEventResult() {
+        String[] input = {"1", "2", "1", "00:01:49:01", "Ny Svømmer Konkurrence", "3", "1", "2", "2", "00:01:19:02", "NSK", "2", "1", "2", "3", "00:00:49:03", "NSK-2", "1", "1", "2", "4", "00:01:49:04", "SnS", "4"};
         FakeUI ui = new FakeUI(input);
         FakeFacade db = new FakeFacade();
         Controller ctrl = new Controller(ui, db);
@@ -111,25 +111,30 @@ public class AddResultTest {
         ctrl.addResult();
         ctrl.addResult();
         ctrl.addResult();
+        ctrl.addResult();
 
         //assert
         assertNull(member.getTrainingResultBrystsvømning());
         assertNull(member.getTrainingResultButterfly());
         assertNull(member.getTrainingResultCrawl());
         assertNull(member.getTrainingResultRygCrawl());
-        assertEquals(3, member.getEventResults().size());
+        assertEquals(4, member.getEventResults().size());
         assertTrue(member.getEventResults().get(0).getEventName().contains("Ny Svømmer Konkurrence"));
-        assertTrue(member.getEventResults().get(0).getTimeResult().contains("00:01:49:71"));
+        assertTrue(member.getEventResults().get(0).getTimeResult().contains("00:01:49:01"));
         assertEquals(3, member.getEventResults().get(0).getPlacement());
         assertEquals(SwimmingDiscipline.BUTTERFLY, member.getEventResults().get(0).getDiscipline());
         assertTrue(member.getEventResults().get(1).getEventName().contains("NSK"));
-        assertTrue(member.getEventResults().get(1).getTimeResult().contains("00:01:19:71"));
+        assertTrue(member.getEventResults().get(1).getTimeResult().contains("00:01:19:02"));
         assertEquals(2, member.getEventResults().get(1).getPlacement());
         assertEquals(SwimmingDiscipline.CRAWL, member.getEventResults().get(1).getDiscipline());
         assertTrue(member.getEventResults().get(2).getEventName().contains("NSK-2"));
-        assertTrue(member.getEventResults().get(2).getTimeResult().contains("00:00:49:71"));
+        assertTrue(member.getEventResults().get(2).getTimeResult().contains("00:00:49:03"));
         assertEquals(1, member.getEventResults().get(2).getPlacement());
         assertEquals(SwimmingDiscipline.RYGCRAWL, member.getEventResults().get(2).getDiscipline());
+        assertTrue(member.getEventResults().get(3).getEventName().contains("SnS"));
+        assertTrue(member.getEventResults().get(3).getTimeResult().contains("00:01:49:04"));
+        assertEquals(4, member.getEventResults().get(3).getPlacement());
+        assertEquals(SwimmingDiscipline.BRYSTSVØMNING, member.getEventResults().get(3).getDiscipline());
     }
 
     @Test

@@ -187,5 +187,52 @@ public class DeleteResultTest {
         assertEquals(1, member.getEventResults().get(1).getPlacement());
 
     }
+    
+        @Test
+    public void testDeleteFourTrainingResultOfFour() {
+        String[] input = {"1", "1", "1", "1", "1", "2", "1", "1", "4", "1", "1", "3"};
+        FakeUI ui = new FakeUI(input);
+        FakeFacade db = new FakeFacade();
+        Controller ctrl = new Controller(ui, db);
+        CompetitiveSwimmer member = new CompetitiveSwimmer(1, "Michael", 26, true, "03-05-2019");
+        TrainingResult trainingResult1 = new TrainingResult(SwimmingDiscipline.CRAWL, "00:00:45:67", "03-05-2019");
+        member.setTrainingResultCrawl(trainingResult1);
+        db.storeTrainingResult(trainingResult1, member.getMember_ID());
+        TrainingResult trainingResult2 = new TrainingResult(SwimmingDiscipline.RYGCRAWL, "00:01:45:67", "03-05-2019");
+        member.setTrainingResultRygCrawl(trainingResult2);
+        db.storeTrainingResult(trainingResult2, member.getMember_ID());
+        TrainingResult trainingResult3 = new TrainingResult(SwimmingDiscipline.BRYSTSVØMNING, "00:02:45:67", "03-05-2019");
+        member.setTrainingResultBrystsvømning(trainingResult3);
+        db.storeTrainingResult(trainingResult3, member.getMember_ID());
+        TrainingResult trainingResult4 = new TrainingResult(SwimmingDiscipline.BUTTERFLY, "00:03:45:67", "03-05-2019");
+        member.setTrainingResultButterfly(trainingResult4);
+        db.storeTrainingResult(trainingResult4, member.getMember_ID());
+        ctrl.getMembers().addMembers(member);
+
+        //pre-asserts
+        assertNotNull(member.getTrainingResultCrawl());
+        assertTrue(member.getTrainingResultCrawl().getTimeResult().contains("00:00:45:67"));
+        assertTrue(member.getTrainingResultCrawl().getDate().contains("03-05-2019"));
+        assertEquals(SwimmingDiscipline.CRAWL, member.getTrainingResultCrawl().getDiscipline());
+        assertEquals(1, ctrl.getMembers().getMembersList().size());
+
+        //act
+        ctrl.deleteResult();
+        ctrl.deleteResult();
+        ctrl.deleteResult();
+        ctrl.deleteResult();
+
+        //assert
+        assertTrue(ui.output.get(0).contains("Indtast medlems ID-nummer:"));
+        assertTrue(ui.output.get(1).contains("Vælg resultattype:"));
+        assertTrue(ui.output.get(2).contains("1: Træningsresultat"));
+        assertTrue(ui.output.get(4).contains("Vælg svømmediscplin:"));
+        assertTrue(ui.output.get(6).contains("2. Crawl"));
+        assertNull(member.getTrainingResultBrystsvømning());
+        assertNull(member.getTrainingResultButterfly());
+        assertNull(member.getTrainingResultRygCrawl());
+        assertNull(member.getTrainingResultCrawl());
+
+    }
 
 }
