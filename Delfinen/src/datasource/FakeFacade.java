@@ -52,6 +52,11 @@ public class FakeFacade implements Facade {
     }
 
     @Override
+    public void topFiveTrainingResults() {
+
+    }
+
+    @Override
     public void updateMember(Member member) {
 
     }

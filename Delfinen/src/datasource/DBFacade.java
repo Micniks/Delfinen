@@ -48,6 +48,8 @@ public class DBFacade implements Facade {
 
     }
 
+
+
     @Override
     public void storageMember(Member member) {
         StringBuilder sb = new StringBuilder();
@@ -125,6 +127,11 @@ public class DBFacade implements Facade {
         }
 
         return highestMemberID;
+
+    }
+
+    @Override
+    public void topFiveTrainingResults() {
 
     }
 
