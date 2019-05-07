@@ -5,10 +5,18 @@
  */
 package testbusinesslogic;
 
+import org.junit.Test;
+import static org.junit.Assert.*;
+
 /**
  *
  * @author Michael N. Korsgaard
  */
 public class MainMenuTest {
-    
+
+    @Test
+    public void test() {
+        
+    }
+
 }

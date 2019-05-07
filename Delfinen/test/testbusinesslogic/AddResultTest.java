@@ -136,19 +136,23 @@ public class AddResultTest {
     public void testAddFourTrainingResultOverride() {
         String[] t = {"00:01:45:01", "00:01:45:02", "00:01:45:03", "00:01:45:04", "00:01:45:05", "00:01:45:06", "00:01:45:07", "00:01:45:08",};
         String[] d = {"01-05-2019", "02-05-2019", "03-05-2019", "04-05-2019", "05-05-2019", "06-05-2019", "07-05-2019", "08-05-2019"};
-        String[] input = {"1", "1", "1", t[1], d[1], "1", "1", "1", "1", t[2], d[2], "1", "1", "1", "1", t[3], d[3], "1", "1", "1", "1", t[4], d[4], "1"};
+        String[] input = {"1", "1", "1", t[0], d[0], "1", "1", "1", "2", t[1], d[1], "1", "1", "1", "3", t[2], d[2], "1", "1", "1", "4", t[3], d[3], "1"};
         FakeUI ui = new FakeUI(input);
         FakeFacade db = new FakeFacade();
         Controller ctrl = new Controller(ui, db);
         CompetitiveSwimmer member = new CompetitiveSwimmer(1, "Michael", 26, true, "03-05-2019");
         ctrl.getMembers().addMembers(member);
-        TrainingResult result1 = new TrainingResult(SwimmingDiscipline.BUTTERFLY, t[5], d[5]);
+        TrainingResult result1 = new TrainingResult(SwimmingDiscipline.BUTTERFLY, t[4], d[4]);
+        member.setTrainingResultButterfly(result1);
         db.storeTrainingResult(result1, member.getMember_ID());
-        TrainingResult result2 = new TrainingResult(SwimmingDiscipline.BUTTERFLY, t[6], d[6]);
+        TrainingResult result2 = new TrainingResult(SwimmingDiscipline.CRAWL, t[5], d[5]);
+        member.setTrainingResultCrawl(result2);
         db.storeTrainingResult(result2, member.getMember_ID());
-        TrainingResult result3 = new TrainingResult(SwimmingDiscipline.BUTTERFLY, t[7], d[7]);
+        TrainingResult result3 = new TrainingResult(SwimmingDiscipline.RYGCRAWL, t[6], d[6]);
+        member.setTrainingResultRygCrawl(result3);
         db.storeTrainingResult(result3, member.getMember_ID());
-        TrainingResult result4 = new TrainingResult(SwimmingDiscipline.BUTTERFLY, t[8], d[8]);
+        TrainingResult result4 = new TrainingResult(SwimmingDiscipline.BRYSTSVØMNING, t[7], d[7]);
+        member.setTrainingResultBrystsvømning(result4);
         db.storeTrainingResult(result4, member.getMember_ID());
 
         //act
@@ -170,6 +174,12 @@ public class AddResultTest {
         assertTrue(member.getTrainingResultCrawl().getTimeResult().contains("00:01:45:02"));
         assertTrue(member.getTrainingResultCrawl().getDate().contains("02-05-2019"));
         assertEquals(SwimmingDiscipline.CRAWL, member.getTrainingResultCrawl().getDiscipline());
+        assertTrue(member.getTrainingResultRygCrawl().getTimeResult().contains("00:01:45:03"));
+        assertTrue(member.getTrainingResultRygCrawl().getDate().contains("03-05-2019"));
+        assertEquals(SwimmingDiscipline.RYGCRAWL, member.getTrainingResultRygCrawl().getDiscipline());
+        assertTrue(member.getTrainingResultBrystsvømning().getTimeResult().contains("00:01:45:04"));
+        assertTrue(member.getTrainingResultBrystsvømning().getDate().contains("04-05-2019"));
+        assertEquals(SwimmingDiscipline.BRYSTSVØMNING, member.getTrainingResultBrystsvømning().getDiscipline());
     }
 
     @Test

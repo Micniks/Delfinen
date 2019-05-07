@@ -5,6 +5,7 @@
  */
 package presentation;
 
+import businesslogic.CompetitiveSwimmer;
 import businesslogic.EventResult;
 import businesslogic.Member;
 import businesslogic.TrainingResult;
@@ -165,33 +166,108 @@ public class FakeUI implements UI {
 
     @Override
     public void showMembersMenu() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        output.add("");
+        output.add("   Svømmeklubben Delfinen - Medlemmer");
+        output.add("");
+        output.add("1. Vis alle");
+        output.add("2. Vis motionister");
+        output.add("3. Vis konkurrence-svømmere");
+        output.add("4. Gå tilbage");
     }
 
     @Override
     public void showAllMembers(ArrayList<Member> membersList) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        for (Member member : membersList) {
+            output.add(member.toString());
+        }
     }
 
     @Override
     public void showNonCompetitiveSwimmers(ArrayList<Member> membersList) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        for (Member member : membersList) {
+            if (!member.isCompetetiveSwimmer()) {
+                output.add(member.toString());
+            }
+        }
     }
 
     @Override
     public void showCompetitiveSwimmers(ArrayList<Member> membersList) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        for (Member member : membersList) {
+            if (member.isCompetetiveSwimmer()) {
+                output.add(member.toString());
+            }
+        }
     }
-
 
     @Override
     public void showResults(ArrayList<Member> membersList) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        ArrayList<String> resultsList;
+        CompetitiveSwimmer temp;
+        for (Member member : membersList) {
+            resultsList = new ArrayList();
+            if (member.isCompetetiveSwimmer()) {
+                temp = (CompetitiveSwimmer) member;
+
+                if (temp.getTrainingResultBrystsvømning() != null) {
+                    resultsList.add(temp.getTrainingResultBrystsvømning().toString());
+                }
+                if (temp.getTrainingResultButterfly() != null) {
+                    resultsList.add(temp.getTrainingResultButterfly().toString());
+                }
+                if (temp.getTrainingResultCrawl() != null) {
+                    resultsList.add(temp.getTrainingResultCrawl().toString());
+                }
+                if (temp.getTrainingResultRygCrawl() != null) {
+                    resultsList.add(temp.getTrainingResultRygCrawl().toString());
+                }
+                for (EventResult eventResult : temp.getEventResults()) {
+                    if (temp.getEventResults() != null) {
+                        resultsList.add(eventResult.toString());
+                    }
+
+                }
+                if (resultsList.size() > 0) {
+                    output.add(temp.toString());
+                    for (String result : resultsList) {
+                        output.add(result);
+
+                    }
+                }
+
+            }
+        }
     }
 
     @Override
     public void showResultsMenu() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        output.add("   Svømmeklubben Delfinen - Vis Resultater");
+        output.add("");
+        output.add("1. Vis alle resultater");
+        output.add("2. Vis træningsresultater");
+        output.add("3. Vis konkurrenceresultater");
+        output.add("4. Vis Top-5 resultater");
+        output.add("5. Gå tilbage");
+    }
+
+    @Override
+    public void showYoungTeamMembers(ArrayList<Member> membersList
+    ) {
+        for (Member member : membersList) {
+            if (member.getAge() < 18) {
+                output.add(member.toString());
+            }
+        }
+    }
+
+    @Override
+    public void showSeniorTeamMembers(ArrayList<Member> membersList
+    ) {
+        for (Member member : membersList) {
+            if (member.getAge() >= 18) {
+                output.add(member.toString());
+            }
+        }
     }
 
 }

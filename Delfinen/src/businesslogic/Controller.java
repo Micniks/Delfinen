@@ -81,7 +81,7 @@ public class Controller {
             switch (userInput) {
                 case "1":
                     ui.showResults(members.getMembersList());
-                     break;
+                    break;
                 case "2":
                     quit = true;
             }
@@ -128,6 +128,12 @@ public class Controller {
                     ui.showCompetitiveSwimmers(members.getMembersList());
                     break;
                 case "4":
+                    ui.showYoungTeamMembers(members.getMembersList());
+                    break;
+                case "5":
+                    ui.showSeniorTeamMembers(members.getMembersList());
+                    break;
+                case "6":
                     quit = true;
                     break;
 

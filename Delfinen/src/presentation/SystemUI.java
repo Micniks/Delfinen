@@ -267,4 +267,22 @@ public class SystemUI implements UI {
 
     }
 
+    @Override
+    public void showYoungTeamMembers(ArrayList<Member> membersList) {
+        for (Member member : membersList) {
+            if (member.getAge() < 18) {
+                System.out.println(member);
+            }
+        }
+    }
+
+    @Override
+    public void showSeniorTeamMembers(ArrayList<Member> membersList) {
+        for (Member member : membersList) {
+            if (member.getAge() >= 18) {
+                System.out.println(member);
+            }
+        }
+    }
+
 }

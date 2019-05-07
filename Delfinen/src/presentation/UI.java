@@ -66,4 +66,8 @@ public interface UI {
 
     public void showResults(ArrayList<Member> membersList);
 
+    public void showYoungTeamMembers(ArrayList<Member> membersList);
+
+    public void showSeniorTeamMembers(ArrayList<Member> membersList);
+
 }
