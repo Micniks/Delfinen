@@ -32,7 +32,7 @@ public class ResultTest {
         assertNull(member.getTrainingResultButterfly());
         assertNull(member.getTrainingResultCrawl());
         assertNotNull(member.getTrainingResultRygCrawl());
-        assertEquals(1, ctrl.getMembers().getMembers().size());
+        assertEquals(1, ctrl.getMembers().getMembersList().size());
         assertTrue(member.getTrainingResultRygCrawl().getTimeResult().contains("00:00:45:67"));
         assertTrue(member.getTrainingResultRygCrawl().getDate().contains("03-05-2019"));
         assertEquals(SwimmingDiscipline.RYGCRAWL, member.getTrainingResultRygCrawl().getDiscipline());
