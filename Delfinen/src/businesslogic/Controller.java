@@ -531,7 +531,7 @@ public class Controller {
                 }
             }
             member.setDebt(debt);
-            db.storageMember(member);
+            db.updateMember(member);
 
         }
 
@@ -540,6 +540,6 @@ public class Controller {
     public void payDebt(Member member) {
         member.setDebt(0);
         member.setPayDate(LocalDate.now().toString());
-        db.storageMember(member);
+        db.updateMember(member);
     }
 }
