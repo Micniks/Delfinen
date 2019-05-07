@@ -61,7 +61,7 @@ public class FakeUI implements UI {
     }
 
     @Override
-    public void displayResultMenu() {
+    public void displayEditResultMenu() {
         output.add("");
         output.add("   Svømmeklubben Delfinen - Resultater");
         output.add("");
@@ -180,6 +180,17 @@ public class FakeUI implements UI {
 
     @Override
     public void showCompetitiveSwimmers(ArrayList<Member> membersList) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+
+    @Override
+    public void showResults(ArrayList<Member> membersList) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void showResultsMenu() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

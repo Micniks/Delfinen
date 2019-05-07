@@ -5,6 +5,7 @@
  */
 package presentation;
 
+import businesslogic.CompetitiveSwimmer;
 import businesslogic.EventResult;
 import businesslogic.Member;
 import businesslogic.TrainingResult;
@@ -71,14 +72,25 @@ public class SystemUI implements UI {
     }
 
     @Override
-    public void displayResultMenu() {
+    public void displayEditResultMenu() {
         System.out.println();
-        System.out.println("   Svømmeklubben Delfinen - Resultater");
+        System.out.println("   Svømmeklubben Delfinen - Adm. Resultater");
         System.out.println();
         System.out.println("1. Opret Resultat");
         System.out.println("2. Ændre Resultat");
         System.out.println("3. Slet Resultat");
         System.out.println("4. Gå tilbage");
+    }
+
+    @Override
+    public void showResultsMenu() {
+        System.out.println("   Svømmeklubben Delfinen - Vis Resultater");
+        System.out.println();
+        System.out.println("1. Vis alle resultater");
+        System.out.println("2. Vis træningsresultater");
+        System.out.println("3. Vis konkurrenceresultater");
+        System.out.println("4. Vis Top-5 resultater");
+        System.out.println("5. Gå tilbage");
     }
 
     @Override
@@ -212,6 +224,30 @@ public class SystemUI implements UI {
                 System.out.println(member);
             }
         }
+    }
+
+    @Override
+    public void showResults(ArrayList<Member> membersList) {
+        CompetitiveSwimmer temp;
+        for (Member member : membersList) {
+            if (member.isCompetetiveSwimmer()) {
+                temp = (CompetitiveSwimmer) member;
+                if (temp.getTrainingResultBrystsvømning() != null) {
+                    System.out.println(temp.getTrainingResultBrystsvømning());
+                }
+                if (temp.getTrainingResultButterfly() != null) {
+                    System.out.println(temp.getTrainingResultButterfly());
+                }
+                if (temp.getTrainingResultCrawl() != null) {
+                    System.out.println(temp.getTrainingResultCrawl());
+                }
+                if (temp.getTrainingResultRygCrawl() != null) {
+                    System.out.println(temp.getTrainingResultRygCrawl());
+                }
+
+            }
+        }
+
     }
 
 }
