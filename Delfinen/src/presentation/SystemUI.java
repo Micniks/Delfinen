@@ -14,6 +14,7 @@ import java.time.LocalDate;
 import java.time.Period;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -283,6 +284,59 @@ public class SystemUI implements UI {
                 System.out.println(member);
             }
         }
+    public void showTopFiveResults(ArrayList<Member> membersList) {
+        ArrayList<String> resultsList = new ArrayList();
+        CompetitiveSwimmer temp;
+        for (Member member : membersList) {
+            //resultsList = new ArrayList();
+            if (member.isCompetetiveSwimmer()) {
+                temp = (CompetitiveSwimmer) member;
+
+                if (temp.getTrainingResultBrystsvømning() != null) {
+                    resultsList.add(temp.getTrainingResultBrystsvømning().toString());
+                }
+                if (temp.getTrainingResultButterfly() != null) {
+                    resultsList.add(temp.getTrainingResultButterfly().toString());
+                }
+                if (temp.getTrainingResultCrawl() != null) {
+                    resultsList.add(temp.getTrainingResultCrawl().toString());
+                }
+                if (temp.getTrainingResultRygCrawl() != null) {
+                    resultsList.add(temp.getTrainingResultRygCrawl().toString());
+                }
+                for (EventResult eventResult : temp.getEventResults()) {
+                    if (temp.getEventResults() != null) {
+                        resultsList.add(eventResult.toString());
+                    }
+
+                }
+            }
+
+        }
+
+        for (int i = 0; i < resultsList.size(); i++) {
+            String smallest = resultsList.get(i);
+            int smallestIndex = i;
+            for (int j = i; j < resultsList.size(); j++) {
+                String value = resultsList.get(j);
+                if (value.compareTo(smallest) < 0) {
+                    smallest = value;
+                    smallestIndex = j;
+                }
+            }
+
+            if (smallestIndex != i) {
+                String head = resultsList.get(i);
+                resultsList.set(i, smallest);
+                resultsList.set(smallestIndex, head);
+            }
+        }
+
+        System.out.println("Nummer 1: " + resultsList.get(0));
+        System.out.println("Nummer 2: " + resultsList.get(1));
+        System.out.println("Nummer 3: " + resultsList.get(2));
+        System.out.println("Nummer 4: " + resultsList.get(3));
+        System.out.println("Nummer 5: " + resultsList.get(4));
     }
 
 }

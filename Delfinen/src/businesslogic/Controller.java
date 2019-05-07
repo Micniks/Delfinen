@@ -82,7 +82,10 @@ public class Controller {
                 case "1":
                     ui.showResults(members.getMembersList());
                     break;
+
                 case "2":
+                    ui.showTopFiveResults(members.getMembersList());
+                case "3":
                     quit = true;
             }
         } while (quit);

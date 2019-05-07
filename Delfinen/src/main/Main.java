@@ -18,8 +18,8 @@ public class Main {
         Facade db = new DBFacade(ui.getPasswordForDatabase());
         Controller ctrl = new Controller(ui, db);
         ctrl.start();
-        
 
+        
     }
 
 }
