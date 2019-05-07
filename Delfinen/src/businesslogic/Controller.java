@@ -507,7 +507,7 @@ public class Controller {
 
                 if (memberAge < 18) {
                     debt = debtAge * 1000;
-                } else if (memberAge >= 18 && memberAge < 60) {
+                } else if (memberAge < 60) {
                     debt = debtAge * 1600;
                 } else {
                     debt = debtAge * (1600 * 0.75);
@@ -518,5 +518,10 @@ public class Controller {
 
         }
 
+    }
+    public void payDebt(Member member){
+        member.setDebt(0);
+        member.setPayDate(LocalDate.now().toString());
+        db.storageMember(member);
     }
 }
