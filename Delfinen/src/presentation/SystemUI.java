@@ -67,8 +67,9 @@ public class SystemUI implements UI {
         System.out.println();
         System.out.println("1. Opret nyt medlem");
         System.out.println("2. Vis medlemmer");
-        System.out.println("3. Resultater");
-        System.out.println("4. Afslut Program");
+        System.out.println("3. Adm. Resultater");
+        System.out.println("4. Vis Resultater");
+        System.out.println("5. Afslut Program");
     }
 
     @Override
@@ -228,21 +229,37 @@ public class SystemUI implements UI {
 
     @Override
     public void showResults(ArrayList<Member> membersList) {
+        ArrayList<String> resultsList;
         CompetitiveSwimmer temp;
         for (Member member : membersList) {
+            resultsList = new ArrayList();
             if (member.isCompetetiveSwimmer()) {
                 temp = (CompetitiveSwimmer) member;
+
                 if (temp.getTrainingResultBrystsvømning() != null) {
-                    System.out.println(temp.getTrainingResultBrystsvømning());
+                    resultsList.add(temp.getTrainingResultBrystsvømning().toString());
                 }
                 if (temp.getTrainingResultButterfly() != null) {
-                    System.out.println(temp.getTrainingResultButterfly());
+                    resultsList.add(temp.getTrainingResultButterfly().toString());
                 }
                 if (temp.getTrainingResultCrawl() != null) {
-                    System.out.println(temp.getTrainingResultCrawl());
+                    resultsList.add(temp.getTrainingResultCrawl().toString());
                 }
                 if (temp.getTrainingResultRygCrawl() != null) {
-                    System.out.println(temp.getTrainingResultRygCrawl());
+                    resultsList.add(temp.getTrainingResultRygCrawl().toString());
+                }
+                for (EventResult eventResult : temp.getEventResults()) {
+                    if (temp.getEventResults() != null) {
+                        resultsList.add(eventResult.toString());
+                    }
+
+                }
+                if (resultsList.size() > 0) {
+                    System.out.println(temp);
+                    for (String result : resultsList) {
+                        System.out.println(result);
+
+                    }
                 }
 
             }

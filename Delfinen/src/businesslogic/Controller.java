@@ -59,18 +59,35 @@ public class Controller {
                     membersMenu();
                     break;
                 case "3":
-                    resultMenu();
+                    editResultMenu();
                     break;
                 case "4":
-                    quit = true;
+                    showResultMenu();
                     break;
+                case "5":
+                    quit = true;
                 default:
                     throw new IllegalArgumentException();
             }
         } while (!quit);
     }
 
-    public void resultMenu() {
+    public void showResultMenu() {
+        boolean quit = false;
+        do {
+            ui.showResultsMenu();
+            String userInput = ui.getMenuSelection();
+            switch (userInput) {
+                case "1":
+                    ui.showResults(members.getMembersList());
+                     break;
+                case "2":
+                    quit = true;
+            }
+        } while (quit);
+    }
+
+    public void editResultMenu() {
         boolean quit = false;
         do {
             ui.displayEditResultMenu();
@@ -519,7 +536,8 @@ public class Controller {
         }
 
     }
-    public void payDebt(Member member){
+
+    public void payDebt(Member member) {
         member.setDebt(0);
         member.setPayDate(LocalDate.now().toString());
         db.storageMember(member);
