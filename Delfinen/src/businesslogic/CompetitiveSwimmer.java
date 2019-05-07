@@ -75,10 +75,9 @@ public class CompetitiveSwimmer extends Member {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append(getName());
-        sb.append(", alder ");
-        sb.append(getAge());
-        sb.append(", konkurrencesvømmer, ");
+        sb.append(getMember_ID()).append(". ");
+        sb.append(getName()).append(", alder ");
+        sb.append(getAge()).append(", konkurrencesvømmer, ");
         if (!isActiveMember()) {
             sb.append("ikke ");
         }

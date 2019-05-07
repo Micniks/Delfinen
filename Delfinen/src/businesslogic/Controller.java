@@ -56,9 +56,12 @@ public class Controller {
                     createNewMember();
                     break;
                 case "2":
-                    resultMenu();
+                    membersMenu();
                     break;
                 case "3":
+                    resultMenu();
+                    break;
+                case "4":
                     quit = true;
                     break;
                 default:
@@ -85,6 +88,31 @@ public class Controller {
                 case "4":
                     quit = true;
                     break;
+                default:
+                    throw new IllegalArgumentException();
+            }
+        } while (!quit);
+    }
+
+    public void membersMenu() {
+        boolean quit = false;
+        do {
+            ui.showMembersMenu();
+            String userInput = ui.getMenuSelection();
+            switch (userInput) {
+                case "1":
+                    ui.showAllMembers(members.getMembersList());
+                    break;
+                case "2":
+                    ui.showNonCompetitiveSwimmers(members.getMembersList());
+                    break;
+                case "3":
+                    ui.showCompetitiveSwimmers(members.getMembersList());
+                    break;
+                case "4":
+                    quit = true;
+                    break;
+
                 default:
                     throw new IllegalArgumentException();
             }
@@ -473,19 +501,16 @@ public class Controller {
             LocalDate current = LocalDate.now();
             int debtAge = Period.between(current, LocalDate.parse(member.getSignUpDate())).getYears();
             double debt;
-            if (!member.isActiveMember()){
+            if (!member.isActiveMember()) {
                 debt = debtAge * 500;
-            }
-            else{
+            } else {
 
-                if(memberAge < 18) {
+                if (memberAge < 18) {
                     debt = debtAge * 1000;
-                }
-                else if(memberAge >=18 && memberAge <60){
+                } else if (memberAge >= 18 && memberAge < 60) {
                     debt = debtAge * 1600;
-                }
-                else{
-                    debt = debtAge *(1600 * 0.75);
+                } else {
+                    debt = debtAge * (1600 * 0.75);
                 }
             }
             member.setDebt(debt);

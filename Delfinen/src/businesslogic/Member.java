@@ -102,10 +102,9 @@ public class Member {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append(name);
-        sb.append(", alder ");
-        sb.append(age);
-        sb.append(", motionist, ");
+        sb.append(member_ID).append(". ");
+        sb.append(name).append(", alder ");
+        sb.append(age).append(", motionist, ");
         if (!activeMember) {
             sb.append("ikke ");
         }

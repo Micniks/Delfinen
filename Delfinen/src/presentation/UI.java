@@ -6,6 +6,7 @@
 package presentation;
 
 import businesslogic.EventResult;
+import businesslogic.Member;
 import businesslogic.TrainingResult;
 import java.util.ArrayList;
 
@@ -51,5 +52,13 @@ public interface UI {
     public boolean confirmTrainingResultOverride(TrainingResult oldTrainingResult, TrainingResult newTrainingResult);
 
     public void notCompetitveSwimmerMessage(int memberID);
+
+    public void showMembersMenu();
+
+    public void showAllMembers(ArrayList<Member> membersList);
+
+    public void showNonCompetitiveSwimmers(ArrayList<Member> membersList);
+
+    public void showCompetitiveSwimmers(ArrayList<Member> membersList);
 
 }
