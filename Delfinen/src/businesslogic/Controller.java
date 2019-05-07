@@ -499,7 +499,7 @@ public class Controller {
             int memberAge = member.getAge();
             double oldDebt = member.getDebt();
             LocalDate current = LocalDate.now();
-            int debtAge = Period.between(current, LocalDate.parse(member.getSignUpDate())).getYears();
+            int debtAge = Period.between(current, LocalDate.parse(member.getPayDate())).getYears();
             double debt;
             if (!member.isActiveMember()) {
                 debt = debtAge * 500;
