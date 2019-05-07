@@ -53,7 +53,7 @@ public class DBFacade implements Facade {
     public void storageMember(Member member) {
         StringBuilder sb = new StringBuilder();
 
-        sb.append("INSERT INTO Members (Member_ID, Name, Age, Active_Member, Competitive_Swimmer, Debt, Sign_Up_Date) VALUES (");
+        sb.append("INSERT INTO Members (Member_ID, Name, Age, Active_Member, Competitive_Swimmer, Debt, Sign_Up_Date, Pay_Date) VALUES (");
         sb.append(member.getMember_ID());
         sb.append(", \"");
         sb.append(member.getName());
@@ -67,6 +67,8 @@ public class DBFacade implements Facade {
         sb.append(member.getDebt());
         sb.append(", \"");
         sb.append(member.getSignUpDate());
+        sb.append("\", \"");
+        sb.append(member.getPayDate());
         sb.append("\")");
         try {
             statement.executeUpdate(sb.toString());

@@ -15,6 +15,7 @@ public class Member {
     private boolean competetiveSwimmer;
     private double debt;
     private String signUpDate;
+    private String payDate;
 
     public Member(int member_ID, String name, int age, boolean competetiveSwimmer, String signUpDate) {
         this.member_ID=member_ID;
@@ -62,6 +63,14 @@ public class Member {
 
     public int getAge() {
         return age;
+    }
+
+    public String getPayDate() {
+        return payDate;
+    }
+
+    public void setPayDate(String payDate) {
+        this.payDate = payDate;
     }
 
     public void setAge(int age) {
