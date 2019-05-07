@@ -491,7 +491,6 @@ public class Controller {
             member.setDebt(debt);
             db.storageMember(member);
 
-
         }
 
     }
