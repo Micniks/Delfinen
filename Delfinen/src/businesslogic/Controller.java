@@ -9,6 +9,7 @@ import datasource.Facade;
 import presentation.UI;
 import java.time.LocalDate;
 import java.time.Period;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -465,13 +466,31 @@ public class Controller {
         }
     }
 
-    public void calculateInterests() {
-        for (Member member : members.getMembersList()) {
+    public void calculateInterests(ArrayList<Member> memberArrayList) {
+        for (Member member : memberArrayList) {
+            int memberAge = member.getAge();
             double oldDebt = member.getDebt();
             LocalDate current = LocalDate.now();
-            int debtAge = Period.between(current, LocalDate.parse(member.getSignUpDate())).getMonths();
-            System.out.println(debtAge);
-            double newDebt = oldDebt * (1.25 * debtAge);
+            int debtAge = Period.between(current, LocalDate.parse(member.getSignUpDate())).getYears();
+            double debt;
+            if (!member.isActiveMember()){
+                debt = debtAge * 500;
+            }
+            else{
+
+                if(memberAge < 18) {
+                    debt = debtAge * 1000;
+                }
+                else if(memberAge >=18 && memberAge <60){
+                    debt = debtAge * 1600;
+                }
+                else{
+                    debt = debtAge *(1600 * 0.75);
+                }
+            }
+            member.setDebt(debt);
+            db.storageMember(member);
+
 
         }
 
