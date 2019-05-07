@@ -9,11 +9,8 @@ import businesslogic.EventResult;
 import businesslogic.Member;
 import businesslogic.SwimmingDiscipline;
 import businesslogic.TrainingResult;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -38,6 +35,8 @@ public class DBFacade implements Facade {
             Logger.getLogger(DBFacade.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
+
 
     public DBFacade() {
         try {
@@ -126,6 +125,34 @@ public class DBFacade implements Facade {
 
         return highestMemberID;
 
+    }
+
+    @Override
+    public void deleteMember() {
+
+    }
+
+    @Override
+    public void updateMember(Member member) {
+
+        try{
+            PreparedStatement statement = connect.prepareStatement("UPDATE Members SET Name = ?, Age = ?, " +
+                    "Active_Member = ?, Competitive_Swimmer = ?, Debt = ?, Sign_Up_Date = ?, Pay_Date = ?" +
+                    "WHERE Member_ID = ?");
+            statement.setString(1, member.getName());
+            statement.setInt(2, member.getAge());
+            statement.setBoolean(3, member.isActiveMember());
+            statement.setBoolean(4, member.isCompetetiveSwimmer());
+            statement.setDouble(5, member.getDebt());
+            statement.setString(6, member.getSignUpDate());
+            statement.setString(7, member.getPayDate());
+            statement.setInt(8, member.getMember_ID());
+            statement.executeUpdate();
+
+        }
+        catch (SQLException e){
+            System.out.println(e);
+        }
     }
 
     @Override

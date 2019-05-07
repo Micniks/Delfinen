@@ -24,6 +24,10 @@ public interface Facade {
 
     public int readHighestMemberID();
 
+    public void deleteMember();
+
+    void updateMember(Member member);
+
     public void storeTrainingResult(TrainingResult trainingResult, int member_ID);
 
     public void storeEventResult(EventResult eventResult, int member_ID);

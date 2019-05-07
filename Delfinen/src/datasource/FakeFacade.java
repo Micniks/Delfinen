@@ -52,6 +52,16 @@ public class FakeFacade implements Facade {
     }
 
     @Override
+    public void updateMember(Member member) {
+
+    }
+
+    @Override
+    public void deleteMember() {
+
+    }
+
+    @Override
     public void storeTrainingResult(TrainingResult trainingResult, int member_ID) {
         HashMap<String, String> map = new HashMap();
         map.put("Swimming_Discipline", trainingResult.getDiscipline().toString());
