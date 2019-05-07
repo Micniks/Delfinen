@@ -92,6 +92,7 @@ public class DBFacade implements Facade {
                 map.put("Active_Member", Boolean.toString(resultMembers.getString("Active_Member").contains("1")));
                 map.put("Debt", resultMembers.getString("Debt"));
                 map.put("Sign_Up_Date", resultMembers.getString("Sign_Up_Date"));
+                map.put("Pay_Date", resultMembers.getString("Pay_Date"));
                 memberinformation.add(map);
             }
 

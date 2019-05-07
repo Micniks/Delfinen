@@ -4,6 +4,7 @@ import businesslogic.CompetitiveSwimmer;
 import businesslogic.Controller;
 import businesslogic.Member;
 import businesslogic.SwimmingDiscipline;
+import businesslogic.TrainingResult;
 import datasource.FakeFacade;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -132,27 +133,42 @@ public class AddResultTest {
     }
 
     @Test
-    public void testAddTwoTrainingResultOverride() {
-        String[] input = {"1", "1", "2", "00:01:45:67", "02-05-2019", "1", "1", "2", "00:00:45:67", "03-05-2019", "1"};
+    public void testAddFourTrainingResultOverride() {
+        String[] t = {"00:01:45:01", "00:01:45:02", "00:01:45:03", "00:01:45:04", "00:01:45:05", "00:01:45:06", "00:01:45:07", "00:01:45:08",};
+        String[] d = {"01-05-2019", "02-05-2019", "03-05-2019", "04-05-2019", "05-05-2019", "06-05-2019", "07-05-2019", "08-05-2019"};
+        String[] input = {"1", "1", "1", t[1], d[1], "1", "1", "1", "1", t[2], d[2], "1", "1", "1", "1", t[3], d[3], "1", "1", "1", "1", t[4], d[4], "1"};
         FakeUI ui = new FakeUI(input);
         FakeFacade db = new FakeFacade();
         Controller ctrl = new Controller(ui, db);
         CompetitiveSwimmer member = new CompetitiveSwimmer(1, "Michael", 26, true, "03-05-2019");
         ctrl.getMembers().addMembers(member);
+        TrainingResult result1 = new TrainingResult(SwimmingDiscipline.BUTTERFLY, t[5], d[5]);
+        db.storeTrainingResult(result1, member.getMember_ID());
+        TrainingResult result2 = new TrainingResult(SwimmingDiscipline.BUTTERFLY, t[6], d[6]);
+        db.storeTrainingResult(result2, member.getMember_ID());
+        TrainingResult result3 = new TrainingResult(SwimmingDiscipline.BUTTERFLY, t[7], d[7]);
+        db.storeTrainingResult(result3, member.getMember_ID());
+        TrainingResult result4 = new TrainingResult(SwimmingDiscipline.BUTTERFLY, t[8], d[8]);
+        db.storeTrainingResult(result4, member.getMember_ID());
 
         //act
         ctrl.addResult();
         ctrl.addResult();
+        ctrl.addResult();
+        ctrl.addResult();
 
         //assert
-        assertNull(member.getTrainingResultBrystsvømning());
-        assertNull(member.getTrainingResultButterfly());
+        assertNotNull(member.getTrainingResultBrystsvømning());
+        assertNotNull(member.getTrainingResultButterfly());
         assertNotNull(member.getTrainingResultCrawl());
-        assertNull(member.getTrainingResultRygCrawl());
+        assertNotNull(member.getTrainingResultRygCrawl());
         assertEquals(1, ctrl.getMembers().getMembersList().size());
 
-        assertTrue(member.getTrainingResultCrawl().getTimeResult().contains("00:00:45:67"));
-        assertTrue(member.getTrainingResultCrawl().getDate().contains("03-05-2019"));
+        assertTrue(member.getTrainingResultButterfly().getTimeResult().contains("00:01:45:01"));
+        assertTrue(member.getTrainingResultButterfly().getDate().contains("01-05-2019"));
+        assertEquals(SwimmingDiscipline.BUTTERFLY, member.getTrainingResultButterfly().getDiscipline());
+        assertTrue(member.getTrainingResultCrawl().getTimeResult().contains("00:01:45:02"));
+        assertTrue(member.getTrainingResultCrawl().getDate().contains("02-05-2019"));
         assertEquals(SwimmingDiscipline.CRAWL, member.getTrainingResultCrawl().getDiscipline());
     }
 

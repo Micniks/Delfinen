@@ -66,6 +66,7 @@ public class Controller {
                     break;
                 case "5":
                     quit = true;
+                    break;
                 default:
                     throw new IllegalArgumentException();
             }
@@ -442,11 +443,12 @@ public class Controller {
             boolean competetiveSwimmer = Boolean.parseBoolean(memberInfo.get("Competitive_Swimmer"));
             double debt = Double.parseDouble(memberInfo.get("Debt"));
             String signUpDate = memberInfo.get("Sign_Up_Date");
+            String payDate = memberInfo.get("Pay_Date");
 
             if (competetiveSwimmer) {
-                storageMember = new CompetitiveSwimmer(member_ID, name, age, activeMember, true, debt, signUpDate);
+                storageMember = new CompetitiveSwimmer(member_ID, name, age, activeMember, true, debt, signUpDate, payDate);
             } else {
-                storageMember = new Member(member_ID, name, age, activeMember, false, debt, signUpDate);
+                storageMember = new Member(member_ID, name, age, activeMember, false, debt, signUpDate, payDate);
             }
 
             members.addMembers(storageMember);

@@ -25,9 +25,10 @@ public class Member {
         this.signUpDate = signUpDate;
         this.activeMember = true;
         this.debt = 0;
+        this.payDate = signUpDate;
     }
 
-    public Member(int member_ID, String name, int age, boolean activeMember, boolean competetiveSwimmer, double debt, String signUpDate) {
+    public Member(int member_ID, String name, int age, boolean activeMember, boolean competetiveSwimmer, double debt, String signUpDate, String payDate) {
         this.member_ID=member_ID;
         this.name = name;
         this.age = age;
@@ -35,6 +36,7 @@ public class Member {
         this.signUpDate = signUpDate;
         this.activeMember = activeMember;
         this.debt = debt;
+        this.payDate = payDate;
     }
 
     public double getDebt() {
