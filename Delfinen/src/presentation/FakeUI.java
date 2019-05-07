@@ -6,6 +6,7 @@
 package presentation;
 
 import businesslogic.EventResult;
+import businesslogic.Member;
 import businesslogic.TrainingResult;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -160,6 +161,26 @@ public class FakeUI implements UI {
     @Override
     public void notCompetitveSwimmerMessage(int memberID) {
         output.add("FEJL: Medlem med ID: " + memberID + " er ikke en konkurrence svømmer.");
+    }
+
+    @Override
+    public void showMembersMenu() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void showAllMembers(ArrayList<Member> membersList) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void showNonCompetitiveSwimmers(ArrayList<Member> membersList) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void showCompetitiveSwimmers(ArrayList<Member> membersList) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

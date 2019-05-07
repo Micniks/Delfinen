@@ -6,6 +6,7 @@
 package presentation;
 
 import businesslogic.EventResult;
+import businesslogic.Member;
 import businesslogic.TrainingResult;
 import java.util.Scanner;
 import java.time.LocalDate;
@@ -64,8 +65,9 @@ public class SystemUI implements UI {
         System.out.println("   Svømmeklubben Delfinen");
         System.out.println();
         System.out.println("1. Opret nyt medlem");
-        System.out.println("2. Resultater");
-        System.out.println("3. Afslut Program");
+        System.out.println("2. Vis medlemmer");
+        System.out.println("3. Resultater");
+        System.out.println("4. Afslut Program");
     }
 
     @Override
@@ -76,6 +78,17 @@ public class SystemUI implements UI {
         System.out.println("1. Opret Resultat");
         System.out.println("2. Ændre Resultat");
         System.out.println("3. Slet Resultat");
+        System.out.println("4. Gå tilbage");
+    }
+
+    @Override
+    public void showMembersMenu() {
+        System.out.println();
+        System.out.println("   Svømmeklubben Delfinen - Medlemmer");
+        System.out.println();
+        System.out.println("1. Vis alle");
+        System.out.println("2. Vis motionister");
+        System.out.println("3. Vis konkurrence-svømmere");
         System.out.println("4. Gå tilbage");
     }
 
@@ -174,6 +187,31 @@ public class SystemUI implements UI {
     @Override
     public void notCompetitveSwimmerMessage(int memberID) {
         System.out.println("FEJL: Medlem med ID: " + memberID + " er ikke en konkurrence svømmer.");
+    }
+
+    @Override
+    public void showAllMembers(ArrayList<Member> membersList) {
+        for (Member member : membersList) {
+            System.out.println(member);
+        }
+    }
+
+    @Override
+    public void showNonCompetitiveSwimmers(ArrayList<Member> membersList) {
+        for (Member member : membersList) {
+            if (!member.isCompetetiveSwimmer()) {
+                System.out.println(member);
+            }
+        }
+    }
+
+    @Override
+    public void showCompetitiveSwimmers(ArrayList<Member> membersList) {
+        for (Member member : membersList) {
+            if (member.isCompetetiveSwimmer()) {
+                System.out.println(member);
+            }
+        }
     }
 
 }
