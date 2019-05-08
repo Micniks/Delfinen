@@ -58,7 +58,15 @@ public class FakeFacade implements Facade {
 
     @Override
     public void updateMember(Member member) {
-
+        int index = 0;
+        for(HashMap<String, String> haspMap : testMembersHashMapArray){
+            if(haspMap.get("Member_ID").contains(Integer.toString(member.getMember_ID()))){
+                testMembersHashMapArray.remove(index);
+                break;
+            }
+            index++;
+        }
+        storageMember(member);
     }
 
     @Override
