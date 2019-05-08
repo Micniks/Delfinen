@@ -79,7 +79,8 @@ public class SystemUI implements UI {
         System.out.println("2. Vis medlemmer");
         System.out.println("3. Adm. Resultater");
         System.out.println("4. Vis Resultater");
-        System.out.println("5. Afslut Program");
+        System.out.println("5. Vis gæld");
+        System.out.println("6. Afslut Program");
     }
 
     @Override
@@ -374,6 +375,21 @@ public class SystemUI implements UI {
         for (String time : times) {
             System.out.println(time);
 
+        }
+    }
+
+    @Override
+    public void showDebt(ArrayList<Member> membersList) {
+        for (Member member : membersList) {
+            if (member.getDebt() > 0){
+                System.out.print("MedlemsID: ");
+                System.out.print(member.getMember_ID());
+                System.out.print(", Medlemsnavn: ");
+                System.out.print(member.getName());
+                System.out.print(", Gæld: ");
+                System.out.print(member.getDebt());
+                System.out.println("");
+            }
         }
     }
 

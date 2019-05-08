@@ -65,6 +65,9 @@ public class Controller {
                     showResultMenu();
                     break;
                 case "5":
+                   ui.showDebt(members.getMembersList());
+                   break;
+                case "6":
                     quit = true;
                     break;
                 default:
