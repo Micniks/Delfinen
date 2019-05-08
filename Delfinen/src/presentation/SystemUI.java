@@ -34,11 +34,20 @@ public class SystemUI implements UI {
 
     @Override
     public int getNewMemberAge() {
+        int age = 0;
         System.out.println("Indtast nyt medlems fødselsdato i formatet YYYY-MM-DD:  ");
-        String birthDate = scan.nextLine();
-        LocalDate birthday = LocalDate.parse(birthDate);
-        LocalDate today = LocalDate.now();
-        int age = Period.between(birthday, today).getYears();
+        boolean temp = true;
+        while (temp) {
+            try {
+                String birthDate = scan.nextLine();
+                LocalDate birthday = LocalDate.parse(birthDate);
+                LocalDate today = LocalDate.now();
+                age = Period.between(birthday, today).getYears();
+                temp = false;
+            } catch (Exception e) {
+                System.out.println("Du indtastede ikke fødselsdagen i det korrekte format. Prøv igen.");
+            }
+        }
         return age;
 
     }
@@ -178,7 +187,8 @@ public class SystemUI implements UI {
     }
 
     @Override
-    public int getEventNeedingDeleting(ArrayList<EventResult> eventResults) {
+    public int getEventNeedingDeleting(ArrayList<EventResult> eventResults
+    ) {
         System.out.println("Indtast nr. for konkurrence der skal slettes: ");
         for (int i = 1; i <= eventResults.size(); i++) {
             System.out.println(Integer.toString(i) + ". " + eventResults.get(i - 1).toString());
@@ -189,7 +199,8 @@ public class SystemUI implements UI {
     }
 
     @Override
-    public boolean confirmTrainingResultOverride(TrainingResult oldTrainingResult, TrainingResult newTrainingResult) {
+    public boolean confirmTrainingResultOverride(TrainingResult oldTrainingResult, TrainingResult newTrainingResult
+    ) {
         System.out.println("Vil du overskrive: " + oldTrainingResult.toString());
         System.out.println("Med følgende: " + newTrainingResult.toString());
         System.out.println("1. Ja");
@@ -200,19 +211,22 @@ public class SystemUI implements UI {
     }
 
     @Override
-    public void notCompetitveSwimmerMessage(int memberID) {
+    public void notCompetitveSwimmerMessage(int memberID
+    ) {
         System.out.println("FEJL: Medlem med ID: " + memberID + " er ikke en konkurrence svømmer.");
     }
 
     @Override
-    public void showAllMembers(ArrayList<Member> membersList) {
+    public void showAllMembers(ArrayList<Member> membersList
+    ) {
         for (Member member : membersList) {
             System.out.println(member);
         }
     }
 
     @Override
-    public void showNonCompetitiveSwimmers(ArrayList<Member> membersList) {
+    public void showNonCompetitiveSwimmers(ArrayList<Member> membersList
+    ) {
         for (Member member : membersList) {
             if (!member.isCompetetiveSwimmer()) {
                 System.out.println(member);
@@ -221,7 +235,8 @@ public class SystemUI implements UI {
     }
 
     @Override
-    public void showCompetitiveSwimmers(ArrayList<Member> membersList) {
+    public void showCompetitiveSwimmers(ArrayList<Member> membersList
+    ) {
         for (Member member : membersList) {
             if (member.isCompetetiveSwimmer()) {
                 System.out.println(member);
@@ -230,7 +245,8 @@ public class SystemUI implements UI {
     }
 
     @Override
-    public void showResults(ArrayList<Member> membersList) {
+    public void showResults(ArrayList<Member> membersList
+    ) {
         ArrayList<String> resultsList;
         CompetitiveSwimmer temp;
         for (Member member : membersList) {
@@ -270,7 +286,8 @@ public class SystemUI implements UI {
     }
 
     @Override
-    public void showYoungTeamMembers(ArrayList<Member> membersList) {
+    public void showYoungTeamMembers(ArrayList<Member> membersList
+    ) {
         for (Member member : membersList) {
             if (member.getAge() < 18) {
                 System.out.println(member);
@@ -279,14 +296,15 @@ public class SystemUI implements UI {
     }
 
     @Override
-    public void showSeniorTeamMembers(ArrayList<Member> membersList) {
+    public void showSeniorTeamMembers(ArrayList<Member> membersList
+    ) {
         for (Member member : membersList) {
             if (member.getAge() >= 18) {
                 System.out.println(member);
             }
         }
     }
-    
+
     public void showTopFiveResults(ArrayList<Member> membersList) {
         ArrayList<String> resultsList = new ArrayList();
         CompetitiveSwimmer temp;
@@ -341,14 +359,13 @@ public class SystemUI implements UI {
         System.out.println("Nummer 4: " + resultsList.get(3));
         System.out.println("Nummer 5: " + resultsList.get(4));
     }
-    
-   @Override 
-    public void showTopTimes(ArrayList<String> times){
+
+    @Override
+    public void showTopTimes(ArrayList<String> times) {
         for (String time : times) {
             System.out.println(time);
-            
+
         }
     }
-    
 
 }
