@@ -38,7 +38,7 @@ public class MainMenuTest {
         assertTrue(ui.output.get(16).contains("5. Afslut Program"));
         assertEquals(1, ctrl.getMembers().getMembersList().size());
         assertTrue(ctrl.getMembers().getMembersList().get(0).getName().contains("Oscar L."));
-        assertFalse(ctrl.getMembers().getMembersList().get(0).isCompetetiveSwimmer());
+        assertFalse(ctrl.getMembers().getMembersList().get(0).isCompetitiveSwimmer());
     }
 
     @Test
@@ -65,7 +65,7 @@ public class MainMenuTest {
         assertTrue(ui.output.get(16).contains("5. Afslut Program"));
         assertEquals(1, ctrl.getMembers().getMembersList().size());
         assertTrue(ctrl.getMembers().getMembersList().get(0).getName().contains("Oscar L."));
-        assertFalse(ctrl.getMembers().getMembersList().get(0).isCompetetiveSwimmer());
+        assertFalse(ctrl.getMembers().getMembersList().get(0).isCompetitiveSwimmer());
     }
 
 }

@@ -46,7 +46,7 @@ public class CreateMembersFromStorageTest {
         assertEquals(1, ctrl.getMembers().getMembersList().get(0).getMember_ID());
         assertTrue(ctrl.getMembers().getMembersList().get(0).getName().contains("Jens"));
         assertEquals(23, ctrl.getMembers().getMembersList().get(0).getAge());
-        assertFalse(ctrl.getMembers().getMembersList().get(0).isCompetetiveSwimmer());
+        assertFalse(ctrl.getMembers().getMembersList().get(0).isCompetitiveSwimmer());
         assertTrue(ctrl.getMembers().getMembersList().get(0).isActiveMember());
         assertEquals(0, ctrl.getMembers().getMembersList().get(0).getDebt(), 0);
         assertTrue(ctrl.getMembers().getMembersList().get(0).getSignUpDate().contains("2019-05-04"));
@@ -79,7 +79,7 @@ public class CreateMembersFromStorageTest {
         assertEquals(2, ctrl.getMembers().getMembersList().get(0).getMember_ID());
         assertTrue(ctrl.getMembers().getMembersList().get(0).getName().contains("Oscar"));
         assertEquals(24, ctrl.getMembers().getMembersList().get(0).getAge());
-        assertTrue(ctrl.getMembers().getMembersList().get(0).isCompetetiveSwimmer());
+        assertTrue(ctrl.getMembers().getMembersList().get(0).isCompetitiveSwimmer());
         assertTrue(ctrl.getMembers().getMembersList().get(0).isActiveMember());
         assertEquals(0, ctrl.getMembers().getMembersList().get(0).getDebt(), 0);
         assertTrue(ctrl.getMembers().getMembersList().get(0).getSignUpDate().contains("2019-05-04"));
@@ -156,7 +156,7 @@ public class CreateMembersFromStorageTest {
         assertEquals(1, ctrl.getMembers().getMembersList().get(0).getMember_ID());
         assertTrue(ctrl.getMembers().getMembersList().get(0).getName().contains("Jens"));
         assertEquals(22, ctrl.getMembers().getMembersList().get(0).getAge());
-        assertTrue(ctrl.getMembers().getMembersList().get(0).isCompetetiveSwimmer());
+        assertTrue(ctrl.getMembers().getMembersList().get(0).isCompetitiveSwimmer());
         assertTrue(ctrl.getMembers().getMembersList().get(0).isActiveMember());
         assertEquals(500, ctrl.getMembers().getMembersList().get(0).getDebt(), 0);
         assertTrue(ctrl.getMembers().getMembersList().get(0).getSignUpDate().contains("2019-05-04"));
@@ -164,7 +164,7 @@ public class CreateMembersFromStorageTest {
         assertEquals(2, ctrl.getMembers().getMembersList().get(1).getMember_ID());
         assertTrue(ctrl.getMembers().getMembersList().get(1).getName().contains("Oscar"));
         assertEquals(25, ctrl.getMembers().getMembersList().get(1).getAge());
-        assertTrue(ctrl.getMembers().getMembersList().get(1).isCompetetiveSwimmer());
+        assertTrue(ctrl.getMembers().getMembersList().get(1).isCompetitiveSwimmer());
         assertFalse(ctrl.getMembers().getMembersList().get(1).isActiveMember());
         assertEquals(1000, ctrl.getMembers().getMembersList().get(1).getDebt(), 0);
         assertTrue(ctrl.getMembers().getMembersList().get(1).getSignUpDate().contains("2019-05-04"));
@@ -172,7 +172,7 @@ public class CreateMembersFromStorageTest {
         assertEquals(3, ctrl.getMembers().getMembersList().get(2).getMember_ID());
         assertTrue(ctrl.getMembers().getMembersList().get(2).getName().contains("Michael"));
         assertEquals(26, ctrl.getMembers().getMembersList().get(2).getAge());
-        assertFalse(ctrl.getMembers().getMembersList().get(2).isCompetetiveSwimmer());
+        assertFalse(ctrl.getMembers().getMembersList().get(2).isCompetitiveSwimmer());
         assertTrue(ctrl.getMembers().getMembersList().get(2).isActiveMember());
         assertEquals(2000, ctrl.getMembers().getMembersList().get(2).getDebt(), 0);
         assertTrue(ctrl.getMembers().getMembersList().get(2).getSignUpDate().contains("2019-05-04"));
@@ -180,7 +180,7 @@ public class CreateMembersFromStorageTest {
         assertEquals(5, ctrl.getMembers().getMembersList().get(3).getMember_ID());
         assertTrue(ctrl.getMembers().getMembersList().get(3).getName().contains("Cassandra"));
         assertEquals(20, ctrl.getMembers().getMembersList().get(3).getAge());
-        assertFalse(ctrl.getMembers().getMembersList().get(3).isCompetetiveSwimmer());
+        assertFalse(ctrl.getMembers().getMembersList().get(3).isCompetitiveSwimmer());
         assertFalse(ctrl.getMembers().getMembersList().get(3).isActiveMember());
         assertEquals(100000, ctrl.getMembers().getMembersList().get(3).getDebt(), 0);
         assertTrue(ctrl.getMembers().getMembersList().get(3).getSignUpDate().contains("2019-05-04"));
@@ -188,7 +188,7 @@ public class CreateMembersFromStorageTest {
         assertEquals(4, ctrl.getMembers().getMembersList().get(4).getMember_ID());
         assertTrue(ctrl.getMembers().getMembersList().get(4).getName().contains("Alexander"));
         assertEquals(23, ctrl.getMembers().getMembersList().get(4).getAge());
-        assertTrue(ctrl.getMembers().getMembersList().get(4).isCompetetiveSwimmer());
+        assertTrue(ctrl.getMembers().getMembersList().get(4).isCompetitiveSwimmer());
         assertTrue(ctrl.getMembers().getMembersList().get(4).isActiveMember());
         assertEquals(0, ctrl.getMembers().getMembersList().get(4).getDebt(), 0);
         assertTrue(ctrl.getMembers().getMembersList().get(4).getSignUpDate().contains("2019-05-04"));

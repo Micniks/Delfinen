@@ -66,7 +66,7 @@ public class CreateNewMemberTest {
         assertEquals(1, ctrl.getMembers().getMembersList().size());
         assertTrue(ctrl.getMembers().getMembersList().get(0).getName().contains("Oscar L."));
         assertEquals(26, ctrl.getMembers().getMembersList().get(0).getAge());
-        assertFalse(ctrl.getMembers().getMembersList().get(0).isCompetetiveSwimmer());
+        assertFalse(ctrl.getMembers().getMembersList().get(0).isCompetitiveSwimmer());
         assertTrue(ctrl.getMembers().getMembersList().get(0).isActiveMember());
         assertEquals(0, ctrl.getMembers().getMembersList().get(0).getDebt(), 0);
         assertEquals(localDate, ctrl.getMembers().getMembersList().get(0).getSignUpDate());
