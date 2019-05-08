@@ -59,15 +59,18 @@ public class Controller {
                     membersMenu();
                     break;
                 case "3":
-                    editResultMenu();
+                    removeMember();
                     break;
                 case "4":
-                    showResultMenu();
+                    editResultMenu();
                     break;
                 case "5":
+                    showResultMenu();
+                    break;
+                case "6":
                    ui.showDebt(members.getMembersList());
                    break;
-                case "6":
+                case "7":
                     quit = true;
                     break;
                 default:
@@ -556,5 +559,18 @@ public class Controller {
         member.setDebt(0);
         member.setPayDate(LocalDate.now().toString());
         db.updateMember(member);
+    }
+
+    private void removeMember() {
+        int i = ui.getMemberID();
+        db.removeMember(i);
+        for (Member member : members.getMembersList()){
+            if (member.getMember_ID() == i){
+                members.getMembersList().remove(member);
+                break;
+            }
+            
+        }
+        
     }
 }

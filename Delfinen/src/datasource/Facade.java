@@ -45,5 +45,6 @@ public interface Facade {
     public ArrayList <String> getTopFiveTrainingResults();
     
     public ArrayList <String> getTopFiveEventResults();
-
+    
+    public void removeMember(int memberID);
 }

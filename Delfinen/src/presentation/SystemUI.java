@@ -77,10 +77,11 @@ public class SystemUI implements UI {
         System.out.println();
         System.out.println("1. Opret nyt medlem");
         System.out.println("2. Vis medlemmer");
-        System.out.println("3. Adm. Resultater");
-        System.out.println("4. Vis Resultater");
-        System.out.println("5. Vis gæld");
-        System.out.println("6. Afslut Program");
+        System.out.println("3. Slet medlemmer");
+        System.out.println("4. Adm. Resultater");
+        System.out.println("5. Vis Resultater");
+        System.out.println("6. Vis gæld");
+        System.out.println("7. Afslut Program");
     }
 
     @Override
