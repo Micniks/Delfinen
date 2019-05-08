@@ -29,7 +29,7 @@ public class AddResultsFromStorageTest {
         FakeFacade db = new FakeFacade();
         Controller ctrl = new Controller(ui, db);
 
-        CompetitiveSwimmer member = new CompetitiveSwimmer(1, "Michael", 26, true, "03-05-2019");
+        CompetitiveSwimmer member = new CompetitiveSwimmer(1, "Michael", 26, true, "2019-05-03");
         ctrl.getMembers().addMembers(member);
 
         HashMap<String, String> map = new HashMap();
@@ -62,7 +62,7 @@ public class AddResultsFromStorageTest {
         FakeFacade db = new FakeFacade();
         Controller ctrl = new Controller(ui, db);
 
-        CompetitiveSwimmer member = new CompetitiveSwimmer(1, "Michael", 26, true, "03-05-2019");
+        CompetitiveSwimmer member = new CompetitiveSwimmer(1, "Michael", 26, true, "2019-05-03");
         ctrl.getMembers().addMembers(member);
 
         HashMap<String, String> map = new HashMap();
@@ -96,13 +96,13 @@ public class AddResultsFromStorageTest {
         FakeFacade db = new FakeFacade();
         Controller ctrl = new Controller(ui, db);
 
-        CompetitiveSwimmer member1 = new CompetitiveSwimmer(1, "Michael", 26, true, "01-05-2019");
+        CompetitiveSwimmer member1 = new CompetitiveSwimmer(1, "Michael", 26, true, "2019-05-01");
         ctrl.getMembers().addMembers(member1);
-        CompetitiveSwimmer member2 = new CompetitiveSwimmer(2, "Oscar", 25, true, "02-05-2019");
+        CompetitiveSwimmer member2 = new CompetitiveSwimmer(2, "Oscar", 25, true, "2019-05-02");
         ctrl.getMembers().addMembers(member2);
-        CompetitiveSwimmer member3 = new CompetitiveSwimmer(3, "Jens", 22, true, "03-05-2019");
+        CompetitiveSwimmer member3 = new CompetitiveSwimmer(3, "Jens", 22, true, "2019-05-03");
         ctrl.getMembers().addMembers(member3);
-        Member member4 = new CompetitiveSwimmer(4, "Cassandra", 20, false, "04-05-2019");
+        Member member4 = new CompetitiveSwimmer(4, "Cassandra", 20, false, "2019-05-04");
         ctrl.getMembers().addMembers(member4);
 
         HashMap<String, String> map1 = new HashMap();

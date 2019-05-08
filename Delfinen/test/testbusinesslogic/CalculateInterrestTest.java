@@ -24,8 +24,14 @@ public class CalculateInterrestTest {
         FakeUI ui = new FakeUI(input);
         FakeFacade db = new FakeFacade();
         Controller ctrl = new Controller(ui, db);
-        Member member = new Member(1, "Jens", 22, false, false, 0, "08-05-2019", "08-05-2019"); 
+        Member member = new Member(1, "Jens", 22, false, false, 0, "2019-05-01", "2019-05-01");
+        ctrl.getMembers().addMembers(member);
         
+        //act
+        ctrl.calculateInterests(ctrl.getMembers().getMembersList());
+        
+        //assert
+        assertTrue(true);
     }
 
 }

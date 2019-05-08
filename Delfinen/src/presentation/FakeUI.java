@@ -80,7 +80,7 @@ public class FakeUI implements UI {
     @Override
     public String getNewMemberSignUpDate() {
         LocalDate today = LocalDate.now();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-LLLL-yyyy");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("YYYY-LLLL-dd");
         String signUpDate = today.format(formatter);
         return signUpDate;
     }
@@ -277,14 +277,24 @@ public class FakeUI implements UI {
 
     @Override
     public void showTopTimes(ArrayList<String> times) {
-        for (String time : times){
+        for (String time : times) {
             output.add(time);
         }
     }
 
     @Override
     public void showDebt(ArrayList<Member> membersList) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        for (Member member : membersList) {
+            if (member.getDebt() > 0) {
+                output.add("MedlemsID: ");
+                output.add(Integer.toString(member.getMember_ID()));
+                output.add(", Medlemsnavn: ");
+                output.add(member.getName());
+                output.add(", Gæld: ");
+                output.add(Double.toString(member.getDebt()));
+                output.add("");
+            }
+        }
     }
 
 }

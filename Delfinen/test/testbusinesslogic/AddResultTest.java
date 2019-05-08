@@ -18,11 +18,11 @@ public class AddResultTest {
 
     @Test
     public void testAddOneTrainingResult() {
-        String[] input = {"1", "1", "3", "00:00:45:67", "03-05-2019"};
+        String[] input = {"1", "1", "3", "00:00:45:67", "2019-05-03"};
         FakeUI ui = new FakeUI(input);
         FakeFacade db = new FakeFacade();
         Controller ctrl = new Controller(ui, db);
-        CompetitiveSwimmer member = new CompetitiveSwimmer(1, "Michael", 26, true, "03-05-2019");
+        CompetitiveSwimmer member = new CompetitiveSwimmer(1, "Michael", 26, true, "2019-05-03");
         ctrl.getMembers().addMembers(member);
 
         //act
@@ -35,7 +35,7 @@ public class AddResultTest {
         assertNotNull(member.getTrainingResultRygCrawl());
         assertEquals(1, ctrl.getMembers().getMembersList().size());
         assertTrue(member.getTrainingResultRygCrawl().getTimeResult().contains("00:00:45:67"));
-        assertTrue(member.getTrainingResultRygCrawl().getDate().contains("03-05-2019"));
+        assertTrue(member.getTrainingResultRygCrawl().getDate().contains("03"));
         assertEquals(SwimmingDiscipline.RYGCRAWL, member.getTrainingResultRygCrawl().getDiscipline());
     }
 
@@ -45,7 +45,7 @@ public class AddResultTest {
         FakeUI ui = new FakeUI(input);
         FakeFacade db = new FakeFacade();
         Controller ctrl = new Controller(ui, db);
-        CompetitiveSwimmer member = new CompetitiveSwimmer(1, "Michael", 26, true, "2019-03-05");
+        CompetitiveSwimmer member = new CompetitiveSwimmer(1, "Michael", 26, true, "2019-05-03");
         ctrl.getMembers().addMembers(member);
 
         //act
@@ -69,7 +69,7 @@ public class AddResultTest {
         FakeUI ui = new FakeUI(input);
         FakeFacade db = new FakeFacade();
         Controller ctrl = new Controller(ui, db);
-        CompetitiveSwimmer member = new CompetitiveSwimmer(1, "Michael", 26, true, "03-05-2019");
+        CompetitiveSwimmer member = new CompetitiveSwimmer(1, "Michael", 26, true, "2019-05-03");
         ctrl.getMembers().addMembers(member);
 
         //act
@@ -104,7 +104,7 @@ public class AddResultTest {
         FakeUI ui = new FakeUI(input);
         FakeFacade db = new FakeFacade();
         Controller ctrl = new Controller(ui, db);
-        CompetitiveSwimmer member = new CompetitiveSwimmer(1, "Michael", 26, true, "2019-03-05");
+        CompetitiveSwimmer member = new CompetitiveSwimmer(1, "Michael", 26, true, "2019-05-03");
         ctrl.getMembers().addMembers(member);
 
         //act
@@ -145,7 +145,7 @@ public class AddResultTest {
         FakeUI ui = new FakeUI(input);
         FakeFacade db = new FakeFacade();
         Controller ctrl = new Controller(ui, db);
-        CompetitiveSwimmer member = new CompetitiveSwimmer(1, "Michael", 26, true, "03-05-2019");
+        CompetitiveSwimmer member = new CompetitiveSwimmer(1, "Michael", 26, true, "2019-05-01");
         ctrl.getMembers().addMembers(member);
         TrainingResult result1 = new TrainingResult(SwimmingDiscipline.BUTTERFLY, t[4], d[4]);
         member.setTrainingResultButterfly(result1);
@@ -193,8 +193,8 @@ public class AddResultTest {
         FakeUI ui = new FakeUI(input);
         FakeFacade db = new FakeFacade();
         Controller ctrl = new Controller(ui, db);
-        CompetitiveSwimmer member1 = new CompetitiveSwimmer(1, "Michael", 26, true, "03-05-2019");
-        CompetitiveSwimmer member2 = new CompetitiveSwimmer(2, "Oscar", 25, true, "02-05-2019");
+        CompetitiveSwimmer member1 = new CompetitiveSwimmer(1, "Michael", 26, true, "2019-05-03");
+        CompetitiveSwimmer member2 = new CompetitiveSwimmer(2, "Oscar", 25, true, "2019-05-02");
         ctrl.getMembers().addMembers(member1);
         ctrl.getMembers().addMembers(member2);
 
@@ -226,8 +226,8 @@ public class AddResultTest {
         FakeUI ui = new FakeUI(input);
         FakeFacade db = new FakeFacade();
         Controller ctrl = new Controller(ui, db);
-        CompetitiveSwimmer member1 = new CompetitiveSwimmer(1, "Michael", 26, true, "03-05-2019");
-        CompetitiveSwimmer member2 = new CompetitiveSwimmer(2, "Oscar", 25, true, "02-05-2019");
+        CompetitiveSwimmer member1 = new CompetitiveSwimmer(1, "Michael", 26, true, "2019-05-03");
+        CompetitiveSwimmer member2 = new CompetitiveSwimmer(2, "Oscar", 25, true, "2019-05-02");
         ctrl.getMembers().addMembers(member1);
         ctrl.getMembers().addMembers(member2);
 

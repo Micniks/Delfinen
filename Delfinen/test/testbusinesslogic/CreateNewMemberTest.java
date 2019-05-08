@@ -23,12 +23,11 @@ public class CreateNewMemberTest {
         FakeFacade db = new FakeFacade();
         Controller ctrl = new Controller(ui, db);
         LocalDate today = LocalDate.now();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-LLLL-yyyy");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-LLLL-dd");
         String localDate = today.format(formatter);
 
         //act
         ctrl.createNewMember();
-        System.out.println(db.getMembers().get(0).get("Dept"));
 
         //assert
         assertTrue(ui.getOutput().get(0).contains("navn"));
@@ -51,12 +50,11 @@ public class CreateNewMemberTest {
         FakeFacade db = new FakeFacade();
         Controller ctrl = new Controller(ui, db);
         LocalDate today = LocalDate.now();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-LLLL-yyyy");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-LLLL-dd");
         String localDate = today.format(formatter);
 
         //act
         ctrl.createNewMember();
-        System.out.println(db.getMembers().get(0).get("Dept"));
 
         //assert
         assertTrue(ui.getOutput().get(0).contains("navn"));
@@ -80,14 +78,12 @@ public class CreateNewMemberTest {
         FakeFacade db = new FakeFacade();
         Controller ctrl = new Controller(ui, db);
         LocalDate today = LocalDate.now();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-LLLL-yyyy");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-LLLL-dd");
         String localDate = today.format(formatter);
 
         //act
         ctrl.createNewMember();
         ctrl.createNewMember();
-        System.out.println(db.getMembers().get(0));
-        System.out.println(db.getMembers().get(1));
 
         //assert
         assertTrue(ui.getOutput().get(5).contains("navn"));
