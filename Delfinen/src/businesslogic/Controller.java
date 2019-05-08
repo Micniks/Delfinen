@@ -184,17 +184,14 @@ public class Controller {
     //  TODO: add access to the start() method in controller
     //  TODO: refactor temp names
     public void addResult() {
-        // we get data from user that we need to add a result to a specific member
         int memberID = ui.getMemberID();
-        int resultChoice = ui.resultType();
-        int disciplineChoice = ui.swimmingDiscipline();
-        String timeResult = ui.timeResult();
-
         CompetitiveSwimmer tempMember = getCompetitiveSwimmerFromMemberID(memberID);
 
-        // calling different methods based on what kind of result should be
-        // added to the competitiveSwimmer 
         if (tempMember != null) {
+            int resultChoice = ui.resultType();
+            int disciplineChoice = ui.swimmingDiscipline();
+            String timeResult = ui.timeResult();
+
             if (resultChoice == 1) {
                 addTrainingResult(memberID, disciplineChoice, timeResult, tempMember);
             } else if (resultChoice == 2) {

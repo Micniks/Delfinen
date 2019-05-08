@@ -18,7 +18,7 @@ public class CreateNewMemberTest {
 
     @Test
     public void testCreateOneMemberToStorage() {
-        String[] input = {"Oscar L.", "26", "1",};
+        String[] input = {"Oscar L.", "26", "1"};
         FakeUI ui = new FakeUI(input);
         FakeFacade db = new FakeFacade();
         Controller ctrl = new Controller(ui, db);
