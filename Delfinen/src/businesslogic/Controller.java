@@ -84,9 +84,11 @@ public class Controller {
                     break;
 
                 case "2":
-                    ui.showTopFiveResults(members.getMembersList());
+                    ui.showTopTimes(db.getTopFiveTrainingResults());
+                    break;
                 case "3":
                     quit = true;
+                    break;
             }
         } while (quit);
     }

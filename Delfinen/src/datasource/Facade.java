@@ -42,5 +42,7 @@ public interface Facade {
 
     public Iterable<HashMap<String, String>> getEventResults();
     
+    public ArrayList <String> getTopFiveTrainingResults();
+    
 
 }

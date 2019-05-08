@@ -89,7 +89,7 @@ public class SystemUI implements UI {
         System.out.println("   Svømmeklubben Delfinen - Vis Resultater");
         System.out.println();
         System.out.println("1. Vis alle resultater");
-        System.out.println("2. Vis træningsresultater");
+        System.out.println("2. Vis top-5 træningsresultater");
         System.out.println("3. Vis konkurrenceresultater");
         System.out.println("4. Vis Top-5 resultater");
         System.out.println("5. Gå tilbage");
@@ -340,5 +340,14 @@ public class SystemUI implements UI {
         System.out.println("Nummer 4: " + resultsList.get(3));
         System.out.println("Nummer 5: " + resultsList.get(4));
     }
+    
+   @Override 
+    public void showTopTimes(ArrayList<String> times){
+        for (String time : times) {
+            System.out.println(time);
+            
+        }
+    }
+    
 
 }

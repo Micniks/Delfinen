@@ -145,4 +145,9 @@ public class FakeFacade implements Facade {
         return testEventResultsHashMapArray;
     }
 
+    @Override
+    public ArrayList<String> getTopFiveTrainingResults() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }

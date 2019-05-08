@@ -36,8 +36,6 @@ public class DBFacade implements Facade {
         }
     }
 
-
-
     public DBFacade() {
         try {
             connect = DriverManager.getConnection("jdbc:mysql://localhost:3306/Delfinen+?" + serverTime, "root", "Gunstar1");
@@ -47,8 +45,6 @@ public class DBFacade implements Facade {
         }
 
     }
-
-
 
     @Override
     public void storageMember(Member member) {
@@ -143,10 +139,10 @@ public class DBFacade implements Facade {
     @Override
     public void updateMember(Member member) {
 
-        try{
-            PreparedStatement statement = connect.prepareStatement("UPDATE Members SET Name = ?, Age = ?, " +
-                    "Active_Member = ?, Competitive_Swimmer = ?, Debt = ?, Sign_Up_Date = ?, Pay_Date = ?" +
-                    "WHERE Member_ID = ?");
+        try {
+            PreparedStatement statement = connect.prepareStatement("UPDATE Members SET Name = ?, Age = ?, "
+                    + "Active_Member = ?, Competitive_Swimmer = ?, Debt = ?, Sign_Up_Date = ?, Pay_Date = ?"
+                    + "WHERE Member_ID = ?");
             statement.setString(1, member.getName());
             statement.setInt(2, member.getAge());
             statement.setBoolean(3, member.isActiveMember());
@@ -157,8 +153,7 @@ public class DBFacade implements Facade {
             statement.setInt(8, member.getMember_ID());
             statement.executeUpdate();
 
-        }
-        catch (SQLException e){
+        } catch (SQLException e) {
             System.out.println(e);
         }
     }
@@ -248,7 +243,7 @@ public class DBFacade implements Facade {
 
             while (resultTrainingResults.next()) {
                 HashMap<String, String> map = new HashMap();
-                
+
                 map.put("Swimming_Discipline", resultTrainingResults.getString("Swimming_Discipline"));
                 map.put("Member_ID", Integer.toString(resultTrainingResults.getInt("Member_ID")));
                 map.put("Time_Result", resultTrainingResults.getString("Time_Result"));
@@ -272,7 +267,7 @@ public class DBFacade implements Facade {
 
             while (resultTrainingResults.next()) {
                 HashMap<String, String> map = new HashMap();
-                
+
                 map.put("Swimming_Discipline", resultTrainingResults.getString("Swimming_Discipline"));
                 map.put("Event_Name", resultTrainingResults.getString("Event_Name"));
                 map.put("Member_ID", Integer.toString(resultTrainingResults.getInt("Member_ID")));
@@ -287,6 +282,51 @@ public class DBFacade implements Facade {
         }
 
         return eventResultInfo;
+    }
+
+    @Override
+    public ArrayList<String> getTopFiveTrainingResults() {
+        ArrayList<String> results = new ArrayList();
+
+        try {
+            String selectSql = "select Members.Name, Training_Results.Time_Result\n"
+                    + "    from Members\n"
+                    + "    join Training_Results on Members.Member_ID = Training_Results.Member_ID\n"
+                    + "    where Training_Results.Swimming_Discipline = ? order by Time_Result asc;";
+            PreparedStatement preparedStatement = connect.prepareStatement(selectSql);
+            for (int i = 1; i < 5; i++) {
+                switch (i) {
+                    case 1:
+                        results.add("BUTTERLFY");
+                        preparedStatement.setString(1, "BUTTERFLY");
+                        break;
+                    case 2:
+                        results.add("CRAWL");
+                        preparedStatement.setString(1, "CRAWL");
+                        break;
+                    case 3:
+                        results.add("RYGCRAWL");
+                        preparedStatement.setString(1, "RYGCRAWL");
+                        break;
+                    case 4:
+                        results.add("BRYSTSVØMNING");
+                        preparedStatement.setString(1, "BRYSTSVØMNING");
+
+                }
+                ResultSet resultSet = preparedStatement.executeQuery();
+                while (resultSet.next()) {
+                    results.add(resultSet.getString(1) + " " + resultSet.getString(2));
+                    
+
+                }
+
+            }
+            return results;
+        } catch (SQLException e) {
+            System.out.println(e);
+            return null;
+        }
+        
     }
 
 }

@@ -71,5 +71,7 @@ public interface UI {
     public void showYoungTeamMembers(ArrayList<Member> membersList);
 
     public void showSeniorTeamMembers(ArrayList<Member> membersList);
+    
+    public void showTopTimes(ArrayList <String> times);
 
 }
