@@ -225,7 +225,7 @@ public class DBFacade implements Facade {
         sb.append(Integer.toString(memberID));
         sb.append(" AND Swimming_Discipline = \"");
         sb.append(eventSD.toString());
-        sb.append(" AND Event_Name = \"");
+        sb.append(" AND Event_Name = \"\"");
         sb.append(eventName);
         sb.append("\"");
         try {

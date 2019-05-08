@@ -102,7 +102,9 @@ public class SystemUI implements UI {
         System.out.println("1. Vis alle");
         System.out.println("2. Vis motionister");
         System.out.println("3. Vis konkurrence-svømmere");
-        System.out.println("4. Gå tilbage");
+        System.out.println("4. Vis juniormedlemmer");
+        System.out.println("5. Vis seniormedlemmer");
+        System.out.println("6. Gå tilbage");
     }
 
     @Override
