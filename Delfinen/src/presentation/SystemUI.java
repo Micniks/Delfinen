@@ -125,9 +125,18 @@ public class SystemUI implements UI {
 
     @Override
     public int getMemberID() {
+        int choice = 0;
         System.out.println("Indtast medlems ID-nummer: ");
-        int choice = scan.nextInt();
-        scan.nextLine();
+        boolean temp = true;
+        while (temp) {
+            try {
+                choice = Integer.parseInt(scan.nextLine());
+                //scan.nextLine();
+                temp = false;
+            } catch (Exception e) {
+                System.out.println("Du indtastede ikke et gyldigt ID, prøv igen.");
+            }
+        }
         return choice;
     }
 
