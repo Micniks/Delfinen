@@ -4,7 +4,7 @@ import java.util.Date;          // Remove if we don't need to use Sign Up Date
 
 /**
  *
- * @author Michael N. Korsgaard
+ * @author Michael N. Korsgaard, Jens Brønd, Oscar Laurberg, Cassandra Lynge.
  */
 public class Member {
 

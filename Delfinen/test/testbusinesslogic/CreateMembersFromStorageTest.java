@@ -15,7 +15,7 @@ import presentation.FakeUI;
 
 /**
  *
- * @author Michael N. Korsgaard
+ * @author Michael N. Korsgaard, Jens Brønd, Oscar Laurberg, Cassandra Lynge.
  */
 public class CreateMembersFromStorageTest {
 

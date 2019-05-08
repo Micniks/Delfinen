@@ -12,7 +12,7 @@ import java.util.ArrayList;
 
 /**
  *
- * @author Michael N. Korsgaard
+ * @author Michael N. Korsgaard, Jens Brønd, Oscar Laurberg, Cassandra Lynge.
  */
 public interface UI {
 

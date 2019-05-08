@@ -12,7 +12,7 @@ import presentation.FakeUI;
 
 /**
  *
- * @author oscar
+ * @author Michael N. Korsgaard, Jens Brønd, Oscar Laurberg, Cassandra Lynge.
  */
 public class AddResultTest {
 
