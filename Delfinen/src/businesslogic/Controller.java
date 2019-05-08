@@ -87,10 +87,12 @@ public class Controller {
                     ui.showTopTimes(db.getTopFiveTrainingResults());
                     break;
                 case "3":
+                    ui.showTopTimes(db.getTopFiveEventResults());
+                case "4":
                     quit = true;
                     break;
             }
-        } while (quit);
+        } while (!quit);
     }
 
     public void editResultMenu() {

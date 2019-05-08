@@ -44,5 +44,6 @@ public interface Facade {
     
     public ArrayList <String> getTopFiveTrainingResults();
     
+    public ArrayList <String> getTopFiveEventResults();
 
 }

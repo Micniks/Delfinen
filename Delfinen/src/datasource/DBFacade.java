@@ -329,4 +329,49 @@ public class DBFacade implements Facade {
         
     }
 
+    @Override
+    public ArrayList<String> getTopFiveEventResults() {
+                ArrayList<String> results = new ArrayList();
+
+        try {
+            String selectSql = "select Members.Name, Event_Results.Time_Result\n"
+                    + "    from Members\n"
+                    + "    join Event_Results on Members.Member_ID = Event_Results.Member_ID\n"
+                    + "    where Event_Results.Swimming_Discipline = ? order by Time_Result asc;";
+            PreparedStatement preparedStatement = connect.prepareStatement(selectSql);
+            for (int i = 1; i < 5; i++) {
+                switch (i) {
+                    case 1:
+                        results.add("BUTTERLFY");
+                        preparedStatement.setString(1, "BUTTERFLY");
+                        break;
+                    case 2:
+                        results.add("CRAWL");
+                        preparedStatement.setString(1, "CRAWL");
+                        break;
+                    case 3:
+                        results.add("RYGCRAWL");
+                        preparedStatement.setString(1, "RYGCRAWL");
+                        break;
+                    case 4:
+                        results.add("BRYSTSVØMNING");
+                        preparedStatement.setString(1, "BRYSTSVØMNING");
+
+                }
+                ResultSet resultSet = preparedStatement.executeQuery();
+                while (resultSet.next()) {
+                    results.add(resultSet.getString(1) + " " + resultSet.getString(2));
+                    
+
+                }
+
+            }
+            return results;
+        } catch (SQLException e) {
+            System.out.println(e);
+            return null;
+        }
+        
+    }
+
 }
