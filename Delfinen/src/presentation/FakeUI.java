@@ -185,7 +185,7 @@ public class FakeUI implements UI {
     @Override
     public void showNonCompetitiveSwimmers(ArrayList<Member> membersList) {
         for (Member member : membersList) {
-            if (!member.isCompetetiveSwimmer()) {
+            if (!member.isCompetitiveSwimmer()) {
                 output.add(member.toString());
             }
         }
@@ -194,7 +194,7 @@ public class FakeUI implements UI {
     @Override
     public void showCompetitiveSwimmers(ArrayList<Member> membersList) {
         for (Member member : membersList) {
-            if (member.isCompetetiveSwimmer()) {
+            if (member.isCompetitiveSwimmer()) {
                 output.add(member.toString());
             }
         }
@@ -206,7 +206,7 @@ public class FakeUI implements UI {
         CompetitiveSwimmer temp;
         for (Member member : membersList) {
             resultsList = new ArrayList();
-            if (member.isCompetetiveSwimmer()) {
+            if (member.isCompetitiveSwimmer()) {
                 temp = (CompetitiveSwimmer) member;
 
                 if (temp.getTrainingResultBrystsvømning() != null) {

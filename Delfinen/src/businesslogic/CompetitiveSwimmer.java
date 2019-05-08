@@ -16,14 +16,14 @@ public class CompetitiveSwimmer extends Member {
     private ArrayList<EventResult> eventResults;
     private TrainingResult[] trainingResults;
 
-    public CompetitiveSwimmer(int member_ID, String name, int age, boolean competetiveSwimmer, String signUpDate) {
-        super(member_ID, name, age, competetiveSwimmer, signUpDate);
+    public CompetitiveSwimmer(int member_ID, String name, int age, boolean competitiveSwimmer, String signUpDate) {
+        super(member_ID, name, age, competitiveSwimmer, signUpDate);
         this.eventResults = new ArrayList();
         trainingResults = new TrainingResult[4];
     }
 
-    public CompetitiveSwimmer(int member_ID, String name, int age, boolean activeMember, boolean competetiveSwimmer, double debt, String signUpDate, String payDate) {
-        super(member_ID, name, age, activeMember, competetiveSwimmer, debt, signUpDate, payDate);
+    public CompetitiveSwimmer(int member_ID, String name, int age, boolean activeMember, boolean competitiveSwimmer, double debt, String signUpDate, String payDate) {
+        super(member_ID, name, age, activeMember, competitiveSwimmer, debt, signUpDate, payDate);
         this.eventResults = new ArrayList();
         trainingResults = new TrainingResult[4];
     }

@@ -12,27 +12,27 @@ public class Member {
     private String name;
     private int age;
     private boolean activeMember;
-    private boolean competetiveSwimmer;
+    private boolean competitiveSwimmer;
     private double debt;
     private String signUpDate;
     private String payDate;
 
-    public Member(int member_ID, String name, int age, boolean competetiveSwimmer, String signUpDate) {
+    public Member(int member_ID, String name, int age, boolean competitiveSwimmer, String signUpDate) {
         this.member_ID=member_ID;
         this.name = name;
         this.age = age;
-        this.competetiveSwimmer = competetiveSwimmer;
+        this.competitiveSwimmer = competitiveSwimmer;
         this.signUpDate = signUpDate;
         this.activeMember = true;
         this.debt = 0;
         this.payDate = signUpDate;
     }
 
-    public Member(int member_ID, String name, int age, boolean activeMember, boolean competetiveSwimmer, double debt, String signUpDate, String payDate) {
+    public Member(int member_ID, String name, int age, boolean activeMember, boolean competitiveSwimmer, double debt, String signUpDate, String payDate) {
         this.member_ID=member_ID;
         this.name = name;
         this.age = age;
-        this.competetiveSwimmer = competetiveSwimmer;
+        this.competitiveSwimmer = competitiveSwimmer;
         this.signUpDate = signUpDate;
         this.activeMember = activeMember;
         this.debt = debt;
@@ -87,12 +87,12 @@ public class Member {
         this.activeMember = activeMember;
     }
 
-    public boolean isCompetetiveSwimmer() {
-        return competetiveSwimmer;
+    public boolean isCompetitiveSwimmer() {
+        return competitiveSwimmer;
     }
 
-    public void setCompetetiveSwimmer(boolean compedetiveSwimmer) {
-        this.competetiveSwimmer = compedetiveSwimmer;
+    public void setCompetitiveSwimmer(boolean compedetiveSwimmer) {
+        this.competitiveSwimmer = compedetiveSwimmer;
     }
     
     public int getMember_ID() {

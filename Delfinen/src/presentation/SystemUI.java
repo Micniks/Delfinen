@@ -228,7 +228,7 @@ public class SystemUI implements UI {
     public void showNonCompetitiveSwimmers(ArrayList<Member> membersList
     ) {
         for (Member member : membersList) {
-            if (!member.isCompetetiveSwimmer()) {
+            if (!member.isCompetitiveSwimmer()) {
                 System.out.println(member);
             }
         }
@@ -238,7 +238,7 @@ public class SystemUI implements UI {
     public void showCompetitiveSwimmers(ArrayList<Member> membersList
     ) {
         for (Member member : membersList) {
-            if (member.isCompetetiveSwimmer()) {
+            if (member.isCompetitiveSwimmer()) {
                 System.out.println(member);
             }
         }
@@ -251,7 +251,7 @@ public class SystemUI implements UI {
         CompetitiveSwimmer temp;
         for (Member member : membersList) {
             resultsList = new ArrayList();
-            if (member.isCompetetiveSwimmer()) {
+            if (member.isCompetitiveSwimmer()) {
                 temp = (CompetitiveSwimmer) member;
 
                 if (temp.getTrainingResultBrystsvømning() != null) {
@@ -310,7 +310,7 @@ public class SystemUI implements UI {
         CompetitiveSwimmer temp;
         for (Member member : membersList) {
             //resultsList = new ArrayList();
-            if (member.isCompetetiveSwimmer()) {
+            if (member.isCompetitiveSwimmer()) {
                 temp = (CompetitiveSwimmer) member;
 
                 if (temp.getTrainingResultBrystsvømning() != null) {

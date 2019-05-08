@@ -152,7 +152,7 @@ public class Controller {
 
     /*
     *   This is the method that is used from the main menu by the User to create a new member.
-    *   It creates an object from the Member or CompetetiveSwimmer classes, add them to the 
+    *   It creates an object from the Member or CompetitiveSwimmer classes, add them to the 
     *   membersList, and add them to storage. A new member will always have a debt = 0 and
     *   boolean activeMember = true, as the default. 
      */
@@ -161,12 +161,12 @@ public class Controller {
         // We get data from user that we need for the new member
         String name = ui.getNewMemberName();
         int age = ui.getNewMemberAge();
-        boolean competetiveSwimmer = ui.getNewMemberActivityForm();
+        boolean competitiveSwimmer = ui.getNewMemberActivityForm();
         String signUpDate = ui.getNewMemberSignUpDate();
 
         // We make the new member, as either Member or CompetitiveSwimmer
         Member newMember;
-        if (competetiveSwimmer) {
+        if (competitiveSwimmer) {
             newMember = new CompetitiveSwimmer(currentHighestMemberID++, name, age, true, signUpDate);
         } else {
             newMember = new Member(currentHighestMemberID++, name, age, false, signUpDate);
@@ -420,7 +420,7 @@ public class Controller {
     public CompetitiveSwimmer getCompetitiveSwimmerFromMemberID(int memberID) {
         CompetitiveSwimmer tempMember = null;
         for (Member member : members.getMembersList()) {
-            if (memberID == member.getMember_ID() && member.isCompetetiveSwimmer()) {
+            if (memberID == member.getMember_ID() && member.isCompetitiveSwimmer()) {
                 tempMember = (CompetitiveSwimmer) member;
                 break;
             }
@@ -450,12 +450,12 @@ public class Controller {
             String name = memberInfo.get("Name");
             int age = Integer.parseInt(memberInfo.get("Age"));
             boolean activeMember = Boolean.parseBoolean(memberInfo.get("Active_Member"));
-            boolean competetiveSwimmer = Boolean.parseBoolean(memberInfo.get("Competitive_Swimmer"));
+            boolean competitiveSwimmer = Boolean.parseBoolean(memberInfo.get("Competitive_Swimmer"));
             double debt = Double.parseDouble(memberInfo.get("Debt"));
             String signUpDate = memberInfo.get("Sign_Up_Date");
             String payDate = memberInfo.get("Pay_Date");
 
-            if (competetiveSwimmer) {
+            if (competitiveSwimmer) {
                 storageMember = new CompetitiveSwimmer(member_ID, name, age, activeMember, true, debt, signUpDate, payDate);
             } else {
                 storageMember = new Member(member_ID, name, age, activeMember, false, debt, signUpDate, payDate);

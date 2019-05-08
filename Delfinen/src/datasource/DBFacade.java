@@ -59,7 +59,7 @@ public class DBFacade implements Facade {
         sb.append(", ");
         sb.append(member.isActiveMember());
         sb.append(", ");
-        sb.append(member.isCompetetiveSwimmer());
+        sb.append(member.isCompetitiveSwimmer());
         sb.append(", ");
         sb.append(member.getDebt());
         sb.append(", \"");
@@ -146,7 +146,7 @@ public class DBFacade implements Facade {
             statement.setString(1, member.getName());
             statement.setInt(2, member.getAge());
             statement.setBoolean(3, member.isActiveMember());
-            statement.setBoolean(4, member.isCompetetiveSwimmer());
+            statement.setBoolean(4, member.isCompetitiveSwimmer());
             statement.setDouble(5, member.getDebt());
             statement.setString(6, member.getSignUpDate());
             statement.setString(7, member.getPayDate());
