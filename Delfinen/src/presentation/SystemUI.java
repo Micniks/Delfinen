@@ -284,6 +284,8 @@ public class SystemUI implements UI {
                 System.out.println(member);
             }
         }
+    }
+    
     public void showTopFiveResults(ArrayList<Member> membersList) {
         ArrayList<String> resultsList = new ArrayList();
         CompetitiveSwimmer temp;
