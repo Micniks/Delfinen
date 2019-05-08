@@ -277,7 +277,9 @@ public class FakeUI implements UI {
 
     @Override
     public void showTopTimes(ArrayList<String> times) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        for (String time : times){
+            output.add(time);
+        }
     }
 
 }
