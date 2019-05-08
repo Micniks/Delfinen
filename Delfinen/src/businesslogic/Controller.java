@@ -44,9 +44,6 @@ public class Controller {
         currentHighestMemberID = db.readHighestMemberID();
         createMembersFromStorage();
         createResultsFromStorage();
-        for (Member member : members.getMembersList()) {
-            System.out.println(member.getMember_ID() + ". " + member);
-        }
         boolean quit = false;
         do {
             ui.displayMainMenu();
