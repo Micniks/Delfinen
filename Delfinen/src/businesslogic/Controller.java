@@ -521,9 +521,9 @@ public class Controller {
             double debt = Double.parseDouble(memberInfo.get("Debt"));
             String signUpDate = memberInfo.get("Sign_Up_Date");
             String lastAddedDebtDate = memberInfo.get("Pay_Date");
-            int trainerID = Integer.parseInt(memberInfo.get("Trainer_ID"));
 
             if (competitiveSwimmer) {
+                int trainerID = Integer.parseInt(memberInfo.get("Trainer_ID"));
                 storageMember = new CompetitiveSwimmer(member_ID, name, age, activeMember, true, debt, signUpDate, lastAddedDebtDate, trainerID);
             } else {
                 storageMember = new Member(member_ID, name, age, activeMember, false, debt, signUpDate, lastAddedDebtDate);
