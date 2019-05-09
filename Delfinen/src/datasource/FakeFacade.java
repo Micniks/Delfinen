@@ -22,11 +22,13 @@ public class FakeFacade implements Facade {
     public ArrayList<HashMap<String, String>> testMembersHashMapArray;
     public ArrayList<HashMap<String, String>> testTrainingResultsHashMapArray;
     public ArrayList<HashMap<String, String>> testEventResultsHashMapArray;
+    public ArrayList<HashMap<String, String>> testTrainersHashMapArray;
 
     public FakeFacade() {
         this.testMembersHashMapArray = new ArrayList();
         this.testTrainingResultsHashMapArray = new ArrayList();
         this.testEventResultsHashMapArray = new ArrayList();
+        this.testTrainersHashMapArray = new ArrayList();
     }
 
     @Override
@@ -60,19 +62,14 @@ public class FakeFacade implements Facade {
     @Override
     public void updateMember(Member member) {
         int index = 0;
-        for(HashMap<String, String> haspMap : testMembersHashMapArray){
-            if(haspMap.get("Member_ID").contains(Integer.toString(member.getMember_ID()))){
+        for (HashMap<String, String> haspMap : testMembersHashMapArray) {
+            if (haspMap.get("Member_ID").contains(Integer.toString(member.getMember_ID()))) {
                 testMembersHashMapArray.remove(index);
                 break;
             }
             index++;
         }
         storageMember(member);
-    }
-
-    @Override
-    public void deleteMember() {
-
     }
 
     @Override
@@ -158,22 +155,34 @@ public class FakeFacade implements Facade {
 
     @Override
     public void removeMember(int memberID) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String compareTrainerID;
+        boolean correctTrainerID;
+        for (int i = 0; i < testEventResultsHashMapArray.size(); i++) {
+            compareTrainerID = testEventResultsHashMapArray.get(i).get("Trainer_ID");
+            correctTrainerID = compareTrainerID.contains(Integer.toString(memberID));
+            if (correctTrainerID) {
+                testEventResultsHashMapArray.remove(i);
+                break;
+            }
+        }
     }
 
     @Override
     public void storeTrainer(Trainer trainer) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        HashMap<String, String> map = new HashMap();
+        map.put("Trainer_ID", Integer.toString(trainer.getTrainerID()));
+        map.put("Name", trainer.getTrainerName());
+        testTrainersHashMapArray.add(map);
     }
 
     @Override
     public int readHighestTrainerID() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return 1;
     }
 
     @Override
     public ArrayList<HashMap<String, String>> getTrainers() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return testTrainersHashMapArray;
     }
 
 }

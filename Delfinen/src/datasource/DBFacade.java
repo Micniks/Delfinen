@@ -179,11 +179,6 @@ public class DBFacade implements Facade {
     }
 
     @Override
-    public void deleteMember() {
-
-    }
-
-    @Override
     public void updateMember(Member member) {
 
         try {
