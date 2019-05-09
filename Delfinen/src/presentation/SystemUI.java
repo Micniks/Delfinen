@@ -73,9 +73,9 @@ public class SystemUI implements UI {
         System.out.println("Skriv medlem op som: ");
         System.out.println("1. Motionist");
         System.out.println("2. Konkurrencesvømmer");
-        String age = scan.nextLine();
+        String choice = scan.nextLine();
         System.out.println();
-        return Integer.parseInt(age) == 2;
+        return Integer.parseInt(choice) == 2;
     }
 
     @Override
@@ -367,5 +367,8 @@ public class SystemUI implements UI {
             }
         }
     }
-
+    @Override
+    public void errorMessage(String str){
+        System.out.println(str);
+    }
 }

@@ -61,21 +61,21 @@ public interface UI {
 
     public void showCompetitiveSwimmers(ArrayList<Member> membersList);
 
-    
     public void showResultsMenu();
 
     public void showResults(ArrayList<Member> membersList);
-   
 
     public void showYoungTeamMembers(ArrayList<Member> membersList);
 
     public void showSeniorTeamMembers(ArrayList<Member> membersList);
-    
-    public void showTopTimes(ArrayList <String> times);
-    
-    public void showDebt(ArrayList <Member> membersList);
+
+    public void showTopTimes(ArrayList<String> times);
+
+    public void showDebt(ArrayList<Member> membersList);
 
     public Boolean confirmPayDebt(Member member);
 
     public String getNewTrainerName();
+
+    public void errorMessage(String str);
 }
