@@ -102,7 +102,8 @@ public class SystemUI implements UI {
         System.out.println("1. Vis alle resultater");
         System.out.println("2. Vis top-5 træningsresultater");
         System.out.println("3. Vis top-5 konkurrenceresultater");
-        System.out.println("4. Gå tilbage");
+        System.out.println("4. Vis resultat fra medlemsID");
+        System.out.println("5. Gå tilbage");
     }
 
     @Override

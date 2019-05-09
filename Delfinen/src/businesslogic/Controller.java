@@ -94,6 +94,8 @@ public class Controller {
                 case "3":
                     ui.showTopTimes(db.getTopFiveEventResults());
                 case "4":
+                    showResultsFromMemberID();
+                case "5":
                     quit = true;
                     break;
             }
@@ -556,5 +558,13 @@ public class Controller {
                 break;
             }
         }
+    }
+
+    private void showResultsFromMemberID() {
+        ArrayList <Member> member = new ArrayList();
+        int thisMemberID = ui.getMemberID();
+        CompetitiveSwimmer competitiveSwimmer = getCompetitiveSwimmerFromMemberID(thisMemberID);
+        member.add(competitiveSwimmer);
+        ui.showResults(member);
     }
 }
