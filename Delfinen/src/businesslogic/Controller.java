@@ -24,6 +24,7 @@ public class Controller {
     private Members members;
     private int currentHighestMemberID;
     private ArrayList<Trainer> trainerList;
+    private int currentHighestTrainerID;
 
     public Members getMembers() {
         return members;
@@ -45,6 +46,7 @@ public class Controller {
     //  TODO: Error-handeling
     public void start() {
         currentHighestMemberID = db.readHighestMemberID();
+        currentHighestTrainerID = db.readHighestTrainerID();
         createMembersFromStorage();
         createResultsFromStorage();
         boolean quit = false;
@@ -183,6 +185,13 @@ public class Controller {
         // We store the member in both the programs MembersList and the Database
         members.addMembers(newMember);
         db.storageMember(newMember);
+    }
+    
+    public void createNewTrainer() {
+        String name = ui.getNewTrainerName();
+        
+        Trainer trainer = new Trainer(currentHighestTrainerID, name);
+        
     }
 
     /*

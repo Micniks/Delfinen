@@ -101,6 +101,28 @@ public class DBFacade implements Facade {
 
         return memberinformation;
     }
+    
+    @Override
+    public ArrayList<HashMap<String, String>> getTrainers() {
+
+        ArrayList<HashMap<String, String>> trainerInformation = new ArrayList<>();
+        try {
+            ResultSet resultTrainers = statement.executeQuery("SELECT * from Trainer");
+
+            while (resultTrainers.next()) {
+                HashMap<String, String> map = new HashMap();
+                map.put("Trainer_ID", resultTrainers.getString("Trainer_ID"));
+                map.put("Name", resultTrainers.getString("Name"));
+                trainerInformation.add(map);
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(DBFacade.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return trainerInformation;
+    }
+
 
     @Override
     public int readHighestMemberID() {
@@ -125,6 +147,30 @@ public class DBFacade implements Facade {
 
         return highestMemberID;
 
+    }
+    
+    @Override
+    public int readHighestTrainerID() {
+        ArrayList databaseTrainerInfo = new ArrayList();
+        int highestTrainerID = 0;
+         ResultSet result;
+        try {
+            result = statement.executeQuery("SELECT * from Trainer");
+
+            while (result.next()) {
+                databaseTrainerInfo.add(result.getInt("Trainer_ID"));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DBFacade.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        if (databaseTrainerInfo.size() != 0) {
+            highestTrainerID = (int) Collections.max(databaseTrainerInfo);
+            highestTrainerID++;
+        } else {
+            highestTrainerID = 1;
+        }
+
+        return highestTrainerID;
     }
 
     @Override

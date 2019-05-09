@@ -50,4 +50,8 @@ public interface Facade {
     public void removeMember(int memberID);
     
     public void storeTrainer(Trainer trainer);
+    
+    public int readHighestTrainerID();
+    
+    public ArrayList<HashMap<String, String>> getTrainers();
 }
