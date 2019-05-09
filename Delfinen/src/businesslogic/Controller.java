@@ -74,6 +74,9 @@ public class Controller {
                     ui.showDebt(members.getMembersList());
                     break;
                 case "7":
+                    payDebt();
+                    break;
+                case "8":
                     quit = true;
                     break;
                 default:
