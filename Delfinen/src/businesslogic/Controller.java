@@ -585,7 +585,10 @@ public class Controller {
         ArrayList<Member> member = new ArrayList();
         int thisMemberID = ui.getMemberID();
         CompetitiveSwimmer competitiveSwimmer = getCompetitiveSwimmerFromMemberID(thisMemberID);
-        member.add(competitiveSwimmer);
-        ui.showResults(member);
+        if (competitiveSwimmer != null) {
+            member.add(competitiveSwimmer);
+            ui.showResults(member);
+        }
+
     }
 }
