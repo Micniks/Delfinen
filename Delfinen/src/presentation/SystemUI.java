@@ -89,7 +89,8 @@ public class SystemUI implements UI {
         System.out.println("4. Adm. Resultater");
         System.out.println("5. Vis Resultater");
         System.out.println("6. Vis gæld");
-        System.out.println("7. Afslut Program");
+        System.out.println("7. Betal gæld");
+        System.out.println("8. Afslut Program");
     }
 
     @Override
@@ -323,61 +324,6 @@ public class SystemUI implements UI {
                 System.out.println(member);
             }
         }
-    }
-
-    public void showTopFiveResults(ArrayList<Member> membersList) {
-        ArrayList<String> resultsList = new ArrayList();
-        CompetitiveSwimmer competitiveSwimmer;
-        for (Member member : membersList) {
-            //resultsList = new ArrayList();
-            if (member.isCompetitiveSwimmer()) {
-                competitiveSwimmer = (CompetitiveSwimmer) member;
-
-                if (competitiveSwimmer.getTrainingResultBrystsvømning() != null) {
-                    resultsList.add(competitiveSwimmer.getTrainingResultBrystsvømning().toString());
-                }
-                if (competitiveSwimmer.getTrainingResultButterfly() != null) {
-                    resultsList.add(competitiveSwimmer.getTrainingResultButterfly().toString());
-                }
-                if (competitiveSwimmer.getTrainingResultCrawl() != null) {
-                    resultsList.add(competitiveSwimmer.getTrainingResultCrawl().toString());
-                }
-                if (competitiveSwimmer.getTrainingResultRygCrawl() != null) {
-                    resultsList.add(competitiveSwimmer.getTrainingResultRygCrawl().toString());
-                }
-                for (EventResult eventResult : competitiveSwimmer.getEventResults()) {
-                    if (competitiveSwimmer.getEventResults() != null) {
-                        resultsList.add(eventResult.toString());
-                    }
-
-                }
-            }
-
-        }
-
-        for (int i = 0; i < resultsList.size(); i++) {
-            String smallest = resultsList.get(i);
-            int smallestIndex = i;
-            for (int j = i; j < resultsList.size(); j++) {
-                String value = resultsList.get(j);
-                if (value.compareTo(smallest) < 0) {
-                    smallest = value;
-                    smallestIndex = j;
-                }
-            }
-
-            if (smallestIndex != i) {
-                String head = resultsList.get(i);
-                resultsList.set(i, smallest);
-                resultsList.set(smallestIndex, head);
-            }
-        }
-
-        System.out.println("Nummer 1: " + resultsList.get(0));
-        System.out.println("Nummer 2: " + resultsList.get(1));
-        System.out.println("Nummer 3: " + resultsList.get(2));
-        System.out.println("Nummer 4: " + resultsList.get(3));
-        System.out.println("Nummer 5: " + resultsList.get(4));
     }
 
     @Override

@@ -271,11 +271,6 @@ public class FakeUI implements UI {
     }
 
     @Override
-    public void showTopFiveResults(ArrayList<Member> membersList) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
     public void showTopTimes(ArrayList<String> times) {
         for (String time : times) {
             output.add(time);
@@ -299,7 +294,12 @@ public class FakeUI implements UI {
 
     @Override
     public Boolean confirmPayDebt(Member member) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        output.add("Gennemfør betaling for medlem: ");
+        output.add(member.toString());
+        output.add("");
+        output.add("1. Bekræft");
+        output.add("2. Annuller");
+        return input[index++].contains("1");
     }
 
     @Override
