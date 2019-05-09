@@ -81,7 +81,8 @@ public class SystemUI implements UI {
         System.out.println("4. Adm. Resultater");
         System.out.println("5. Vis Resultater");
         System.out.println("6. Vis gæld");
-        System.out.println("7. Afslut Program");
+        System.out.println("7. Betal gæld");
+        System.out.println("8. Afslut Program");
     }
 
     @Override
