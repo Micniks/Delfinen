@@ -11,6 +11,7 @@ import java.time.LocalDate;
 import java.time.Period;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.lang.Math;
 
 /**
  *
@@ -537,6 +538,7 @@ public class Controller {
             double oldDebt = member.getDebt();
             LocalDate current = LocalDate.now();
             int debtAge = Period.between(current, LocalDate.parse(member.getLastAddedDebtDate())).getYears();
+            debtAge = Math.abs(debtAge);
             double debt = member.getDebt();
             if (!member.isActiveMember()) {
                 debt += debtAge * 500;
