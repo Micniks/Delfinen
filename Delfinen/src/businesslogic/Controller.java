@@ -427,6 +427,20 @@ public class Controller {
         return competitiveSwimmer;
     }
 
+    public Member getMemberFromMemberID(int memberID) {
+        Member foundMember = null;
+        for (Member member : members.getMembersList()) {
+            if (memberID == member.getMember_ID()) {
+                foundMember = member;
+                break;
+            }
+        }
+        if (foundMember == null) {
+            ui.notCompetitveSwimmerMessage(memberID);
+        }
+        return foundMember;
+    }
+
     /*
     *   This is the method that read from the database when called, and create 
     *   Members from the database information. This should only be called once,
@@ -449,12 +463,12 @@ public class Controller {
             boolean competitiveSwimmer = Boolean.parseBoolean(memberInfo.get("Competitive_Swimmer"));
             double debt = Double.parseDouble(memberInfo.get("Debt"));
             String signUpDate = memberInfo.get("Sign_Up_Date");
-            String payDate = memberInfo.get("Pay_Date");
+            String lastAddedDebtDate = memberInfo.get("Pay_Date");
 
             if (competitiveSwimmer) {
-                storageMember = new CompetitiveSwimmer(member_ID, name, age, activeMember, true, debt, signUpDate, payDate);
+                storageMember = new CompetitiveSwimmer(member_ID, name, age, activeMember, true, debt, signUpDate, lastAddedDebtDate);
             } else {
-                storageMember = new Member(member_ID, name, age, activeMember, false, debt, signUpDate, payDate);
+                storageMember = new Member(member_ID, name, age, activeMember, false, debt, signUpDate, lastAddedDebtDate);
             }
 
             members.addMembers(storageMember);
@@ -522,7 +536,7 @@ public class Controller {
             int memberAge = member.getAge();
             double oldDebt = member.getDebt();
             LocalDate current = LocalDate.now();
-            int debtAge = Period.between(current, LocalDate.parse(member.getPayDate())).getYears();
+            int debtAge = Period.between(current, LocalDate.parse(member.getLastAddedDebtDate())).getYears();
             double debt;
             if (!member.isActiveMember()) {
                 debt = debtAge * 500;
@@ -536,6 +550,7 @@ public class Controller {
                     debt = debtAge * (1600 * 0.75);
                 }
             }
+            member.setLastAddedDebtDate(LocalDate.now().plusYears(debtAge).toString());
             member.setDebt(debt);
             db.updateMember(member);
 
@@ -543,10 +558,14 @@ public class Controller {
 
     }
 
-    public void payDebt(Member member) {
-        member.setDebt(0);
-        member.setPayDate(LocalDate.now().toString());
-        db.updateMember(member);
+    public void payDebt() {
+        int memberID = ui.getMemberID();
+        Member member = getMemberFromMemberID(memberID);
+        Boolean confirmPayDebt = ui.confirmPayDebt(member);
+        if (confirmPayDebt) {
+            member.setDebt(0);
+            db.updateMember(member);
+        }
     }
 
     private void removeMember() {
@@ -561,7 +580,7 @@ public class Controller {
     }
 
     private void showResultsFromMemberID() {
-        ArrayList <Member> member = new ArrayList();
+        ArrayList<Member> member = new ArrayList();
         int thisMemberID = ui.getMemberID();
         CompetitiveSwimmer competitiveSwimmer = getCompetitiveSwimmerFromMemberID(thisMemberID);
         member.add(competitiveSwimmer);

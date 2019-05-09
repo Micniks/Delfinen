@@ -383,7 +383,7 @@ public class SystemUI implements UI {
     @Override
     public void showDebt(ArrayList<Member> membersList) {
         for (Member member : membersList) {
-            if (member.getDebt() > 0){
+            if (member.getDebt() > 0) {
                 System.out.print("MedlemsID: ");
                 System.out.print(member.getMember_ID());
                 System.out.print(", Medlemsnavn: ");
@@ -391,6 +391,25 @@ public class SystemUI implements UI {
                 System.out.print(", Gæld: ");
                 System.out.print(member.getDebt());
                 System.out.println("");
+            }
+        }
+    }
+
+    @Override
+    public Boolean confirmPayDebt(Member member) {
+        System.out.println("Gennemfør betaling for medlem: ");
+        System.out.println(member);
+        System.out.println("");
+        System.out.println("1. Bekræft");
+        System.out.println("2. Annuller");
+        while (true) {
+            String input = scan.nextLine();
+            if (input.contains("1")) {
+                return true;
+            } else if (input.contains("2")) {
+                return false;
+            } else {
+                System.out.println("Forkert input, prøv igen");
             }
         }
     }

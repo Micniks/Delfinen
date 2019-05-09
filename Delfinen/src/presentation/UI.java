@@ -76,4 +76,6 @@ public interface UI {
     
     public void showDebt(ArrayList <Member> membersList);
 
+    public Boolean confirmPayDebt(Member member);
+
 }

@@ -22,8 +22,8 @@ public class CompetitiveSwimmer extends Member {
         trainingResults = new TrainingResult[4];
     }
 
-    public CompetitiveSwimmer(int member_ID, String name, int age, boolean activeMember, boolean competitiveSwimmer, double debt, String signUpDate, String payDate) {
-        super(member_ID, name, age, activeMember, competitiveSwimmer, debt, signUpDate, payDate);
+    public CompetitiveSwimmer(int member_ID, String name, int age, boolean activeMember, boolean competitiveSwimmer, double debt, String signUpDate, String lastAddedDebtDate) {
+        super(member_ID, name, age, activeMember, competitiveSwimmer, debt, signUpDate, lastAddedDebtDate);
         this.eventResults = new ArrayList();
         trainingResults = new TrainingResult[4];
     }
