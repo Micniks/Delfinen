@@ -21,8 +21,7 @@ public class Trainers {
     public Trainers(Facade db) {
         trainerList = new ArrayList();
         this.db = db;
-        getTrainersFromStorage(trainerList);
-       
+        getTrainersFromStorage();
     }
     
      public ArrayList<Trainer> getTrainersList() {
@@ -32,12 +31,15 @@ public class Trainers {
     public void addTrainers(Trainer trainer) {
         trainerList.add(trainer);
     }
-    private void getTrainersFromStorage(ArrayList<Trainer> trainers) {
+    
+    public void getTrainersFromStorage() {
         ArrayList<HashMap<String, String>> trainerInfo = db.getTrainers();
         
         for(HashMap<String, String> map : trainerInfo){
             String name = map.get("Name");
-          
+            int trainerID = Integer.parseInt(map.get("Trainer_ID"));
+            Trainer trainer = new Trainer(trainerID, name);
+            addTrainers(trainer);
         }
     }        
 }

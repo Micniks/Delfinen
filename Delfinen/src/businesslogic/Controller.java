@@ -21,9 +21,9 @@ public class Controller {
 
     private UI ui;
     private Facade db;
+    private Trainers trainers;
     private Members members;
     private int currentHighestMemberID;
-    private ArrayList<Trainer> trainerList;
     private int currentHighestTrainerID;
 
     public Members getMembers() {
@@ -33,8 +33,9 @@ public class Controller {
     public Controller(UI ui, Facade db) {
         this.ui = ui;
         this.db = db;
+        this.trainers = new Trainers(db);
         this.members = new Members(db);
-        this.trainerList = new ArrayList();
+        
     }
 
     /*
