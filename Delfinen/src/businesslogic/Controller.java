@@ -35,7 +35,7 @@ public class Controller {
         this.db = db;
         this.trainers = new Trainers(db);
         this.members = new Members(db);
-        
+
     }
 
     /*
@@ -187,12 +187,12 @@ public class Controller {
         members.addMembers(newMember);
         db.storageMember(newMember);
     }
-    
+
     public void createNewTrainer() {
         String name = ui.getNewTrainerName();
-        
-        Trainer trainer = new Trainer(currentHighestTrainerID, name);
-        
+
+        Trainer trainer = new Trainer(currentHighestTrainerID++, name);
+
     }
 
     /*
@@ -394,9 +394,10 @@ public class Controller {
 
     public void editResult() {
         int memberID = ui.getMemberID();
-        int resultChoice = ui.resultType();
+
         CompetitiveSwimmer competitiveSwimmer = getCompetitiveSwimmerFromMemberID(memberID);
         if (competitiveSwimmer != null) {
+            int resultChoice = ui.resultType();
             if (resultChoice == 1) {
                 editTrainingResult(memberID, competitiveSwimmer);
 
