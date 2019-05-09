@@ -531,23 +531,23 @@ public class Controller {
         }
     }
 
-    public void calculateInterests(ArrayList<Member> memberArrayList) {
+    public void calculateDebts(ArrayList<Member> memberArrayList) {
         for (Member member : memberArrayList) {
             int memberAge = member.getAge();
             double oldDebt = member.getDebt();
             LocalDate current = LocalDate.now();
             int debtAge = Period.between(current, LocalDate.parse(member.getLastAddedDebtDate())).getYears();
-            double debt;
+            double debt = member.getDebt();
             if (!member.isActiveMember()) {
-                debt = debtAge * 500;
+                debt += debtAge * 500;
             } else {
 
                 if (memberAge < 18) {
-                    debt = debtAge * 1000;
+                    debt += debtAge * 1000;
                 } else if (memberAge < 60) {
-                    debt = debtAge * 1600;
+                    debt += debtAge * 1600;
                 } else {
-                    debt = debtAge * (1600 * 0.75);
+                    debt += debtAge * (1600 * 0.75);
                 }
             }
             member.setLastAddedDebtDate(LocalDate.now().plusYears(debtAge).toString());
