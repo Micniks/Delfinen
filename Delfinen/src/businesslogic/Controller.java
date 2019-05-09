@@ -191,9 +191,6 @@ public class Controller {
                     createNewTrainer();
                     break;
                 case "3":
-                    deleteTrainer();
-                    break;
-                case "4":
                     quit = true;
                     break;
                 default:
@@ -657,7 +654,4 @@ public class Controller {
 
     }
 
-    private void deleteTrainer() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 }

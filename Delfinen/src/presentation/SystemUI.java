@@ -382,8 +382,7 @@ public class SystemUI implements UI {
         System.out.println();
         System.out.println("1. Vis trænere");
         System.out.println("2. Opret træner");
-        System.out.println("3. Slet træner");
-        System.out.println("4. Gå tilbage");
+        System.out.println("3. Gå tilbage");
     }
 
     @Override
