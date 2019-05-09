@@ -297,4 +297,9 @@ public class FakeUI implements UI {
         }
     }
 
+    @Override
+    public Boolean confirmPayDebt(Member member) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }
