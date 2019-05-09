@@ -436,9 +436,6 @@ public class Controller {
                 break;
             }
         }
-        if (foundMember == null) {
-            ui.notCompetitveSwimmerMessage(memberID);
-        }
         return foundMember;
     }
 
