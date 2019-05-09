@@ -29,6 +29,10 @@ public class Controller {
     public Members getMembers() {
         return members;
     }
+    
+    public Trainers getTrainers(){
+        return trainers;
+    }
 
     public Controller(UI ui, Facade db) {
         this.ui = ui;
