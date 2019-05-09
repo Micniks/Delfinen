@@ -8,6 +8,7 @@ package datasource;
 import businesslogic.EventResult;
 import businesslogic.Member;
 import businesslogic.SwimmingDiscipline;
+import businesslogic.Trainer;
 import businesslogic.TrainingResult;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -157,6 +158,11 @@ public class FakeFacade implements Facade {
 
     @Override
     public void removeMember(int memberID) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void storeTrainer(Trainer trainer) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

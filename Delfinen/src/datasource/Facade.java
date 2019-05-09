@@ -8,6 +8,7 @@ package datasource;
 import businesslogic.EventResult;
 import businesslogic.Member;
 import businesslogic.SwimmingDiscipline;
+import businesslogic.Trainer;
 import businesslogic.TrainingResult;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -47,4 +48,6 @@ public interface Facade {
     public ArrayList <String> getTopFiveEventResults();
     
     public void removeMember(int memberID);
+    
+    public void storeTrainer(Trainer trainer);
 }
