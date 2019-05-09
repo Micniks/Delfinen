@@ -103,20 +103,20 @@ public class DBFacade implements Facade {
 
     @Override
     public int readHighestMemberID() {
-        ArrayList temp = new ArrayList();
+        ArrayList databaseMemberInfo = new ArrayList();
         int highestMemberID = 0;
         ResultSet result;
         try {
             result = statement.executeQuery("SELECT * from Members");
 
             while (result.next()) {
-                temp.add(result.getInt("Member_ID"));
+                databaseMemberInfo.add(result.getInt("Member_ID"));
             }
         } catch (SQLException ex) {
             Logger.getLogger(DBFacade.class.getName()).log(Level.SEVERE, null, ex);
         }
-        if (temp.size() != 0) {
-            highestMemberID = (int) Collections.max(temp);
+        if (databaseMemberInfo.size() != 0) {
+            highestMemberID = (int) Collections.max(databaseMemberInfo);
             highestMemberID++;
         } else {
             highestMemberID = 1;

@@ -36,14 +36,14 @@ public class SystemUI implements UI {
     public int getNewMemberAge() {
         int age = 0;
         System.out.println("Indtast nyt medlems fødselsdato i formatet YYYY-MM-DD:  ");
-        boolean temp = true;
-        while (temp) {
+        boolean legalBirthDate = true;
+        while (legalBirthDate) {
             try {
                 String birthDate = scan.nextLine();
                 LocalDate birthday = LocalDate.parse(birthDate);
                 LocalDate today = LocalDate.now();
                 age = Period.between(birthday, today).getYears();
-                temp = false;
+                legalBirthDate = false;
             } catch (Exception e) {
                 System.out.println("Du indtastede ikke fødselsdagen i det korrekte format. Prøv igen.");
             }
@@ -129,12 +129,12 @@ public class SystemUI implements UI {
     public int getMemberID() {
         int choice = 0;
         System.out.println("Indtast medlems ID-nummer: ");
-        boolean temp = true;
-        while (temp) {
+        boolean validUserInput = true;
+        while (validUserInput) {
             try {
                 choice = Integer.parseInt(scan.nextLine());
                 //scan.nextLine();
-                temp = false;
+                validUserInput = false;
             } catch (Exception e) {
                 System.out.println("Du indtastede ikke et gyldigt ID, prøv igen.");
             }
@@ -259,32 +259,32 @@ public class SystemUI implements UI {
     public void showResults(ArrayList<Member> membersList
     ) {
         ArrayList<String> resultsList;
-        CompetitiveSwimmer temp;
+        CompetitiveSwimmer competitiveSwimmer;
         for (Member member : membersList) {
             resultsList = new ArrayList();
             if (member.isCompetitiveSwimmer()) {
-                temp = (CompetitiveSwimmer) member;
+                competitiveSwimmer = (CompetitiveSwimmer) member;
 
-                if (temp.getTrainingResultBrystsvømning() != null) {
-                    resultsList.add(temp.getTrainingResultBrystsvømning().toString());
+                if (competitiveSwimmer.getTrainingResultBrystsvømning() != null) {
+                    resultsList.add(competitiveSwimmer.getTrainingResultBrystsvømning().toString());
                 }
-                if (temp.getTrainingResultButterfly() != null) {
-                    resultsList.add(temp.getTrainingResultButterfly().toString());
+                if (competitiveSwimmer.getTrainingResultButterfly() != null) {
+                    resultsList.add(competitiveSwimmer.getTrainingResultButterfly().toString());
                 }
-                if (temp.getTrainingResultCrawl() != null) {
-                    resultsList.add(temp.getTrainingResultCrawl().toString());
+                if (competitiveSwimmer.getTrainingResultCrawl() != null) {
+                    resultsList.add(competitiveSwimmer.getTrainingResultCrawl().toString());
                 }
-                if (temp.getTrainingResultRygCrawl() != null) {
-                    resultsList.add(temp.getTrainingResultRygCrawl().toString());
+                if (competitiveSwimmer.getTrainingResultRygCrawl() != null) {
+                    resultsList.add(competitiveSwimmer.getTrainingResultRygCrawl().toString());
                 }
-                for (EventResult eventResult : temp.getEventResults()) {
-                    if (temp.getEventResults() != null) {
+                for (EventResult eventResult : competitiveSwimmer.getEventResults()) {
+                    if (competitiveSwimmer.getEventResults() != null) {
                         resultsList.add(eventResult.toString());
                     }
 
                 }
                 if (resultsList.size() > 0) {
-                    System.out.println(temp);
+                    System.out.println(competitiveSwimmer);
                     for (String result : resultsList) {
                         System.out.println(result);
 
@@ -318,26 +318,26 @@ public class SystemUI implements UI {
 
     public void showTopFiveResults(ArrayList<Member> membersList) {
         ArrayList<String> resultsList = new ArrayList();
-        CompetitiveSwimmer temp;
+        CompetitiveSwimmer competitiveSwimmer;
         for (Member member : membersList) {
             //resultsList = new ArrayList();
             if (member.isCompetitiveSwimmer()) {
-                temp = (CompetitiveSwimmer) member;
+                competitiveSwimmer = (CompetitiveSwimmer) member;
 
-                if (temp.getTrainingResultBrystsvømning() != null) {
-                    resultsList.add(temp.getTrainingResultBrystsvømning().toString());
+                if (competitiveSwimmer.getTrainingResultBrystsvømning() != null) {
+                    resultsList.add(competitiveSwimmer.getTrainingResultBrystsvømning().toString());
                 }
-                if (temp.getTrainingResultButterfly() != null) {
-                    resultsList.add(temp.getTrainingResultButterfly().toString());
+                if (competitiveSwimmer.getTrainingResultButterfly() != null) {
+                    resultsList.add(competitiveSwimmer.getTrainingResultButterfly().toString());
                 }
-                if (temp.getTrainingResultCrawl() != null) {
-                    resultsList.add(temp.getTrainingResultCrawl().toString());
+                if (competitiveSwimmer.getTrainingResultCrawl() != null) {
+                    resultsList.add(competitiveSwimmer.getTrainingResultCrawl().toString());
                 }
-                if (temp.getTrainingResultRygCrawl() != null) {
-                    resultsList.add(temp.getTrainingResultRygCrawl().toString());
+                if (competitiveSwimmer.getTrainingResultRygCrawl() != null) {
+                    resultsList.add(competitiveSwimmer.getTrainingResultRygCrawl().toString());
                 }
-                for (EventResult eventResult : temp.getEventResults()) {
-                    if (temp.getEventResults() != null) {
+                for (EventResult eventResult : competitiveSwimmer.getEventResults()) {
+                    if (competitiveSwimmer.getEventResults() != null) {
                         resultsList.add(eventResult.toString());
                     }
 

@@ -1,7 +1,5 @@
 package businesslogic;
 
-import java.util.Date;          // Remove if we don't need to use Sign Up Date
-
 /**
  *
  * @author Michael N. Korsgaard, Jens Brønd, Oscar Laurberg, Cassandra Lynge.
@@ -18,7 +16,7 @@ public class Member {
     private String payDate;
 
     public Member(int member_ID, String name, int age, boolean competitiveSwimmer, String signUpDate) {
-        this.member_ID=member_ID;
+        this.member_ID = member_ID;
         this.name = name;
         this.age = age;
         this.competitiveSwimmer = competitiveSwimmer;
@@ -29,7 +27,7 @@ public class Member {
     }
 
     public Member(int member_ID, String name, int age, boolean activeMember, boolean competitiveSwimmer, double debt, String signUpDate, String payDate) {
-        this.member_ID=member_ID;
+        this.member_ID = member_ID;
         this.name = name;
         this.age = age;
         this.competitiveSwimmer = competitiveSwimmer;
@@ -94,12 +92,10 @@ public class Member {
     public void setCompetitiveSwimmer(boolean compedetiveSwimmer) {
         this.competitiveSwimmer = compedetiveSwimmer;
     }
-    
+
     public int getMember_ID() {
         return member_ID;
     }
-    
-    
 
     @Override
     public String toString() {
@@ -111,7 +107,7 @@ public class Member {
             sb.append("ikke ");
         }
         sb.append("aktivt medlem.");
-        if (debt > 0){
+        if (debt > 0) {
             sb.append(" Gæld: ");
             sb.append(debt);
         }

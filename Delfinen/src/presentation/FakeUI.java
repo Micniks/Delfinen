@@ -203,32 +203,32 @@ public class FakeUI implements UI {
     @Override
     public void showResults(ArrayList<Member> membersList) {
         ArrayList<String> resultsList;
-        CompetitiveSwimmer temp;
+        CompetitiveSwimmer competitiveSwimmer;
         for (Member member : membersList) {
             resultsList = new ArrayList();
             if (member.isCompetitiveSwimmer()) {
-                temp = (CompetitiveSwimmer) member;
+                competitiveSwimmer = (CompetitiveSwimmer) member;
 
-                if (temp.getTrainingResultBrystsvømning() != null) {
-                    resultsList.add(temp.getTrainingResultBrystsvømning().toString());
+                if (competitiveSwimmer.getTrainingResultBrystsvømning() != null) {
+                    resultsList.add(competitiveSwimmer.getTrainingResultBrystsvømning().toString());
                 }
-                if (temp.getTrainingResultButterfly() != null) {
-                    resultsList.add(temp.getTrainingResultButterfly().toString());
+                if (competitiveSwimmer.getTrainingResultButterfly() != null) {
+                    resultsList.add(competitiveSwimmer.getTrainingResultButterfly().toString());
                 }
-                if (temp.getTrainingResultCrawl() != null) {
-                    resultsList.add(temp.getTrainingResultCrawl().toString());
+                if (competitiveSwimmer.getTrainingResultCrawl() != null) {
+                    resultsList.add(competitiveSwimmer.getTrainingResultCrawl().toString());
                 }
-                if (temp.getTrainingResultRygCrawl() != null) {
-                    resultsList.add(temp.getTrainingResultRygCrawl().toString());
+                if (competitiveSwimmer.getTrainingResultRygCrawl() != null) {
+                    resultsList.add(competitiveSwimmer.getTrainingResultRygCrawl().toString());
                 }
-                for (EventResult eventResult : temp.getEventResults()) {
-                    if (temp.getEventResults() != null) {
+                for (EventResult eventResult : competitiveSwimmer.getEventResults()) {
+                    if (competitiveSwimmer.getEventResults() != null) {
                         resultsList.add(eventResult.toString());
                     }
 
                 }
                 if (resultsList.size() > 0) {
-                    output.add(temp.toString());
+                    output.add(competitiveSwimmer.toString());
                     for (String result : resultsList) {
                         output.add(result);
 
