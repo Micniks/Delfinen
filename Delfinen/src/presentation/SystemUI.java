@@ -55,7 +55,7 @@ public class SystemUI implements UI {
     @Override
     public String getNewMemberSignUpDate() {
         LocalDate today = LocalDate.now();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("YYYY-ll-dd");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("YYYY-LLLL-dd");
         String signUpDate = today.format(formatter);
         return signUpDate;
     }

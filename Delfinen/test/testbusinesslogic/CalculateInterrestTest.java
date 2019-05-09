@@ -31,7 +31,7 @@ public class CalculateInterrestTest {
         ctrl.calculateInterests(ctrl.getMembers().getMembersList());
         
         //assert
-        assertTrue(true);
+        assertTrue(false);
     }
 
 }
