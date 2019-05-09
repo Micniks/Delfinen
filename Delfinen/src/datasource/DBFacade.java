@@ -451,7 +451,18 @@ public class DBFacade implements Facade {
 
     @Override
     public void storeTrainer(Trainer trainer) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        StringBuilder sb = new StringBuilder();
+
+        sb.append("INSERT INTO Trainer (Trainer_ID, Name) VALUES (");
+        sb.append(trainer.getTrainerID());
+        sb.append(", \"");
+        sb.append(trainer.getTrainerName());
+        sb.append("\")");
+        try {
+            statement.executeUpdate(sb.toString());
+        } catch (SQLException ex) {
+            Logger.getLogger(DBFacade.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
 }

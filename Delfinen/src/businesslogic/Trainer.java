@@ -34,4 +34,9 @@ public class Trainer {
         this.TrainerName = TrainerName;
     }
     
+    @Override
+    public String toString(){
+        return getTrainerID() + ". " + getTrainerName();
+    }
+    
 }

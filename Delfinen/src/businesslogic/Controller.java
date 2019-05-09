@@ -195,6 +195,7 @@ public class Controller {
         String name = ui.getNewTrainerName();
 
         Trainer trainer = new Trainer(currentHighestTrainerID++, name);
+        db.storeTrainer(trainer);
 
     }
 
