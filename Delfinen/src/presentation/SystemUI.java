@@ -169,7 +169,7 @@ public class SystemUI implements UI {
         System.out.println("Vælg svømmediscplin:");
         System.out.println("1. Butterfly");
         System.out.println("2. Crawl");
-        System.out.println("3. Rycrawl");
+        System.out.println("3. Rygcrawl");
         System.out.println("4. Brystsvømning");
         int choice = scan.nextInt();
         scan.nextLine();
