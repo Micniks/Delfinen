@@ -285,8 +285,6 @@ public class Controller {
     *   order in which they are added to the ArrayList
     *      
      */
-    //  TODO: Maybe sort the eventResults based on date
-    //  TODO: refactor temp names
     public void addEventResult(int memberID, int disciplineChoice, String timeResult, CompetitiveSwimmer competitiveSwimmer) {
 
         String eventName = ui.getEventName();
@@ -320,8 +318,6 @@ public class Controller {
     *   This method is used to delete a Training- or Event-Result from a specific
     *   Member, and goes to either deleteTrainingResult() or deleteEventResult()
      */
-    //  TODO: add way to access from Start()
-    //  TODO: delete from database as well.
     public void deleteResult() {
         int memberID = ui.getMemberID();
         int resultChoice = ui.resultType();
@@ -340,9 +336,7 @@ public class Controller {
     *   by setting the TrainResultArray[] at the corrosponing index to equal null.
     *   The method is called from the Controller.deleteResult
      */
-    //  TODO: refactor temp names.
-    //  TODO: think about showing the time in the training dicipline before choosing to delete.
-    //  TODO: delete from database as well.
+    //  TODO: think about showing the time in the training dicipline before choosing to delete. A confirm delete ui call
     public void deleteTrainingResult(CompetitiveSwimmer competitiveSwimmer) {
 
         int disciplineChoice = ui.swimmingDiscipline();
@@ -375,8 +369,6 @@ public class Controller {
     *   by removing it from the ArrayList of EventResults from that member.
     *   The method is called from the Controller.deleteResult
      */
-    //  TODO: refactor temp names.
-    //  TODO: delete from database as well.
     public void deleteEventResult(CompetitiveSwimmer competitiveSwimmer) {
         int eventNeedingDeleting = ui.getEventNeedingDeleting(competitiveSwimmer.getEventResults());
         String eventName = competitiveSwimmer.getEventResults().get(eventNeedingDeleting).getEventName();
@@ -468,8 +460,6 @@ public class Controller {
     /*
     *   if there is faulty data in storage, ui.notCompetitveSwimmerMessage() will be called as the program is starting up
      */
-    //  TODO: addEventResults
-    //  TODO: change temp names
     public void createResultsFromStorage() {
         for (HashMap<String, String> memberInfo : db.getTrainingResults()) {
 
