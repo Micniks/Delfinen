@@ -426,7 +426,6 @@ public class DBFacade implements Facade {
     public void removeMember(int memberID) {
         String sqlStatement1 = "DELETE FROM Training_Results WHERE Member_ID = ?;";
         String sqlStatement2 = "DELETE FROM Event_Results WHERE Member_ID = ?;";
-        String sqlStatement3 = "DELETE FROM Team_Members where Member_ID = ?;";
         String sqlStatement4 = "DELETE FROM Members where Member_ID = ?;";
 
         try {
@@ -436,9 +435,6 @@ public class DBFacade implements Facade {
             PreparedStatement statement2 = connect.prepareStatement(sqlStatement2);
             statement2.setInt(1, memberID);
             statement2.executeUpdate();
-            PreparedStatement statement3 = connect.prepareStatement(sqlStatement3);
-            statement3.setInt(1, memberID);
-            statement3.executeUpdate();
             PreparedStatement statement4 = connect.prepareStatement(sqlStatement4);
             statement4.setInt(1, memberID);
             statement4.executeUpdate();
