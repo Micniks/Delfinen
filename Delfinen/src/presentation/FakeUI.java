@@ -8,6 +8,7 @@ package presentation;
 import businesslogic.CompetitiveSwimmer;
 import businesslogic.EventResult;
 import businesslogic.Member;
+import businesslogic.Trainer;
 import businesslogic.TrainingResult;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -311,6 +312,24 @@ public class FakeUI implements UI {
     @Override
     public void errorMessage(String str) {
         output.add(str);
+    }
+
+    @Override
+    public void showTrainerMenu() {
+        output.add("");
+        output.add("   Svømmeklubben Delfinen - Trænere");
+        output.add("");
+        output.add("1. Vis trænere");
+        output.add("2. Opret træner");
+        output.add("3. Slet træner");
+        output.add("4. Gå tilbage");
+    }
+
+    @Override
+    public void showTrainers(ArrayList<Trainer> trainersList) {
+         for(Trainer trainer : trainersList) {
+            output.add(trainer.toString());
+        }
     }
 
 }

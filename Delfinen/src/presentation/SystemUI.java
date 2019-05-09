@@ -8,6 +8,7 @@ package presentation;
 import businesslogic.CompetitiveSwimmer;
 import businesslogic.EventResult;
 import businesslogic.Member;
+import businesslogic.Trainer;
 import businesslogic.TrainingResult;
 import java.util.Scanner;
 import java.time.LocalDate;
@@ -370,5 +371,23 @@ public class SystemUI implements UI {
     @Override
     public void errorMessage(String str){
         System.out.println(str);
+    }
+
+    @Override
+    public void showTrainerMenu() {
+        System.out.println();
+        System.out.println("   Svømmeklubben Delfinen - Trænere");
+        System.out.println();
+        System.out.println("1. Vis trænere");
+        System.out.println("2. Opret træner");
+        System.out.println("3. Slet træner");
+        System.out.println("4. Gå tilbage");
+    }
+
+    @Override
+    public void showTrainers(ArrayList<Trainer> trainersList) {
+        for(Trainer trainer : trainersList) {
+            System.out.println(trainer);
+        }
     }
 }

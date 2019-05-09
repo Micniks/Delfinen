@@ -7,6 +7,7 @@ package presentation;
 
 import businesslogic.EventResult;
 import businesslogic.Member;
+import businesslogic.Trainer;
 import businesslogic.TrainingResult;
 import java.util.ArrayList;
 
@@ -78,4 +79,8 @@ public interface UI {
     public String getNewTrainerName();
 
     public void errorMessage(String str);
+
+    public void showTrainerMenu();
+
+    public void showTrainers(ArrayList<Trainer> trainersList);
 }

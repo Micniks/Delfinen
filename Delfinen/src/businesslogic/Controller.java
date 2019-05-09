@@ -79,6 +79,9 @@ public class Controller {
                         payDebt();
                         break;
                     case "8":
+                        trainerMenu();
+                        break;
+                    case "9":
                         quit = true;
                         break;
                     default:
@@ -164,6 +167,31 @@ public class Controller {
                     quit = true;
                     break;
 
+                default:
+                    throw new IllegalArgumentException();
+            }
+        } while (!quit);
+    }
+
+    public void trainerMenu() {
+        boolean quit = false;
+        ui.showTrainerMenu();
+
+        do {
+            String userInput = ui.getMenuSelection();
+            switch (userInput) {
+                case "1":
+                    ui.showTrainers(trainers.getTrainersList());
+                    break;
+                case "2":
+                    createNewTrainer();
+                    break;
+                case "3":
+                    deleteTrainer();
+                    break;
+                case "4":
+                    quit = true;
+                    break;
                 default:
                     throw new IllegalArgumentException();
             }
@@ -612,5 +640,9 @@ public class Controller {
             ui.showResults(member);
         }
 
+    }
+
+    private void deleteTrainer() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
