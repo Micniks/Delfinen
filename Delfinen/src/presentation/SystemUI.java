@@ -31,6 +31,14 @@ public class SystemUI implements UI {
         System.out.println();
         return name;
     }
+   
+    @Override
+    public String getNewTrainerName() {
+        System.out.println("Ny træners navn: ");
+        String name = scan.nextLine();
+        System.out.println();
+        return name;
+    }
 
     @Override
     public int getNewMemberAge() {

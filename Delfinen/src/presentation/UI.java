@@ -78,4 +78,5 @@ public interface UI {
 
     public Boolean confirmPayDebt(Member member);
 
+    public String getNewTrainerName();
 }
