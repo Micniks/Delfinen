@@ -18,31 +18,31 @@ import java.util.ArrayList;
  * @author Michael N. Korsgaard, Jens Brønd, Oscar Laurberg, Cassandra Lynge.
  */
 public class FakeUI implements UI {
-    
+
     private int index = 0;
     public ArrayList<String> output = new ArrayList();
     private String[] input;
-    
+
     public FakeUI(String[] input) {
         this.input = input;
     }
-    
+
     public ArrayList<String> getOutput() {
         return output;
     }
-    
+
     @Override
     public String getNewMemberName() {
         output.add("Nyt medlems navn: ");
         return input[index++];
     }
-    
+
     @Override
     public int getNewMemberAge() {
         output.add("Nyt medlems alder: ");
         return Integer.parseInt(input[index++]);
     }
-    
+
     @Override
     public boolean getNewMemberActivityForm() {
         output.add("Skriv medlem op som: ");
@@ -50,7 +50,7 @@ public class FakeUI implements UI {
         output.add("2. Konkurrencesvømmer");
         return Integer.parseInt(input[index++]) == 2;
     }
-    
+
     @Override
     public void displayMainMenu() {
         output.add("");
@@ -60,7 +60,7 @@ public class FakeUI implements UI {
         output.add("2. Resultater");
         output.add("3. Afslut Program");
     }
-    
+
     @Override
     public void displayEditResultMenu() {
         output.add("");
@@ -71,12 +71,12 @@ public class FakeUI implements UI {
         output.add("3. Slet Resultat");
         output.add("4. Gå tilbage");
     }
-    
+
     @Override
     public String getMenuSelection() {
         return input[index++];
     }
-    
+
     @Override
     public String getNewMemberSignUpDate() {
         LocalDate today = LocalDate.now();
@@ -84,14 +84,14 @@ public class FakeUI implements UI {
         String signUpDate = today.format(formatter);
         return signUpDate;
     }
-    
+
     @Override
     public int getMemberID() {
         output.add("Indtast medlems ID-nummer: ");
         return Integer.parseInt(input[index++]);
-        
+
     }
-    
+
     @Override
     public int resultType() {
         output.add("Vælg resultattype: ");
@@ -99,7 +99,7 @@ public class FakeUI implements UI {
         output.add("2: Konkurrenceresultat");
         return Integer.parseInt(input[index++]);
     }
-    
+
     @Override
     public int swimmingDiscipline() {
         output.add("Vælg svømmediscplin:");
@@ -108,39 +108,39 @@ public class FakeUI implements UI {
         output.add("3. Rycrawl");
         output.add("4. Brystsvømning");
         return Integer.parseInt(input[index++]);
-        
+
     }
-    
+
     @Override
     public String timeResult() {
         output.add("Indtast tidsresultatet i formattet TT:MM:SS:MM");
         return input[index++];
     }
-    
+
     @Override
     public String resultDate() {
         output.add("Indtast dato for træningsresultatet i formattet DD:MM:ÅÅÅÅ");
         return input[index++];
     }
-    
+
     @Override
     public String getPasswordForDatabase() {
         // This is not meant to be tested with.
         return null;
     }
-    
+
     @Override
     public String getEventName() {
         output.add("Indtast navnet for konkurrencen: ");
         return input[index++];
     }
-    
+
     @Override
     public int getEventPlacement() {
         output.add("Indtast svømmerens placeing i konkurrencen: ");
         return Integer.parseInt(input[index++]);
     }
-    
+
     @Override
     public int getEventNeedingDeleting(ArrayList<EventResult> eventResults) {
         output.add("Indtast nr. for konkurrence der skal slettes: ");
@@ -149,7 +149,7 @@ public class FakeUI implements UI {
         }
         return Integer.parseInt(input[index++]) - 1;
     }
-    
+
     @Override
     public boolean confirmTrainingResultOverride(TrainingResult oldTrainingResult, TrainingResult newTrainingResult) {
         output.add("Vil du overskrive: " + oldTrainingResult.toString());
@@ -158,12 +158,12 @@ public class FakeUI implements UI {
         output.add("2. Nej");
         return Integer.parseInt(input[index++]) == 1;
     }
-    
+
     @Override
     public void notCompetitveSwimmerMessage(int memberID) {
         output.add("FEJL: Medlem med ID: " + memberID + " er ikke en konkurrence svømmer.");
     }
-    
+
     @Override
     public void showMembersMenu() {
         output.add("");
@@ -174,14 +174,14 @@ public class FakeUI implements UI {
         output.add("3. Vis konkurrence-svømmere");
         output.add("4. Gå tilbage");
     }
-    
+
     @Override
     public void showAllMembers(ArrayList<Member> membersList) {
         for (Member member : membersList) {
             output.add(member.toString());
         }
     }
-    
+
     @Override
     public void showNonCompetitiveSwimmers(ArrayList<Member> membersList) {
         for (Member member : membersList) {
@@ -190,7 +190,7 @@ public class FakeUI implements UI {
             }
         }
     }
-    
+
     @Override
     public void showCompetitiveSwimmers(ArrayList<Member> membersList) {
         for (Member member : membersList) {
@@ -199,7 +199,7 @@ public class FakeUI implements UI {
             }
         }
     }
-    
+
     @Override
     public void showResults(ArrayList<Member> membersList) {
         ArrayList<String> resultsList;
@@ -208,7 +208,7 @@ public class FakeUI implements UI {
             resultsList = new ArrayList();
             if (member.isCompetitiveSwimmer()) {
                 competitiveSwimmer = (CompetitiveSwimmer) member;
-                
+
                 if (competitiveSwimmer.getTrainingResultBrystsvømning() != null) {
                     resultsList.add(competitiveSwimmer.getTrainingResultBrystsvømning().toString());
                 }
@@ -225,20 +225,20 @@ public class FakeUI implements UI {
                     if (competitiveSwimmer.getEventResults() != null) {
                         resultsList.add(eventResult.toString());
                     }
-                    
+
                 }
                 if (resultsList.size() > 0) {
                     output.add(competitiveSwimmer.toString());
                     for (String result : resultsList) {
                         output.add(result);
-                        
+
                     }
                 }
-                
+
             }
         }
     }
-    
+
     @Override
     public void showResultsMenu() {
         output.add("   Svømmeklubben Delfinen - Vis Resultater");
@@ -249,7 +249,7 @@ public class FakeUI implements UI {
         output.add("4. Vis Top-5 resultater");
         output.add("5. Gå tilbage");
     }
-    
+
     @Override
     public void showYoungTeamMembers(ArrayList<Member> membersList
     ) {
@@ -259,7 +259,7 @@ public class FakeUI implements UI {
             }
         }
     }
-    
+
     @Override
     public void showSeniorTeamMembers(ArrayList<Member> membersList
     ) {
@@ -269,19 +269,14 @@ public class FakeUI implements UI {
             }
         }
     }
-    
-    @Override
-    public void showTopFiveResults(ArrayList<Member> membersList) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
+
     @Override
     public void showTopTimes(ArrayList<String> times) {
         for (String time : times) {
             output.add(time);
         }
     }
-    
+
     @Override
     public void showDebt(ArrayList<Member> membersList) {
         for (Member member : membersList) {
@@ -296,7 +291,7 @@ public class FakeUI implements UI {
             }
         }
     }
-    
+
     @Override
     public Boolean confirmPayDebt(Member member) {
         output.add("Gennemfør betaling for medlem: ");
@@ -306,5 +301,5 @@ public class FakeUI implements UI {
         output.add("2. Annuller");
         return input[index++].contains("1");
     }
-    
+
 }
