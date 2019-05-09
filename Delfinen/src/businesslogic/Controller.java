@@ -51,38 +51,44 @@ public class Controller {
         createMembersFromStorage();
         createResultsFromStorage();
         boolean quit = false;
+
         do {
-            ui.displayMainMenu();
-            String userInput = ui.getMenuSelection();
-            switch (userInput) {
-                case "1":
-                    createNewMember();
-                    break;
-                case "2":
-                    membersMenu();
-                    break;
-                case "3":
-                    removeMember();
-                    break;
-                case "4":
-                    editResultMenu();
-                    break;
-                case "5":
-                    showResultMenu();
-                    break;
-                case "6":
-                    ui.showDebt(members.getMembersList());
-                    break;
-                case "7":
-                    payDebt();
-                    break;
-                case "8":
-                    quit = true;
-                    break;
-                default:
-                    throw new IllegalArgumentException();
+            try {
+                ui.displayMainMenu();
+                String userInput = ui.getMenuSelection();
+                switch (userInput) {
+                    case "1":
+                        createNewMember();
+                        break;
+                    case "2":
+                        membersMenu();
+                        break;
+                    case "3":
+                        removeMember();
+                        break;
+                    case "4":
+                        editResultMenu();
+                        break;
+                    case "5":
+                        showResultMenu();
+                        break;
+                    case "6":
+                        ui.showDebt(members.getMembersList());
+                        break;
+                    case "7":
+                        payDebt();
+                        break;
+                    case "8":
+                        quit = true;
+                        break;
+                    default:
+                        throw new IllegalArgumentException();
+                }
+            } catch (Exception e) {
+                ui.errorMessage("Du indtastede ikke et gyldigt menu-valg.");
             }
         } while (!quit);
+
     }
 
     public void showResultMenu() {
