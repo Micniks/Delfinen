@@ -304,12 +304,13 @@ public class FakeUI implements UI {
 
     @Override
     public String getNewTrainerName() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        output.add("Ny træners navn: ");
+        return input[index++];
     }
 
     @Override
     public void errorMessage(String str) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        output.add(str);
     }
 
 }

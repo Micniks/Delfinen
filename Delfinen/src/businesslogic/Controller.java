@@ -581,10 +581,14 @@ public class Controller {
     public void payDebt() {
         int memberID = ui.getMemberID();
         Member member = getMemberFromMemberID(memberID);
-        Boolean confirmPayDebt = ui.confirmPayDebt(member);
-        if (confirmPayDebt) {
-            member.setDebt(0);
-            db.updateMember(member);
+        if (member.getDebt() > 0) {
+            Boolean confirmPayDebt = ui.confirmPayDebt(member);
+            if (confirmPayDebt) {
+                member.setDebt(0);
+                db.updateMember(member);
+            }
+        } else {
+            ui.errorMessage("Det valgte medlem har ingen gæld");
         }
     }
 
