@@ -332,4 +332,9 @@ public class FakeUI implements UI {
         }
     }
 
+    @Override
+    public int getTrainerID() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }

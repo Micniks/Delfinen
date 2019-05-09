@@ -175,9 +175,9 @@ public class Controller {
 
     public void trainerMenu() {
         boolean quit = false;
-        ui.showTrainerMenu();
 
         do {
+            ui.showTrainerMenu();
             String userInput = ui.getMenuSelection();
             switch (userInput) {
                 case "1":
@@ -209,26 +209,36 @@ public class Controller {
         // We get data from user that we need for the new member
         String name = ui.getNewMemberName();
         int age = ui.getNewMemberAge();
-        boolean competitiveSwimmer = ui.getNewMemberActivityForm();
         String signUpDate = ui.getNewMemberSignUpDate();
+        boolean competitiveSwimmer = ui.getNewMemberActivityForm();
 
         // We make the new member, as either Member or CompetitiveSwimmer
         Member newMember;
         if (competitiveSwimmer) {
-            newMember = new CompetitiveSwimmer(currentHighestMemberID++, name, age, true, signUpDate);
+            boolean validTrainerID;
+            do {
+                int trainerID = ui.getTrainerID();
+                validTrainerID = trainers.validateTrainerID(trainerID);
+                if (validTrainerID) {
+                    newMember = new CompetitiveSwimmer(currentHighestMemberID++, name, age, true, signUpDate, trainerID);
+                    members.addMembers(newMember);
+                    db.storageMember(newMember);
+                } else {
+                    ui.errorMessage("Du indtastede ikke et gyldigt Træner ID");
+                }
+            } while (!validTrainerID);
         } else {
             newMember = new Member(currentHighestMemberID++, name, age, false, signUpDate);
+            members.addMembers(newMember);
+            db.storageMember(newMember);
         }
 
-        // We store the member in both the programs MembersList and the Database
-        members.addMembers(newMember);
-        db.storageMember(newMember);
     }
 
     public void createNewTrainer() {
         String name = ui.getNewTrainerName();
-
         Trainer trainer = new Trainer(currentHighestTrainerID++, name);
+        trainers.addTrainers(trainer);
         db.storeTrainer(trainer);
 
     }
@@ -511,9 +521,10 @@ public class Controller {
             double debt = Double.parseDouble(memberInfo.get("Debt"));
             String signUpDate = memberInfo.get("Sign_Up_Date");
             String lastAddedDebtDate = memberInfo.get("Pay_Date");
+            int trainerID = Integer.parseInt(memberInfo.get("Trainer_ID"));
 
             if (competitiveSwimmer) {
-                storageMember = new CompetitiveSwimmer(member_ID, name, age, activeMember, true, debt, signUpDate, lastAddedDebtDate);
+                storageMember = new CompetitiveSwimmer(member_ID, name, age, activeMember, true, debt, signUpDate, lastAddedDebtDate, trainerID);
             } else {
                 storageMember = new Member(member_ID, name, age, activeMember, false, debt, signUpDate, lastAddedDebtDate);
             }

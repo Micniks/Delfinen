@@ -32,7 +32,7 @@ public class SystemUI implements UI {
         System.out.println();
         return name;
     }
-   
+
     @Override
     public String getNewTrainerName() {
         System.out.println("Ny træners navn: ");
@@ -91,7 +91,8 @@ public class SystemUI implements UI {
         System.out.println("5. Vis Resultater");
         System.out.println("6. Vis gæld");
         System.out.println("7. Betal gæld");
-        System.out.println("8. Afslut Program");
+        System.out.println("8. Trænere");
+        System.out.println("9. Afslut Program");
     }
 
     @Override
@@ -368,8 +369,9 @@ public class SystemUI implements UI {
             }
         }
     }
+
     @Override
-    public void errorMessage(String str){
+    public void errorMessage(String str) {
         System.out.println(str);
     }
 
@@ -386,8 +388,25 @@ public class SystemUI implements UI {
 
     @Override
     public void showTrainers(ArrayList<Trainer> trainersList) {
-        for(Trainer trainer : trainersList) {
+        for (Trainer trainer : trainersList) {
             System.out.println(trainer);
         }
+    }
+
+    @Override
+    public int getTrainerID() {
+        int choice = 0;
+        System.out.println("Indtast trænerens ID-nummer: ");
+        boolean validUserInput = true;
+        while (validUserInput) {
+            try {
+                choice = Integer.parseInt(scan.nextLine());
+                //scan.nextLine();
+                validUserInput = false;
+            } catch (Exception e) {
+                System.out.println("Du indtastede ikke et gyldigt ID, prøv igen.");
+            }
+        }
+        return choice;
     }
 }

@@ -5,6 +5,7 @@
  */
 package datasource;
 
+import businesslogic.CompetitiveSwimmer;
 import businesslogic.EventResult;
 import businesslogic.Member;
 import businesslogic.SwimmingDiscipline;
@@ -20,7 +21,7 @@ import java.util.logging.Logger;
 
 /**
  *
- *  @author Michael N. Korsgaard, Jens Brønd, Oscar Laurberg, Cassandra Lynge.
+ * @author Michael N. Korsgaard, Jens Brønd, Oscar Laurberg, Cassandra Lynge.
  */
 public class DBFacade implements Facade {
 
@@ -67,7 +68,14 @@ public class DBFacade implements Facade {
         sb.append(member.getSignUpDate());
         sb.append("\", \"");
         sb.append(member.getLastAddedDebtDate());
-        sb.append("\")");
+        if (member.isCompetitiveSwimmer()) {
+            sb.append("\", ");
+            CompetitiveSwimmer cs = (CompetitiveSwimmer) member;
+            sb.append(cs.getTrainerID());
+            sb.append(")");
+        } else {
+            sb.append("\")");
+        }
         try {
             statement.executeUpdate(sb.toString());
         } catch (SQLException ex) {
@@ -92,6 +100,7 @@ public class DBFacade implements Facade {
                 map.put("Debt", resultMembers.getString("Debt"));
                 map.put("Sign_Up_Date", resultMembers.getString("Sign_Up_Date"));
                 map.put("Pay_Date", resultMembers.getString("Pay_Date"));
+                map.put("Trainer_ID", resultMembers.getString("Trainer_ID"));
                 memberinformation.add(map);
             }
 
@@ -101,7 +110,7 @@ public class DBFacade implements Facade {
 
         return memberinformation;
     }
-    
+
     @Override
     public ArrayList<HashMap<String, String>> getTrainers() {
 
@@ -122,7 +131,6 @@ public class DBFacade implements Facade {
 
         return trainerInformation;
     }
-
 
     @Override
     public int readHighestMemberID() {
@@ -148,12 +156,12 @@ public class DBFacade implements Facade {
         return highestMemberID;
 
     }
-    
+
     @Override
     public int readHighestTrainerID() {
         ArrayList databaseTrainerInfo = new ArrayList();
         int highestTrainerID = 0;
-         ResultSet result;
+        ResultSet result;
         try {
             result = statement.executeQuery("SELECT * from Trainer");
 
@@ -358,7 +366,6 @@ public class DBFacade implements Facade {
                 ResultSet resultSet = preparedStatement.executeQuery();
                 while (resultSet.next()) {
                     results.add(resultSet.getString(1) + " " + resultSet.getString(2));
-                    
 
                 }
 
@@ -368,12 +375,12 @@ public class DBFacade implements Facade {
             System.out.println(e);
             return null;
         }
-        
+
     }
 
     @Override
     public ArrayList<String> getTopFiveEventResults() {
-                ArrayList<String> results = new ArrayList();
+        ArrayList<String> results = new ArrayList();
 
         try {
             String selectSql = "select Members.Name, Event_Results.Time_Result\n"
@@ -403,7 +410,6 @@ public class DBFacade implements Facade {
                 ResultSet resultSet = preparedStatement.executeQuery();
                 while (resultSet.next()) {
                     results.add(resultSet.getString(1) + " " + resultSet.getString(2));
-                    
 
                 }
 
@@ -413,35 +419,34 @@ public class DBFacade implements Facade {
             System.out.println(e);
             return null;
         }
-        
+
     }
 
     @Override
-    public void removeMember(int memberID){
+    public void removeMember(int memberID) {
         String sqlStatement1 = "DELETE FROM Training_Results WHERE Member_ID = ?;";
         String sqlStatement2 = "DELETE FROM Event_Results WHERE Member_ID = ?;";
         String sqlStatement3 = "DELETE FROM Team_Members where Member_ID = ?;";
         String sqlStatement4 = "DELETE FROM Members where Member_ID = ?;";
-        
+
         try {
             PreparedStatement statement1 = connect.prepareStatement(sqlStatement1);
             statement1.setInt(1, memberID);
             statement1.executeUpdate();
             PreparedStatement statement2 = connect.prepareStatement(sqlStatement2);
-            statement2.setInt(1,memberID);
+            statement2.setInt(1, memberID);
             statement2.executeUpdate();
             PreparedStatement statement3 = connect.prepareStatement(sqlStatement3);
-            statement3.setInt(1,memberID);
+            statement3.setInt(1, memberID);
             statement3.executeUpdate();
             PreparedStatement statement4 = connect.prepareStatement(sqlStatement4);
             statement4.setInt(1, memberID);
             statement4.executeUpdate();
-            
+
         } catch (SQLException ex) {
             Logger.getLogger(DBFacade.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-            
+
     }
 
     @Override

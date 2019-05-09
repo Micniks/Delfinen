@@ -83,4 +83,6 @@ public interface UI {
     public void showTrainerMenu();
 
     public void showTrainers(ArrayList<Trainer> trainersList);
+
+    public int getTrainerID();
 }

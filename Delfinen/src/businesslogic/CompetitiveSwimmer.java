@@ -15,17 +15,30 @@ public class CompetitiveSwimmer extends Member {
 
     private ArrayList<EventResult> eventResults;
     private TrainingResult[] trainingResults;
+    private int trainerID;
 
-    public CompetitiveSwimmer(int member_ID, String name, int age, boolean competitiveSwimmer, String signUpDate) {
+    public CompetitiveSwimmer(int member_ID, String name, int age, boolean competitiveSwimmer, String signUpDate, int trainerID) {
         super(member_ID, name, age, competitiveSwimmer, signUpDate);
         this.eventResults = new ArrayList();
         trainingResults = new TrainingResult[4];
+        this.trainerID = trainerID;
+        
+        
     }
 
-    public CompetitiveSwimmer(int member_ID, String name, int age, boolean activeMember, boolean competitiveSwimmer, double debt, String signUpDate, String lastAddedDebtDate) {
+    public int getTrainerID() {
+        return trainerID;
+    }
+
+    public void setTrainerID(int trainerID) {
+        this.trainerID = trainerID;
+    }
+
+    public CompetitiveSwimmer(int member_ID, String name, int age, boolean activeMember, boolean competitiveSwimmer, double debt, String signUpDate, String lastAddedDebtDate, int trainerID) {
         super(member_ID, name, age, activeMember, competitiveSwimmer, debt, signUpDate, lastAddedDebtDate);
         this.eventResults = new ArrayList();
         trainingResults = new TrainingResult[4];
+        this.trainerID = trainerID;
     }
 
     public ArrayList<EventResult> getEventResults() {
