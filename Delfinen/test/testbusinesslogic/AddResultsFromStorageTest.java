@@ -9,6 +9,7 @@ import businesslogic.CompetitiveSwimmer;
 import businesslogic.Controller;
 import businesslogic.Member;
 import businesslogic.SwimmingDiscipline;
+import businesslogic.Trainer;
 import datasource.FakeFacade;
 import java.util.HashMap;
 import org.junit.Test;
@@ -28,8 +29,9 @@ public class AddResultsFromStorageTest {
         FakeUI ui = new FakeUI(input);
         FakeFacade db = new FakeFacade();
         Controller ctrl = new Controller(ui, db);
-
-        CompetitiveSwimmer member = new CompetitiveSwimmer(1, "Michael", 26, true, "2019-05-03");
+        Trainer trainer = new Trainer(1, "Bob");
+        ctrl.getTrainers().addTrainers(trainer);
+        CompetitiveSwimmer member = new CompetitiveSwimmer(1, "Michael", 26, true, "2019-05-03",1);
         ctrl.getMembers().addMembers(member);
 
         HashMap<String, String> map = new HashMap();
@@ -61,8 +63,9 @@ public class AddResultsFromStorageTest {
         FakeUI ui = new FakeUI(input);
         FakeFacade db = new FakeFacade();
         Controller ctrl = new Controller(ui, db);
-
-        CompetitiveSwimmer member = new CompetitiveSwimmer(1, "Michael", 26, true, "2019-05-03");
+        Trainer trainer = new Trainer(1, "Bob");
+        ctrl.getTrainers().addTrainers(trainer);
+        CompetitiveSwimmer member = new CompetitiveSwimmer(1, "Michael", 26, true, "2019-05-03",1);
         ctrl.getMembers().addMembers(member);
 
         HashMap<String, String> map = new HashMap();
@@ -95,14 +98,15 @@ public class AddResultsFromStorageTest {
         FakeUI ui = new FakeUI(input);
         FakeFacade db = new FakeFacade();
         Controller ctrl = new Controller(ui, db);
-
-        CompetitiveSwimmer member1 = new CompetitiveSwimmer(1, "Michael", 26, true, "2019-05-01");
+        Trainer trainer = new Trainer(1, "Bob");
+        ctrl.getTrainers().addTrainers(trainer);
+        CompetitiveSwimmer member1 = new CompetitiveSwimmer(1, "Michael", 26, true, "2019-05-01",1);
         ctrl.getMembers().addMembers(member1);
-        CompetitiveSwimmer member2 = new CompetitiveSwimmer(2, "Oscar", 25, true, "2019-05-02");
+        CompetitiveSwimmer member2 = new CompetitiveSwimmer(2, "Oscar", 25, true, "2019-05-02",1);
         ctrl.getMembers().addMembers(member2);
-        CompetitiveSwimmer member3 = new CompetitiveSwimmer(3, "Jens", 22, true, "2019-05-03");
+        CompetitiveSwimmer member3 = new CompetitiveSwimmer(3, "Jens", 22, true, "2019-05-03",1);
         ctrl.getMembers().addMembers(member3);
-        Member member4 = new CompetitiveSwimmer(4, "Cassandra", 20, false, "2019-05-04");
+        Member member4 = new CompetitiveSwimmer(4, "Cassandra", 20, false, "2019-05-04",1);
         ctrl.getMembers().addMembers(member4);
 
         HashMap<String, String> map1 = new HashMap();

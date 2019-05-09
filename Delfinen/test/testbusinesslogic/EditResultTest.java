@@ -9,6 +9,7 @@ import businesslogic.CompetitiveSwimmer;
 import businesslogic.Controller;
 import businesslogic.EventResult;
 import businesslogic.SwimmingDiscipline;
+import businesslogic.Trainer;
 import businesslogic.TrainingResult;
 import datasource.FakeFacade;
 import org.junit.Test;
@@ -27,7 +28,9 @@ public class EditResultTest {
         FakeUI ui = new FakeUI(input);
         FakeFacade db = new FakeFacade();
         Controller ctrl = new Controller(ui, db);
-        CompetitiveSwimmer member = new CompetitiveSwimmer(1, "Michael", 26, true, "03-05-2019");
+        Trainer trainer = new Trainer(1, "Bob");
+        ctrl.getTrainers().addTrainers(trainer);
+        CompetitiveSwimmer member = new CompetitiveSwimmer(1, "Michael", 26, true, "03-05-2019", 1);
         ctrl.getMembers().addMembers(member);
         TrainingResult trainingResult = new TrainingResult(SwimmingDiscipline.CRAWL, "00:00:45:01", "01-05-2019");
         member.setTrainingResultCrawl(trainingResult);
@@ -52,7 +55,9 @@ public class EditResultTest {
         FakeUI ui = new FakeUI(input);
         FakeFacade db = new FakeFacade();
         Controller ctrl = new Controller(ui, db);
-        CompetitiveSwimmer member = new CompetitiveSwimmer(1, "Michael", 26, true, "03-05-2019");
+        Trainer trainer = new Trainer(1, "Bob");
+        ctrl.getTrainers().addTrainers(trainer);
+        CompetitiveSwimmer member = new CompetitiveSwimmer(1, "Michael", 26, true, "03-05-2019", 1);
         ctrl.getMembers().addMembers(member);
         EventResult eventResult = new EventResult("Gammel Svømmer Konkurrence", 1, "00:00:45:01", SwimmingDiscipline.CRAWL);
         member.addEventResult(eventResult);
@@ -60,16 +65,16 @@ public class EditResultTest {
 
         //act
         ctrl.editResult();
-        for (String str : ui.output){
+        for (String str : ui.output) {
             System.out.println(str);
         }
 
         //assert
-        assertEquals(1,member.getEventResults().size());
+        assertEquals(1, member.getEventResults().size());
         assertTrue(member.getEventResults().get(0).getEventName().contains("Ny"));
         assertTrue(member.getEventResults().get(0).getTimeResult().contains("02"));
-        assertEquals(SwimmingDiscipline.RYGCRAWL,member.getEventResults().get(0).getDiscipline());
-        assertEquals(2,member.getEventResults().get(0).getPlacement());
+        assertEquals(SwimmingDiscipline.RYGCRAWL, member.getEventResults().get(0).getDiscipline());
+        assertEquals(2, member.getEventResults().get(0).getPlacement());
 
     }
 

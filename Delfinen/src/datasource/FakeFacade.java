@@ -5,6 +5,7 @@
  */
 package datasource;
 
+import businesslogic.CompetitiveSwimmer;
 import businesslogic.EventResult;
 import businesslogic.Member;
 import businesslogic.SwimmingDiscipline;
@@ -41,6 +42,10 @@ public class FakeFacade implements Facade {
         map.put("Active_Member", Boolean.toString(member.isActiveMember()));
         map.put("Debt", Double.toString(member.getDebt()));
         map.put("Sign_Up_Date", member.getSignUpDate());
+        if (member.isCompetitiveSwimmer()) {
+            CompetitiveSwimmer cs = (CompetitiveSwimmer) member;
+            map.put("Trainer_ID", Integer.toString(cs.getTrainerID()));
+        }
         testMembersHashMapArray.add(map);
     }
 

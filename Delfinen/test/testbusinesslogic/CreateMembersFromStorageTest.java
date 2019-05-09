@@ -69,6 +69,7 @@ public class CreateMembersFromStorageTest {
         map.put("Debt", Double.toString(0));
         map.put("Sign_Up_Date", "2019-05-04");
         map.put("Pay_Date", "2019-05-04");
+        map.put("Trainer_ID", "1");
         db.testMembersHashMapArray.add(map);
 
         //act
@@ -102,6 +103,7 @@ public class CreateMembersFromStorageTest {
         map1.put("Debt", Double.toString(500));
         map1.put("Sign_Up_Date", "2019-05-04");
         map1.put("Pay_Date", "2019-05-04");
+        map1.put("Trainer_ID", "1");
         db.testMembersHashMapArray.add(map1);
 
         HashMap<String, String> map2 = new HashMap();
@@ -113,6 +115,7 @@ public class CreateMembersFromStorageTest {
         map2.put("Debt", Double.toString(1000));
         map2.put("Sign_Up_Date", "2019-05-04");
         map2.put("Pay_Date", "2019-05-04");
+        map2.put("Trainer_ID", "1");
         db.testMembersHashMapArray.add(map2);
 
         HashMap<String, String> map3 = new HashMap();
@@ -146,6 +149,7 @@ public class CreateMembersFromStorageTest {
         map5.put("Debt", Double.toString(0));
         map5.put("Sign_Up_Date", "2019-05-04");
         map5.put("Pay_Date", "2019-05-04");
+        map5.put("Trainer_ID", "1");
         db.testMembersHashMapArray.add(map5);
 
         //act

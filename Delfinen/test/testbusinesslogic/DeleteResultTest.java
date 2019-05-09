@@ -9,6 +9,7 @@ import businesslogic.CompetitiveSwimmer;
 import businesslogic.Controller;
 import businesslogic.EventResult;
 import businesslogic.SwimmingDiscipline;
+import businesslogic.Trainer;
 import businesslogic.TrainingResult;
 import datasource.FakeFacade;
 import org.junit.Test;
@@ -27,7 +28,9 @@ public class DeleteResultTest {
         FakeUI ui = new FakeUI(input);
         FakeFacade db = new FakeFacade();
         Controller ctrl = new Controller(ui, db);
-        CompetitiveSwimmer member = new CompetitiveSwimmer(1, "Michael", 26, true, "03-05-2019");
+        Trainer trainer = new Trainer(1, "Bob");
+        ctrl.getTrainers().addTrainers(trainer);
+        CompetitiveSwimmer member = new CompetitiveSwimmer(1, "Michael", 26, true, "03-05-2019", 1);
         TrainingResult trainingResult = new TrainingResult(SwimmingDiscipline.CRAWL, "00:00:45:67", "03-05-2019");
         member.setTrainingResultCrawl(trainingResult);
         db.storeTrainingResult(trainingResult, member.getMember_ID());
@@ -62,7 +65,9 @@ public class DeleteResultTest {
         FakeUI ui = new FakeUI(input);
         FakeFacade db = new FakeFacade();
         Controller ctrl = new Controller(ui, db);
-        CompetitiveSwimmer member = new CompetitiveSwimmer(1, "Michael", 26, true, "03-05-2019");
+        Trainer trainer = new Trainer(1, "Bob");
+        ctrl.getTrainers().addTrainers(trainer);
+        CompetitiveSwimmer member = new CompetitiveSwimmer(1, "Michael", 26, true, "03-05-2019", 1);
         EventResult eventResult = new EventResult("Ny Svømmer Konkurrence", 3, "00:00:45:67", SwimmingDiscipline.CRAWL);
         member.addEventResult(eventResult);
         db.storeEventResult(eventResult, member.getMember_ID());
@@ -95,7 +100,9 @@ public class DeleteResultTest {
         FakeUI ui = new FakeUI(input);
         FakeFacade db = new FakeFacade();
         Controller ctrl = new Controller(ui, db);
-        CompetitiveSwimmer member = new CompetitiveSwimmer(1, "Michael", 26, true, "03-05-2019");
+        Trainer trainer = new Trainer(1, "Bob");
+        ctrl.getTrainers().addTrainers(trainer);
+        CompetitiveSwimmer member = new CompetitiveSwimmer(1, "Michael", 26, true, "03-05-2019", 1);
         TrainingResult trainingResult1 = new TrainingResult(SwimmingDiscipline.CRAWL, "00:00:45:67", "03-05-2019");
         member.setTrainingResultCrawl(trainingResult1);
         db.storeTrainingResult(trainingResult1, member.getMember_ID());
@@ -139,7 +146,9 @@ public class DeleteResultTest {
         FakeUI ui = new FakeUI(input);
         FakeFacade db = new FakeFacade();
         Controller ctrl = new Controller(ui, db);
-        CompetitiveSwimmer member = new CompetitiveSwimmer(1, "Michael", 26, true, "03-05-2019");
+        Trainer trainer = new Trainer(1, "Bob");
+        ctrl.getTrainers().addTrainers(trainer);
+        CompetitiveSwimmer member = new CompetitiveSwimmer(1, "Michael", 26, true, "03-05-2019", 1);
         EventResult eventResult1 = new EventResult("Ny Svømmer Konkurrence", 3, "00:01:45:67", SwimmingDiscipline.CRAWL);
         member.addEventResult(eventResult1);
         db.storeEventResult(eventResult1, member.getMember_ID());
@@ -187,14 +196,16 @@ public class DeleteResultTest {
         assertEquals(1, member.getEventResults().get(1).getPlacement());
 
     }
-    
-        @Test
+
+    @Test
     public void testDeleteFourTrainingResultOfFour() {
         String[] input = {"1", "1", "1", "1", "1", "2", "1", "1", "4", "1", "1", "3"};
         FakeUI ui = new FakeUI(input);
         FakeFacade db = new FakeFacade();
         Controller ctrl = new Controller(ui, db);
-        CompetitiveSwimmer member = new CompetitiveSwimmer(1, "Michael", 26, true, "03-05-2019");
+        Trainer trainer = new Trainer(1, "Bob");
+        ctrl.getTrainers().addTrainers(trainer);
+        CompetitiveSwimmer member = new CompetitiveSwimmer(1, "Michael", 26, true, "03-05-2019",1);
         TrainingResult trainingResult1 = new TrainingResult(SwimmingDiscipline.CRAWL, "00:00:45:67", "03-05-2019");
         member.setTrainingResultCrawl(trainingResult1);
         db.storeTrainingResult(trainingResult1, member.getMember_ID());

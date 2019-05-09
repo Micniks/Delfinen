@@ -54,12 +54,16 @@ public class FakeUI implements UI {
 
     @Override
     public void displayMainMenu() {
-        output.add("");
         output.add("   Svømmeklubben Delfinen");
-        output.add("");
         output.add("1. Opret nyt medlem");
-        output.add("2. Resultater");
-        output.add("3. Afslut Program");
+        output.add("2. Vis medlemmer");
+        output.add("3. Slet medlemmer");
+        output.add("4. Adm. Resultater");
+        output.add("5. Vis Resultater");
+        output.add("6. Vis gæld");
+        output.add("7. Betal gæld");
+        output.add("8. Trænere");
+        output.add("9. Afslut Program");
     }
 
     @Override
@@ -327,14 +331,14 @@ public class FakeUI implements UI {
 
     @Override
     public void showTrainers(ArrayList<Trainer> trainersList) {
-         for(Trainer trainer : trainersList) {
+        for (Trainer trainer : trainersList) {
             output.add(trainer.toString());
         }
     }
 
     @Override
     public int getTrainerID() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return Integer.parseInt(input[index++]);
     }
 
 }

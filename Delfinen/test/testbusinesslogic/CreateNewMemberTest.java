@@ -1,6 +1,7 @@
 package testbusinesslogic;
 
 import businesslogic.Controller;
+import businesslogic.Trainer;
 import datasource.Facade;
 import datasource.FakeFacade;
 import java.time.LocalDate;
@@ -73,10 +74,12 @@ public class CreateNewMemberTest {
 
     @Test
     public void testCreateTwoMemberToStorage() {
-        String[] input = {"Oscar L.", "26", "1", "Jens B.", "22", "2",};
+        String[] input = {"Oscar L.", "26", "1", "Jens B.", "22", "2", "1"};
         FakeUI ui = new FakeUI(input);
         FakeFacade db = new FakeFacade();
         Controller ctrl = new Controller(ui, db);
+        Trainer trainer = new Trainer(1, "Bob");
+        ctrl.getTrainers().addTrainers(trainer);
         LocalDate today = LocalDate.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-LLLL-dd");
         String localDate = today.format(formatter);

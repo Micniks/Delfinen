@@ -4,6 +4,7 @@ import businesslogic.CompetitiveSwimmer;
 import businesslogic.Controller;
 import businesslogic.Member;
 import businesslogic.SwimmingDiscipline;
+import businesslogic.Trainer;
 import businesslogic.TrainingResult;
 import datasource.FakeFacade;
 import org.junit.Test;
@@ -22,7 +23,9 @@ public class AddResultTest {
         FakeUI ui = new FakeUI(input);
         FakeFacade db = new FakeFacade();
         Controller ctrl = new Controller(ui, db);
-        CompetitiveSwimmer member = new CompetitiveSwimmer(1, "Michael", 26, true, "2019-05-03");
+        Trainer trainer = new Trainer(1, "Bob");
+        ctrl.getTrainers().addTrainers(trainer);
+        CompetitiveSwimmer member = new CompetitiveSwimmer(1, "Michael", 26, true, "2019-05-03", 1);
         ctrl.getMembers().addMembers(member);
 
         //act
@@ -45,7 +48,9 @@ public class AddResultTest {
         FakeUI ui = new FakeUI(input);
         FakeFacade db = new FakeFacade();
         Controller ctrl = new Controller(ui, db);
-        CompetitiveSwimmer member = new CompetitiveSwimmer(1, "Michael", 26, true, "2019-05-03");
+        Trainer trainer = new Trainer(1, "Bob");
+        ctrl.getTrainers().addTrainers(trainer);
+        CompetitiveSwimmer member = new CompetitiveSwimmer(1, "Michael", 26, true, "2019-05-03", 1);
         ctrl.getMembers().addMembers(member);
 
         //act
@@ -69,7 +74,9 @@ public class AddResultTest {
         FakeUI ui = new FakeUI(input);
         FakeFacade db = new FakeFacade();
         Controller ctrl = new Controller(ui, db);
-        CompetitiveSwimmer member = new CompetitiveSwimmer(1, "Michael", 26, true, "2019-05-03");
+        Trainer trainer = new Trainer(1, "Bob");
+        ctrl.getTrainers().addTrainers(trainer);
+        CompetitiveSwimmer member = new CompetitiveSwimmer(1, "Michael", 26, true, "2019-05-03", 1);
         ctrl.getMembers().addMembers(member);
 
         //act
@@ -104,7 +111,9 @@ public class AddResultTest {
         FakeUI ui = new FakeUI(input);
         FakeFacade db = new FakeFacade();
         Controller ctrl = new Controller(ui, db);
-        CompetitiveSwimmer member = new CompetitiveSwimmer(1, "Michael", 26, true, "2019-05-03");
+        Trainer trainer = new Trainer(1, "Bob");
+        ctrl.getTrainers().addTrainers(trainer);
+        CompetitiveSwimmer member = new CompetitiveSwimmer(1, "Michael", 26, true, "2019-05-03", 1);
         ctrl.getMembers().addMembers(member);
 
         //act
@@ -145,7 +154,9 @@ public class AddResultTest {
         FakeUI ui = new FakeUI(input);
         FakeFacade db = new FakeFacade();
         Controller ctrl = new Controller(ui, db);
-        CompetitiveSwimmer member = new CompetitiveSwimmer(1, "Michael", 26, true, "2019-05-01");
+        Trainer trainer = new Trainer(1, "Bob");
+        ctrl.getTrainers().addTrainers(trainer);
+        CompetitiveSwimmer member = new CompetitiveSwimmer(1, "Michael", 26, true, "2019-05-01", 1);
         ctrl.getMembers().addMembers(member);
         TrainingResult result1 = new TrainingResult(SwimmingDiscipline.BUTTERFLY, t[4], d[4]);
         member.setTrainingResultButterfly(result1);
@@ -193,8 +204,10 @@ public class AddResultTest {
         FakeUI ui = new FakeUI(input);
         FakeFacade db = new FakeFacade();
         Controller ctrl = new Controller(ui, db);
-        CompetitiveSwimmer member1 = new CompetitiveSwimmer(1, "Michael", 26, true, "2019-05-03");
-        CompetitiveSwimmer member2 = new CompetitiveSwimmer(2, "Oscar", 25, true, "2019-05-02");
+        Trainer trainer = new Trainer(1, "Bob");
+        ctrl.getTrainers().addTrainers(trainer);
+        CompetitiveSwimmer member1 = new CompetitiveSwimmer(1, "Michael", 26, true, "2019-05-03", 1);
+        CompetitiveSwimmer member2 = new CompetitiveSwimmer(2, "Oscar", 25, true, "2019-05-02", 1);
         ctrl.getMembers().addMembers(member1);
         ctrl.getMembers().addMembers(member2);
 
@@ -226,8 +239,10 @@ public class AddResultTest {
         FakeUI ui = new FakeUI(input);
         FakeFacade db = new FakeFacade();
         Controller ctrl = new Controller(ui, db);
-        CompetitiveSwimmer member1 = new CompetitiveSwimmer(1, "Michael", 26, true, "2019-05-03");
-        CompetitiveSwimmer member2 = new CompetitiveSwimmer(2, "Oscar", 25, true, "2019-05-02");
+        Trainer trainer = new Trainer(1, "Bob");
+        ctrl.getTrainers().addTrainers(trainer);
+        CompetitiveSwimmer member1 = new CompetitiveSwimmer(1, "Michael", 26, true, "2019-05-03",1);
+        CompetitiveSwimmer member2 = new CompetitiveSwimmer(2, "Oscar", 25, true, "2019-05-02",1);
         ctrl.getMembers().addMembers(member1);
         ctrl.getMembers().addMembers(member2);
 
